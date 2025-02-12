@@ -17,7 +17,6 @@ const eslintConfig = [
     plugins: ["simple-import-sort"],
     rules: {
       quotes: ["error", "double"],
-      // semi: ["error", "always"],
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
       "no-console": "warn",
