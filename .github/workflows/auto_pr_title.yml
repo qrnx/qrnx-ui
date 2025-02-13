@@ -1,8 +1,11 @@
 name: Auto PR Title from Branch
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write  # Allows editing PR titles
 
 jobs:
   set-pr-title:
