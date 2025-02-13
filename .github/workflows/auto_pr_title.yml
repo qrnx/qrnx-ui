@@ -2,7 +2,7 @@ name: Auto PR Title from Branch
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize, reopened]
 
 jobs:
   set-pr-title:
@@ -12,16 +12,18 @@ jobs:
         run: |
           BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
           
-          # Extract task-tracker number (format: username/task-tracker-number/description)
-          TASK_TRACKER=$(echo "$BRANCH_NAME" | cut -d'/' -f2)
+          # Extract second part of the branch name (username/task-tracker-number/description)
+          TASK_TRACKER=$(echo "$BRANCH_NAME" | awk -F'/' '{print $2}')
 
-          # Ensure it follows the expected pattern
+          # Validate the extracted task-tracker ID (e.g., QR-37, TASK-242)
           if [[ "$TASK_TRACKER" =~ ^[A-Za-z]+-[0-9]+$ ]]; then
             PR_TITLE="${TASK_TRACKER}: "
             PR_NUMBER="${{ github.event.pull_request.number }}"
+            echo "Setting PR title to: $PR_TITLE"
+
             gh pr edit $PR_NUMBER --title "$PR_TITLE"
           else
-            echo "Branch name format is incorrect. Skipping title update."
+            echo "Branch name format is incorrect. Expected format: username/TASK-123/short-description"
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
