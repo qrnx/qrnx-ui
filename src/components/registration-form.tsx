@@ -19,9 +19,9 @@ export function RegistrationForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">SignUp</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email, create login and password, below to registration your account
+            Enter your email and password below to registration your account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -37,10 +37,6 @@ export function RegistrationForm({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="login">Login</Label>
-                <Input id="loginInput" type="login" required />
-              </div>
-              <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
@@ -49,9 +45,9 @@ export function RegistrationForm({
               <Button type="submit" className="w-full">
                 Create account
               </Button>
-              <Button variant="outline" className="w-full">
+              {/* <Button variant="outline" className="w-full">
                 Login with Google
-              </Button>
+              </Button> */}
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
