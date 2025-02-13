@@ -21,7 +21,7 @@ export function RegistrationForm({
         <CardHeader>
           <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email and password below to registration your account
+            Enter your email and password below
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -48,7 +48,7 @@ export function RegistrationForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
-              <Link href="#" className="underline underline-offset-4">
+              <Link href="/sign-in" className="underline underline-offset-4">
                 Sign in
               </Link>
             </div>

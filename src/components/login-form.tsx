@@ -21,7 +21,7 @@ export function LoginForm({
         <CardHeader>
           <CardTitle className="text-2xl">Sign In</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email and password below
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -57,7 +57,7 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link href="#" className="underline underline-offset-4">
+              <Link href="/sign-up" className="underline underline-offset-4">
                 Sign up
               </Link>
             </div>
