@@ -1,0 +1,18 @@
+name: Auto PR Title from Branch
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  set-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set PR title from branch name
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          TITLE=$(echo "$BRANCH_NAME" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;++i) $i=toupper(substr($i,1,1)) tolower(substr($i,2)); print}')
+          gh pr edit $PR_NUMBER --title "$TITLE"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
