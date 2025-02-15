@@ -1,37 +1,63 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Link from "next/link"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const router = useRouter();
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+    });
+
+    if (res?.ok) {
+      router.push("/dashboard");
+    } else {
+      // Handle errors
+    }
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Sign In</CardTitle>
-          <CardDescription>
-            Enter your email and password below
-          </CardDescription>
+          <CardDescription>Enter your email and password below</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="m@example.com"
                   required
                 />
@@ -46,10 +72,17 @@ export function LoginForm({
                     Forgot your password?
                   </Link>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" name="password" required />
               </div>
               <Button type="submit" className="w-full">
                 Login
+              </Button>
+              <Button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                variant="outline"
+                className="w-full"
+              >
+                Logout
               </Button>
               {/* <Button variant="outline" className="w-full">
                 Login with Google
@@ -65,5 +98,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
