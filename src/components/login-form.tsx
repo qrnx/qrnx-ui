@@ -16,6 +16,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useTranslation } from "react-i18next";
+import { routes } from "@/config/routes";
 
 export function LoginForm({
   className,
@@ -44,7 +45,7 @@ export function LoginForm({
       }
 
       if (res?.ok) {
-        router.push("/dashboard");
+        router.push(routes.dashboard);
       } else {
         setError(t("error.redirect"));
       }
@@ -103,7 +104,7 @@ export function LoginForm({
                 Login
               </Button>
               <Button
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={() => signOut({ callbackUrl: routes.home })}
                 variant="outline"
                 className="w-full cursor-pointer"
               >
@@ -115,7 +116,10 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link href="/sign-up" className="underline underline-offset-4">
+              <Link
+                href={routes.signUp}
+                className="underline underline-offset-4"
+              >
                 Sign up
               </Link>
             </div>

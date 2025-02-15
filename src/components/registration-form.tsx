@@ -16,6 +16,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { routes } from "@/config/routes";
 
 export function RegistrationForm({
   className,
@@ -53,7 +54,7 @@ export function RegistrationForm({
       });
 
       if (res?.ok) {
-        router.push("/dashboard");
+        router.push(routes.dashboard);
       } else {
         setError(t("error.redirect"));
       }
@@ -108,7 +109,10 @@ export function RegistrationForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
-              <Link href="/sign-in" className="underline underline-offset-4">
+              <Link
+                href={routes.signIn}
+                className="underline underline-offset-4"
+              >
                 Sign in
               </Link>
             </div>

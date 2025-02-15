@@ -1,15 +1,10 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { useTranslation } from "react-i18next";
-import { LanguageToggle } from "@/components/ui/language-toggle";
 import { signOut, useSession } from "next-auth/react";
+import { routes } from "@/config/routes";
 
 export default function Home() {
-  const { t } = useTranslation();
   const { data: session, status } = useSession();
 
   return (
@@ -20,7 +15,7 @@ export default function Home() {
           <div>{status}</div>
         </div>
         <Button
-          onClick={() => signOut({ callbackUrl: "/" })}
+          onClick={() => signOut({ callbackUrl: routes.home })}
           variant="outline"
           className="w-full cursor-pointer"
         >
