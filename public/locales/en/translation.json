@@ -1,3 +1,7 @@
 {
-  "hello": "Hello, world!"
+  "hello": "Hello, world!",
+
+  "error": {
+    "registration": "Registration failed"
+  }
 }
