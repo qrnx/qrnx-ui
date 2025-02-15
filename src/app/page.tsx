@@ -39,7 +39,7 @@ export default function Home() {
         <ThemeToggle />
 
         <Button>
-          <Link href="/signin">Go to sign in</Link>
+          <Link href="/sign-in">Go to sign in</Link>
         </Button>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">

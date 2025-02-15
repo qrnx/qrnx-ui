@@ -1,3 +1,9 @@
 {
-  "hello": "Hello, world!"
+  "hello": "Hello, world!",
+
+  "error": {
+    "registration": "Registration failed",
+    "redirect": "Redirect failed",
+    "login": "Wrong credentials"
+  }
 }
