@@ -13,7 +13,7 @@ const handler = NextAuth({
       async authorize(credentials) {
         try {
           if (!credentials) {
-            throw new Error("Необходимо ввести email и пароль");
+            throw new Error("Empty credentials");
           }
           const username = credentials.email.split("@")[0];
 
@@ -37,8 +37,8 @@ const handler = NextAuth({
           return null;
         } catch (error) {
           // eslint-disable-next-line no-console
-          console.error("Ошибка авторизации в Strapi:", error);
-          throw new Error("Неверный email или пароль");
+          console.error("Auth error:", error);
+          throw new Error("Wrong credentials");
         }
       },
     }),

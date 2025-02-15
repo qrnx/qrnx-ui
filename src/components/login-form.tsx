@@ -12,15 +12,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useTranslation } from "react-i18next";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
+  const [error, setError] = useState("");
+  const { t } = useTranslation();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,16 +32,28 @@ export function LoginForm({
     const email = formData.get("email");
     const password = formData.get("password");
 
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-    });
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (res?.ok) {
-      router.push("/dashboard");
-    } else {
-      // Handle errors
+      if (res?.error) {
+        throw new Error(t("error.login"));
+      }
+
+      if (res?.ok) {
+        router.push("/dashboard");
+      } else {
+        setError(t("error.redirect"));
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(t("error.login"));
+      }
     }
   }
 
@@ -60,31 +75,41 @@ export function LoginForm({
                   name="email"
                   placeholder="m@example.com"
                   required
+                  className={cn({ "border-red-500": error })}
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <Link
+                  {/* <Link
                     href="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </Link>
+                  </Link> */}
                 </div>
-                <Input id="password" type="password" name="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  required
+                  className={cn({ "border-red-500": error })}
+                />
+                {error && (
+                  <div className="text-red-500 text-sm text-left">{error}</div>
+                )}
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full cursor-pointer">
                 Login
               </Button>
               <Button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 variant="outline"
-                className="w-full"
+                className="w-full cursor-pointer"
               >
                 Logout
               </Button>
-              {/* <Button variant="outline" className="w-full">
+              {/* <Button variant="outline" className="w-full cursor-pointer">
                 Login with Google
               </Button> */}
             </div>

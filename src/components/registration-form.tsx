@@ -34,14 +34,11 @@ export function RegistrationForm({
     const password = formData.get("password");
 
     try {
-      const response = await fetch(
-        "http://localhost:1337/api/auth/local/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, email, password }),
-        }
-      );
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      });
 
       const data = await response.json();
 
@@ -58,7 +55,7 @@ export function RegistrationForm({
       if (res?.ok) {
         router.push("/dashboard");
       } else {
-        setError("Ошибка входа после регистрации.");
+        setError(t("error.redirect"));
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -105,7 +102,7 @@ export function RegistrationForm({
                   <div className="text-red-500 text-sm text-left">{error}</div>
                 )}
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full cursor-pointer">
                 Create account
               </Button>
             </div>
