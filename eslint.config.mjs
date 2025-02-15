@@ -11,13 +11,13 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ["next"],
+    extends: ["next", "eslint:recommended"],
     rules: {
       quotes: ["error", "double"],
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
       "no-console": "warn",
-      "no-unused-vars": "warn",
+      "no-unused-vars": ["warn", { varsIgnorePattern: "^_" }],
       "import/no-anonymous-default-export": "off",
     },
   }),
