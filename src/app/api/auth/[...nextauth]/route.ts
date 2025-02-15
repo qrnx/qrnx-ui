@@ -15,7 +15,6 @@ const handler = NextAuth({
           if (!credentials) {
             throw new Error("Empty credentials");
           }
-          const username = credentials.email.split("@")[0];
 
           const response = await axios.post(
             `${process.env.STRAPI_API_URL}/api/auth/local`,
