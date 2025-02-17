@@ -1,7 +1,7 @@
 import serverInstance from "@/lib/serverInstance";
 import { NextResponse } from "next/server";
 
-const getAll = async (_req: Request, _res: Response) => {
+const getAll = async (_req: Request) => {
   try {
     const { data } = await serverInstance.get("/polls", {
       params: {

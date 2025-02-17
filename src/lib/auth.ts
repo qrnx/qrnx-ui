@@ -1,6 +1,7 @@
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import serverInstance from "./serverInstance";
+import { routes } from "@/config/routes";
 
 declare module "next-auth" {
   interface User {
@@ -72,7 +73,7 @@ export const authOptions: AuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/sign-in",
-    error: "/sign-in",
+    signIn: routes.signIn,
+    error: routes.signIn,
   },
 };
