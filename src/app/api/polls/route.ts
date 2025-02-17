@@ -1,7 +1,11 @@
+import { authGuard } from "@/lib/authGuard";
 import serverInstance from "@/lib/serverInstance";
 import { NextResponse } from "next/server";
 
-const getAll = async (_req: Request, _res: Response) => {
+const getAll = async (req: Request) => {
+  const session = await authGuard(req);
+  if (session instanceof NextResponse) return session;
+
   try {
     const { data } = await serverInstance.get("/polls", {
       params: {

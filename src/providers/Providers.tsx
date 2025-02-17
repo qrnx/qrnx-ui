@@ -1,4 +1,4 @@
-"use client"; // ✅ Делаем компонент клиентским
+"use client";
 
 import { SessionProvider } from "next-auth/react";
 import { type ReactNode } from "react";
@@ -6,6 +6,7 @@ import { ThemeProvider } from "./ThemeProvider";
 import I18nProvider from "./I18nProvider";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/lib/queryClient";
+import ToasterLayout from "./Toaster";
 
 export default function Providers({ children }: { children: ReactNode }) {
   return (
@@ -18,7 +19,7 @@ export default function Providers({ children }: { children: ReactNode }) {
       >
         <I18nProvider>
           <QueryClientProvider client={queryClient}>
-            {children}
+            <ToasterLayout>{children}</ToasterLayout>
           </QueryClientProvider>
         </I18nProvider>
       </ThemeProvider>
