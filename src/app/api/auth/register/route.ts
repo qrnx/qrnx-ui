@@ -1,29 +1,29 @@
+import serverInstance from "@/lib/serverInstance";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     const { username, email, password } = await req.json();
 
-    const response = await fetch(
-      `${process.env.STRAPI_API_URL}/api/auth/local/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      }
-    );
+    const response = await serverInstance.post("/auth/local/register", {
+      username,
+      email,
+      password,
+    });
 
-    const data = await response.json();
+    const data = response.data;
 
-    if (!response.ok) {
+    if (response.status !== 200) {
       return NextResponse.json(
-        { error: data.message || "Registration error" },
+        { error: data.error || "Registration error" },
         { status: 400 }
       );
     }
 
     return NextResponse.json({ success: true, user: data.user });
-  } catch (_err) {
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Register error:", error);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }
