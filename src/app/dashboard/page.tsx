@@ -6,7 +6,7 @@ import { routes } from "@/config/routes";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 
-export default function Home() {
+export default function Dashboard() {
   const { data: session, status } = useSession();
 
   const {
