@@ -12,11 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
 import { useTranslation } from "react-i18next";
 import { routes } from "@/config/routes";
+import { toast } from "sonner";
+import { Toast } from "./ui/toast";
 
 export function LoginForm({
   className,
@@ -25,6 +27,30 @@ export function LoginForm({
   const router = useRouter();
   const [error, setError] = useState("");
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const queryError = searchParams.get("error");
+
+    let timerId: NodeJS.Timeout;
+    if (queryError === "unauthorized") {
+      timerId = setTimeout(() => {
+        toast.custom((id) => (
+          <Toast
+            id={id}
+            title="Error"
+            description="Your session has expired. Please log in again."
+            variant="destructive"
+          />
+        ));
+      });
+      router.push(routes.signIn);
+    }
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [router, searchParams]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

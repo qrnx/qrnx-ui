@@ -13,7 +13,10 @@ export default async function middleware(req: NextRequest) {
   const token = await getToken({ req });
 
   if (isProtectedRoute && !token?.jwt) {
-    return NextResponse.redirect(`${req.nextUrl.origin}${routes.signIn}`);
+    const signInUrl = new URL("/sign-in", req.nextUrl.origin);
+    signInUrl.searchParams.set("error", "unauthorized");
+
+    return NextResponse.redirect(signInUrl);
   }
 
   if (isPublicRoute && token?.jwt) {
