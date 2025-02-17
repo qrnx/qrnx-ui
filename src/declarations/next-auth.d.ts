@@ -13,4 +13,8 @@ declare module "next-auth" {
     jwt?: string; // Добавляем jwt в JWT
     id: string;
   }
+
+  interface User {
+    jwt: string;
+  }
 }
