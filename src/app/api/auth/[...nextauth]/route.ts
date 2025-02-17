@@ -1,6 +1,12 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
+import serverInstance from "@/lib/serverInstance";
+
+declare module "next-auth" {
+  interface User {
+    jwt: string;
+  }
+}
 
 const handler = NextAuth({
   providers: [
@@ -16,15 +22,13 @@ const handler = NextAuth({
             throw new Error("Empty credentials");
           }
 
-          const response = await axios.post(
-            `${process.env.STRAPI_API_URL}/api/auth/local`,
-            {
-              identifier: credentials.email,
-              password: credentials.password,
-            }
-          );
+          const response = await serverInstance.post("auth/local", {
+            identifier: credentials.email,
+            password: credentials.password,
+          });
 
           const user = response.data.user;
+
           if (user) {
             return {
               id: String(user.id),
@@ -33,6 +37,7 @@ const handler = NextAuth({
               jwt: response.data.jwt,
             };
           }
+
           return null;
         } catch (error) {
           // eslint-disable-next-line no-console
@@ -46,7 +51,9 @@ const handler = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.jwt = user.jwt; // ✅ Сохраняем Strapi JWT в token
       }
+
       return token;
     },
     async session({ session, token }) {
