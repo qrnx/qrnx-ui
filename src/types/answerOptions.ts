@@ -6,7 +6,6 @@ enum EAnswerOptionType {
 }
 
 export type TAnswerOptionsBase = {
-  uuid: string;
   text: string;
   type: EAnswerOptionType;
   userId: number;
