@@ -1,3 +1,15 @@
 {
-  "hello": "Привет, мир!"
+  "hello": "Привет, мир!",
+
+  "signIn": {
+    "title": "Вход",
+    "description": "Введите ваш email и пароль ниже",
+    "email": "Email",
+    "password": "Пароль",
+    "forgot": "Забыли ваш пароль?",
+    "login": "Войти",
+    "signUpQuestion": "Нет аккаунта?",
+    "signUpLink": "Зарегистрируйтесь"
+  }
 }
+
