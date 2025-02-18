@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
 import { routes } from "@/config/routes";
 import { usePathname } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "lucide-react";
 
 const routesWIthoutHeader = [routes.signIn, routes.signUp];
 
@@ -24,7 +26,12 @@ const Header = () => {
         <div className={cn(styles["container"], "flex h-14 items-center")}>
           <h1>qrnx/logo</h1>
           <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
-            buttons
+            <Avatar>
+            <AvatarImage alt="User Avatar" />
+              <AvatarFallback>
+                <User width={24} height={24}/>
+              </AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </div>
