@@ -21,9 +21,9 @@
   },
 
   "error": {
-    "registration": "Registration failed",
-    "redirect": "Redirect failed",
-    "login": "Wrong credentials"
+    "registration": "Регистрация не удалась",
+    "redirect": "Ошибка перенаправления",
+    "login": "Неверные данные учетной записи"
   }
 }
 
