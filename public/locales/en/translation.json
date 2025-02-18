@@ -1,6 +1,17 @@
 {
   "hello": "Hello, world!",
 
+  "signIn": {
+    "title": "Sign In",
+    "description": "Enter your email and password bellow",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot your password?",
+    "login": "Login",
+    "signUpQuestion": "Don’t have an account?",
+    "signUpLink": "Sign up"
+  },
+
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",
