@@ -1,6 +1,4 @@
 {
-  "hello": "Hello, world!",
-
   "signIn": {
     "title": "Sign In",
     "description": "Enter your email and password below",

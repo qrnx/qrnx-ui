@@ -1,6 +1,4 @@
 {
-  "hello": "Привет, мир!",
-
   "signIn": {
     "title": "Вход",
     "description": "Введите ваш email и пароль ниже",
