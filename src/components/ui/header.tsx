@@ -5,6 +5,8 @@ import styles from "@/components/layout.module.css";
 import { routes } from "@/config/routes";
 import { usePathname } from "next/navigation";
 import { UserNav } from "./user-nav";
+import { LanguageSelect } from "./language-select";
+import { ThemeToggle } from "./theme-toggle";
 
 const routesWIthoutHeader = [routes.signIn, routes.signUp];
 
@@ -23,8 +25,10 @@ const Header = () => {
     >
       <div className={styles["container-wrapper"]}>
         <div className={cn(styles["container"], "flex h-14 items-center")}>
-          <h1>qrnx/logo</h1>
-          <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
+          <h1>qrnx</h1>
+          <div className="flex flex-1 items-center justify-between gap-3 md:justify-end">
+            <ThemeToggle />
+            <LanguageSelect />
             <UserNav />
           </div>
         </div>

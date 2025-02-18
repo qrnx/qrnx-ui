@@ -11,9 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useState } from "react";
 
-export function LanguageToggle() {
+export function LanguageSelect() {
   const { i18n } = useTranslation();
 
   const handleToggle = (language: string) => {
@@ -23,11 +22,11 @@ export function LanguageToggle() {
       i18n.changeLanguage("en");
     }
   };
-  console.log(i18n)
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="default" className="gap-[2] px-1.5">
+        <Button variant="ghost" size="default" className="gap-[2] px-1.5">
           {String(i18n.language).toUpperCase()}
           <ChevronsUpDown className="w-[14]! h-[16]!"/>
           <span className="sr-only">Toggle theme</span>
