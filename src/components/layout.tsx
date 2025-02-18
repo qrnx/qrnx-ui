@@ -7,8 +7,13 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className={styles["container-wrapper"]}>
-      <div className={cn(styles.container, "flex-1 items-start ")}>
+    <div className={cn(styles["container-wrapper"], "flex grow")}>
+      <div
+        className={cn(
+          styles.container,
+          "flex-1 items-center justify-start flex-col flex grow"
+        )}
+      >
         {children}
       </div>
     </div>
