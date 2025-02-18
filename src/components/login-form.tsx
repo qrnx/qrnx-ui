@@ -88,14 +88,14 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Sign In</CardTitle>
-          <CardDescription>Enter your email and password below</CardDescription>
+          <CardTitle className="text-2xl">{t("signIn.title")}</CardTitle>
+          <CardDescription>{t("signIn.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("signIn.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -107,13 +107,7 @@ export function LoginForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  {/* <Link
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </Link> */}
+                  <Label htmlFor="password">{t("signIn.password")}</Label>
                 </div>
                 <Input
                   id="password"
@@ -127,7 +121,7 @@ export function LoginForm({
                 )}
               </div>
               <Button type="submit" className="w-full cursor-pointer">
-                Login
+                {t("signIn.login")}
               </Button>
               <Button
                 onClick={() => signOut({ callbackUrl: routes.home })}
@@ -136,17 +130,14 @@ export function LoginForm({
               >
                 Logout
               </Button>
-              {/* <Button variant="outline" className="w-full cursor-pointer">
-                Login with Google
-              </Button> */}
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+              {t("signIn.signUpQuestion")}{" "}
               <Link
                 href={routes.signUp}
                 className="underline underline-offset-4"
               >
-                Sign up
+                {t("signIn.signUpLink")}
               </Link>
             </div>
           </form>
