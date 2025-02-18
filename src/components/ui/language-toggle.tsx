@@ -4,28 +4,43 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { ChevronsUpDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useState } from "react";
 
 export function LanguageToggle() {
   const { i18n } = useTranslation();
 
-  const handleToggle = () => {
-    if (i18n.language === "en") {
+  const handleToggle = (language: string) => {
+    if (i18n.language === "en" && language === "ru") {
       i18n.changeLanguage("ru");
-    } else {
+    } else if (i18n.language === "ru" && language === "en") {
       i18n.changeLanguage("en");
     }
   };
-
+  console.log(i18n)
   return (
-    <Button
-      className="cursor-pointer"
-      onClick={handleToggle}
-      variant="outline"
-      size="icon"
-    >
-      <span className="absolute h-[1.2rem] w-[1.2rem] transition-all">
-        {String(i18n.language).toUpperCase()}
-      </span>
-    </Button>
-  );
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="default" className="gap-[2] px-1.5">
+          {String(i18n.language).toUpperCase()}
+          <ChevronsUpDown className="w-[14]! h-[16]!"/>
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => handleToggle("en")}>
+          En
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleToggle("ru")}>
+          Ru
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }
