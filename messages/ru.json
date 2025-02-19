@@ -1,0 +1,28 @@
+{
+  "signIn": {
+    "title": "Вход",
+    "description": "Введите ваш email и пароль ниже",
+    "email": "Email",
+    "password": "Пароль",
+    "forgot": "Забыли ваш пароль?",
+    "login": "Войти",
+    "signUpQuestion": "Нет аккаунта?",
+    "signUpLink": "Зарегистрируйтесь"
+  },
+
+  "signUp": {
+    "title": "Регистрация",
+    "description": "Введите ваш email и пароль ниже",
+    "email": "Email",
+    "password": "Пароль",
+    "createAccount": "Создать аккаунт",
+    "signInQuestion": "Уже есть аккаунт?",
+    "signInLink": "Войти"
+  },
+
+  "error": {
+    "registration": "Регистрация не удалась",
+    "redirect": "Ошибка перенаправления",
+    "login": "Неверные данные учетной записи"
+  }
+}
