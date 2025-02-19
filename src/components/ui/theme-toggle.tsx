@@ -23,7 +23,7 @@ export function ThemeToggle() {
     <Button
       className="cursor-pointer"
       onClick={handleToggle}
-      variant="outline"
+      variant="ghost"
       size="icon"
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

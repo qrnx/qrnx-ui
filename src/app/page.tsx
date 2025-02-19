@@ -1,10 +1,8 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { LanguageToggle } from "@/components/ui/language-toggle";
 
 export default function Home() {
 
@@ -20,8 +18,6 @@ export default function Home() {
           priority
         />
 
-        <LanguageToggle />
-
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
@@ -32,8 +28,6 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
-        <ThemeToggle />
 
         <Button>
           <Link href="/sign-in">Go to sign in</Link>

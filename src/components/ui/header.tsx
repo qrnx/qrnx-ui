@@ -4,10 +4,17 @@ import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
 import { routes } from "@/config/routes";
 import { usePathname } from "next/navigation";
+import { UserNav } from "./user-nav";
+import { LanguageSelect } from "./language-select";
+import { ThemeToggle } from "./theme-toggle";
+import Logo from "@/assets/logo.svg";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const routesWIthoutHeader = [routes.signIn, routes.signUp];
 
 const Header = () => {
+  const { data: session } = useSession();
   const pathname = usePathname();
   if (routesWIthoutHeader.includes(pathname)) {
     return null;
@@ -22,9 +29,14 @@ const Header = () => {
     >
       <div className={styles["container-wrapper"]}>
         <div className={cn(styles["container"], "flex h-14 items-center")}>
-          <h1>qrnx/logo</h1>
-          <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
-            buttons
+          <Link href={session ? routes.dashboard : routes.home}>
+            <Logo />
+          </Link>
+
+          <div className="flex flex-1 items-center justify-between gap-3 md:justify-end">
+            <ThemeToggle />
+            <LanguageSelect />
+            <UserNav />
           </div>
         </div>
       </div>

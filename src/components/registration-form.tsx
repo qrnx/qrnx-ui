@@ -15,8 +15,8 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { routes } from "@/config/routes";
+import { useTranslations } from "next-intl";
 
 export function RegistrationForm({
   className,
@@ -24,7 +24,7 @@ export function RegistrationForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
   const [error, setError] = useState("");
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -104,7 +104,7 @@ export function RegistrationForm({
                 )}
               </div>
               <Button type="submit" className="w-full cursor-pointer">
-              {t("signUp.createAccount")}
+                {t("signUp.createAccount")}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
