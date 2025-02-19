@@ -5,10 +5,23 @@ import { getPollById } from "@/api/polls";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { TAnswerOption } from "@/types/answerOptions";
+import { useEffect } from "react";
 
 export default function AnswerPage() {
   const { answerOptionId, pollId } = useParams();
   const { data: session } = useSession();
+
+  useEffect(() => {
+    const requestBody = { answerOptionId, pollId };
+
+    fetch("/api/response", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+  }, []);
 
   const {
     data: answerOption,
