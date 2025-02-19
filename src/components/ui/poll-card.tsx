@@ -10,6 +10,7 @@ import { ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
 import Link from "next/link";
 import { capitalize } from "@/lib/string";
 import { TPoll } from "@/types/poll";
+import { useTranslations } from "next-intl";
 
 const chartData = [
   { weekDay: "Monday", affirmative: 252, negative: 123 },
@@ -27,14 +28,15 @@ interface PollCard {
 
 export function PollCard({ poll }: PollCard) {
   const { title, description } = poll;
+  const t = useTranslations("dashboard");
 
   const chartConfig = {
     affirmative: {
-      label: "Affirmative",
+      label: t("affirmative"),
       color: "var(--chart-2)",
     },
     negative: {
-      label: "Negative",
+      label: t("negative"),
       color: "var(--chart-1)",
     },
   } satisfies ChartConfig;
@@ -49,7 +51,7 @@ export function PollCard({ poll }: PollCard) {
           </div>
           <div className="flex flex-col gap-1">
             <div className="opacity-50 text-xs font-medium">
-              In 7 days (7.05 - 14.05)
+              {t("inWeek")} 7.05 - 14.05
             </div>
             <div className="flex gap-6 text-2xl font-medium">
               <div className="flex gap-2">

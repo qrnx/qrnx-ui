@@ -20,6 +20,12 @@
     "signInLink": "Войти"
   },
 
+  "dashboard": {
+    "inWeek": "За 7 дней",
+    "negative": "Негативный",
+    "affirmative": "Позитивный"
+  },
+
   "error": {
     "registration": "Регистрация не удалась",
     "redirect": "Ошибка перенаправления",
