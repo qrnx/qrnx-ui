@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "@/providers/Providers";
+import ClientProviders from "@/providers/ClientProviders";
 import { Header } from "@/components/ui/header";
 import { Layout } from "@/components/layout";
 import { getLocale, getMessages } from "next-intl/server";
@@ -37,10 +37,10 @@ export default async function RootLayout({
       >
         <main className="flex flex-1 flex-col">
           <NextIntlClientProvider messages={messages}>
-            <Providers>
+            <ClientProviders>
               <Header />
               <Layout>{children}</Layout>
-            </Providers>
+            </ClientProviders>
           </NextIntlClientProvider>
         </main>
       </body>
