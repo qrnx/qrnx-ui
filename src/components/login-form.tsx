@@ -15,7 +15,6 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
-import { useTranslation } from "react-i18next";
 import { routes } from "@/config/routes";
 import { toast } from "sonner";
 import { Toast } from "./ui/toast";
@@ -27,7 +26,6 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
   const [error, setError] = useState("");
-  const { _t2 } = useTranslation();
   const t = useTranslations();
 
   const searchParams = useSearchParams();

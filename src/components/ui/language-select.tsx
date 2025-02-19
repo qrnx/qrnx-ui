@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next";
 import { ChevronsUpDown } from "lucide-react";
 import {
   DropdownMenu,
