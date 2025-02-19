@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { routes } from "@/config/routes";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
-import { PollCart } from "@/components/ui/pollCard";
+import { PollCard } from "@/components/ui/poll-card";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -34,7 +34,7 @@ export default function Dashboard() {
           <div>{error ? "Error fetching data" : null}</div>
 
           {polls?.map((poll) => (
-            <PollCart poll={poll} key={poll.id}></PollCart>
+            <PollCard poll={poll} key={poll.id}></PollCard>
           ))}
         </div>
 
