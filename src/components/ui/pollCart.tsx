@@ -12,8 +12,8 @@ import { ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
 import Link from "next/link";
 
 const chartData = [
-    { weekDay: "Monday", desktop: 186, mobile: 80 },
-    { weekDay: "Tuesday", desktop: 305, mobile: 200 },
+    { weekDay: "Monday", desktop: 252, mobile: 123 },
+    { weekDay: "Tuesday", desktop: 325, mobile: 200 },
     { weekDay: "Wednesday", desktop: 237, mobile: 120 },
     { weekDay: "Thursday", desktop: 73, mobile: 190 },
     { weekDay: "Friday", desktop: 209, mobile: 130 },
@@ -33,22 +33,22 @@ const chartData = [
   } satisfies ChartConfig
 
 export function PollCart ({poll}) {
-    // console.log(poll, "PollCart")
+    console.log(poll, "PollCart")
     return (
         <Link href="test" className="flex w-full">
             <Card className="flex w-full justify-between p-[20]">
                 <div className="flex flex-col justify-between">
-                    <div className="mb-[52]"> 
-                        <h3>{poll.title}</h3>
-                        <div>{poll.description}</div>
+                    <div className="mb-[52] h-[160px] w-[238px]"> 
+                        <h3 className="text-5xl">{(poll.title).charAt(0).toUpperCase() + (poll.title).slice(1)}</h3>
+                        <div>{poll.uuid}</div>
                     </div>
                     <div>
                         <div className="text-gray-800 opacity-50">In 7 days (7.05 - 14.05)</div>
-                        <div className="flex">
+                        <div className="flex text-3xl">
                             2 263
-                            <TrendingUp className="text-(--chart-2)"/>
+                            <TrendingUp className="size-8 text-(--chart-2)"/>
                             176
-                            <TrendingDown className="text-(--chart-1)"/>
+                            <TrendingDown className="size-8 text-(--chart-1)"/>
                         </div>
                     </div>
                 </div>
