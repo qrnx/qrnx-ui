@@ -12,25 +12,14 @@ import { capitalize } from "@/lib/string";
 import { TPoll } from "@/types/poll";
 
 const chartData = [
-  { weekDay: "Monday", desktop: 252, mobile: 123 },
-  { weekDay: "Tuesday", desktop: 325, mobile: 200 },
-  { weekDay: "Wednesday", desktop: 237, mobile: 120 },
-  { weekDay: "Thursday", desktop: 73, mobile: 190 },
-  { weekDay: "Friday", desktop: 209, mobile: 130 },
-  { weekDay: "Saturday ", desktop: 214, mobile: 140 },
-  { weekDay: "Sunday", desktop: 214, mobile: 140 },
+  { weekDay: "Monday", affirmative: 252, negative: 123 },
+  { weekDay: "Tuesday", affirmative: 325, negative: 200 },
+  { weekDay: "Wednesday", affirmative: 237, negative: 120 },
+  { weekDay: "Thursday", affirmative: 73, negative: 190 },
+  { weekDay: "Friday", affirmative: 209, negative: 130 },
+  { weekDay: "Saturday ", affirmative: 214, negative: 140 },
+  { weekDay: "Sunday", affirmative: 214, negative: 140 },
 ];
-
-const chartConfig = {
-  desktop: {
-    label: "Affirmative",
-    color: "var(--chart-2)",
-  },
-  mobile: {
-    label: "Negative",
-    color: "var(--chart-1)",
-  },
-} satisfies ChartConfig;
 
 interface PollCard {
   poll: TPoll;
@@ -38,6 +27,17 @@ interface PollCard {
 
 export function PollCard({ poll }: PollCard) {
   const { title, description } = poll;
+
+  const chartConfig = {
+    affirmative: {
+      label: "Affirmative",
+      color: "var(--chart-2)",
+    },
+    negative: {
+      label: "Negative",
+      color: "var(--chart-1)",
+    },
+  } satisfies ChartConfig;
 
   return (
     <Link href="test" className="flex w-full">
@@ -82,8 +82,12 @@ export function PollCard({ poll }: PollCard) {
                 cursor={false}
                 content={<ChartTooltipContent indicator="dashed" />}
               />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-              <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+              <Bar
+                dataKey="affirmative"
+                fill="var(--color-affirmative)"
+                radius={4}
+              />
+              <Bar dataKey="negative" fill="var(--color-negative)" radius={4} />
             </BarChart>
           </ChartContainer>
         </div>
