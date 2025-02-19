@@ -2,12 +2,15 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getPollById } from "@/api/polls";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { TAnswerOption } from "@/types/answerOptions";
+import Link from "next/link";
 
 export default function PollPage() {
   const { pollId } = useParams();
   const { data: session } = useSession();
+  const pathname = usePathname();
 
   const {
     data: poll,
@@ -23,12 +26,22 @@ export default function PollPage() {
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
 
-  return (
-    <div>
-      {/* <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-4 row-start-2 items-center sm:items-start"> */}
+  const { title, answerOptions } = poll;
 
-      <h1>{poll.title} Page</h1>
+  const renderPollAnswerLink = (answerOption: TAnswerOption) => {
+    const { documentId, text } = answerOption;
+    return <Link href={`${pathname}/${documentId}`}>{text}</Link>;
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center h-full">
+      <h1>{title} Page</h1>
+
+      <div>
+        {answerOptions.map((answerOption) => (
+          <div key={answerOption.id}>{renderPollAnswerLink(answerOption)}</div>
+        ))}
+      </div>
       {/* </main>
     </div> */}
     </div>

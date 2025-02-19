@@ -5,10 +5,10 @@ enum EAnswerOptionType {
   Negative = "negative",
 }
 
-export type TAnswerOptionsBase = {
+export type TAnswerOptionBase = {
   text: string;
   type: EAnswerOptionType;
   userId: number;
 };
 
-export type TAnswerOptions = TModel<TAnswerOptionsBase>;
+export type TAnswerOption = TModel<TAnswerOptionBase>;
