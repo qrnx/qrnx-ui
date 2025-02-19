@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { routes } from "@/config/routes";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
-import { PollCart } from "@/components/ui/pollCart";
+import { PollCart } from "@/components/ui/pollCard";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
