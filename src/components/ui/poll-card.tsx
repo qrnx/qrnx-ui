@@ -9,7 +9,7 @@ import {
 import { ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
 import Link from "next/link";
 import { capitalize } from "@/lib/string";
-import { TPoll } from "@/types/poll";
+import { Poll } from "@/types/poll";
 import { useTranslations } from "next-intl";
 
 const chartData = [
@@ -23,7 +23,7 @@ const chartData = [
 ];
 
 interface PollCard {
-  poll: TPoll;
+  poll: Poll;
 }
 
 export function PollCard({ poll }: PollCard) {
