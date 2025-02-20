@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPollById } from "@/api/polls";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { TAnswerOption } from "@/types/answerOptions";
+import { AnswerOption } from "@/types/answerOptions";
 import { useEffect } from "react";
 
 export default function AnswerPage() {
@@ -36,7 +36,7 @@ export default function AnswerPage() {
       const answerOption = poll.answerOptions.find(
         (answerOption) => answerOption.documentId === answerOptionId
       );
-      return answerOption as TAnswerOption;
+      return answerOption as AnswerOption;
     },
   });
 
