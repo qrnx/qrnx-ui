@@ -1,18 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { signOut, useSession } from "next-auth/react";
-import { ROUTES } from "@/config/routes";
+import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
-import { PollCard } from "@/components/ui/poll-card";
+import { PollCard, PollCardSkeleton } from "@/components/ui/poll-card";
 
 export default function Dashboard() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const {
     data: polls,
-    isLoading,
+    isPending,
     error,
   } = useQuery({
     queryKey: ["polls"],
@@ -21,30 +19,25 @@ export default function Dashboard() {
     select: (data) => data.data,
   });
 
-  return (
-    <div className="flex flex-col items-center justify-center justify-items-center w-full h-full pt-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
-        <div className="flex flex-col gap-2 row-start-2 items-center sm:items-start">
-          <div>{session && session.user?.email}</div>
-          <div>{status}</div>
-        </div>
+  const SKELETONS_AMOUNT = 3;
 
+  const renderSkeletons = () => {
+    return Array.from({ length: SKELETONS_AMOUNT }).map((_, index) => (
+      <PollCardSkeleton key={index} />
+    ));
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-start justify-items-center w-full h-full pt-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
         <div className="flex w-full flex-col gap-2 row-start-2 items-center sm:items-start">
-          <div>{isLoading ? "Loading..." : null}</div>
-          <div>{error ? "Error fetching data" : null}</div>
+          {isPending ? renderSkeletons() : null}
+          {error ? <div>"Error fetching data"</div> : null}
 
           {polls?.map((poll) => (
             <PollCard poll={poll} key={poll.id}></PollCard>
           ))}
         </div>
-
-        <Button
-          onClick={() => signOut({ callbackUrl: ROUTES.home })}
-          variant="outline"
-          className="w-full cursor-pointer"
-        >
-          Logout
-        </Button>
       </main>
     </div>
   );
