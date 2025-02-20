@@ -11,6 +11,8 @@ import Link from "next/link";
 import { capitalize } from "@/lib/string";
 import { Poll } from "@/types/poll";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ROUTES } from "@/config/routes";
 
 const chartData = [
   { weekDay: "Monday", affirmative: 252, negative: 123 },
@@ -42,8 +44,11 @@ export function PollCard({ poll }: PollCard) {
   } satisfies ChartConfig;
 
   return (
-    <Link href="test" className="flex w-full">
-      <Card className="flex w-full justify-between  p-[20] h-[200]">
+    <Link
+      href={`${ROUTES.dashboard}/${poll.documentId}`}
+      className="flex w-full"
+    >
+      <Card className="flex w-full justify-between p-[20] h-[200]">
         <div className="flex flex-col justify-between w-3/10">
           <div className="flex flex-col gap-2">
             <h3 className="text-3xl font-medium">{capitalize(title)}</h3>
@@ -99,3 +104,7 @@ export function PollCard({ poll }: PollCard) {
     </Link>
   );
 }
+
+export const PollCardSkeleton = () => {
+  return <Skeleton className="w-full h-[200px] rounded-xl" />;
+};
