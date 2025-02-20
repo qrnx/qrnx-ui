@@ -1,5 +1,4 @@
 import serverInstance from "@/lib/serverInstance";
-import axios from "axios";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -7,13 +6,16 @@ export const POST = async (req: Request) => {
     const body = await req.json();
     const { answerOptionId, pollId } = body;
 
-    const response = await axios.post("/responses", {
-      poll: pollId,
-      answerOption: answerOptionId,
+    await serverInstance.post("/responses", {
+      data: {
+        poll: pollId,
+        answerOption: answerOptionId,
+      },
     });
 
-    return NextResponse.json({ message: "POST /api/polls" });
+    return NextResponse.json({ success: true });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Response creating error: ", error);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }

@@ -21,7 +21,7 @@ export default function AnswerPage() {
       },
       body: JSON.stringify(requestBody),
     });
-  }, []);
+  }, [answerOptionId, pollId]);
 
   const {
     data: answerOption,
@@ -48,9 +48,7 @@ export default function AnswerPage() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <h1>{answerOptionId}</h1>
-
       <div>Answer: {text}</div>
-
       <div>Answer type: {type}</div>
     </div>
   );
