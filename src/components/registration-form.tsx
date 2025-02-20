@@ -15,7 +15,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { useTranslations } from "next-intl";
 
 export function RegistrationForm({
@@ -54,7 +54,7 @@ export function RegistrationForm({
       });
 
       if (res?.ok) {
-        router.push(routes.dashboard);
+        router.push(ROUTES.dashboard);
       } else {
         setError(t("error.redirect"));
       }
@@ -110,7 +110,7 @@ export function RegistrationForm({
             <div className="mt-4 text-center text-sm">
               {t("signUp.signInQuestion")}{" "}
               <Link
-                href={routes.signIn}
+                href={ROUTES.signIn}
                 className="underline underline-offset-4"
               >
                 {t("signUp.signInLink")}

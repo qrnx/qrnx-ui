@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { usePathname } from "next/navigation";
 import { UserNav } from "./user-nav";
 import { LanguageSelect } from "./language-select";
@@ -11,7 +11,7 @@ import Logo from "@/assets/logo.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-const routesWIthoutHeader = [routes.signIn, routes.signUp];
+const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 const Header = () => {
   const { data: session } = useSession();
@@ -29,7 +29,7 @@ const Header = () => {
     >
       <div className={styles["container-wrapper"]}>
         <div className={cn(styles["container"], "flex h-14 items-center")}>
-          <Link href={session ? routes.dashboard : routes.home}>
+          <Link href={session ? ROUTES.dashboard : ROUTES.home}>
             <Logo />
           </Link>
 

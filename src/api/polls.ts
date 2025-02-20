@@ -1,8 +1,8 @@
-import { TResponse } from "@/types/api";
-import { TPoll } from "@/types/poll";
+import { Response } from "@/types/api";
+import { Poll } from "@/types/poll";
 
-export type TGetPollsData = TResponse<TPoll[]>;
-export type TGetPollByIdData = TResponse<TPoll>;
+export type TGetPollsData = Response<Poll[]>;
+export type TGetPollByIdData = Response<Poll>;
 
 export const getPolls = async (): Promise<TGetPollsData> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/polls`, {

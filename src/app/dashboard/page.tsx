@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { signOut, useSession } from "next-auth/react";
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard } from "@/components/ui/poll-card";
@@ -39,7 +39,7 @@ export default function Dashboard() {
         </div>
 
         <Button
-          onClick={() => signOut({ callbackUrl: routes.home })}
+          onClick={() => signOut({ callbackUrl: ROUTES.home })}
           variant="outline"
           className="w-full cursor-pointer"
         >

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPollById } from "@/api/polls";
 import { useParams, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { TAnswerOption } from "@/types/answerOptions";
+import { AnswerOption } from "@/types/answerOptions";
 import Link from "next/link";
 
 export default function PollPage() {
@@ -28,7 +28,7 @@ export default function PollPage() {
 
   const { title, answerOptions } = poll;
 
-  const renderPollAnswerLink = (answerOption: TAnswerOption) => {
+  const renderPollAnswerLink = (answerOption: AnswerOption) => {
     const { documentId, text } = answerOption;
     return <Link href={`${pathname}/${documentId}`}>{text}</Link>;
   };

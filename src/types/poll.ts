@@ -1,11 +1,11 @@
-import { TAnswerOption } from "./answerOptions";
-import { TModel } from "./api";
+import { AnswerOption } from "./answerOptions";
+import { Model } from "./api";
 
-export type TPollBase = {
+export type PollBase = {
   title: string;
   description: string;
   userId: number;
-  answerOptions: TAnswerOption[];
+  answerOptions: AnswerOption[];
 };
 
-export type TPoll = TModel<TPollBase>;
+export type Poll = Model<PollBase>;

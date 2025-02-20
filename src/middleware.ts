@@ -1,9 +1,9 @@
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const protectedRoutes = [routes.dashboard];
-const publicRoutes = [routes.home, routes.signIn, routes.signUp];
+const protectedRoutes = [ROUTES.dashboard];
+const publicRoutes = [ROUTES.home, ROUTES.signIn, ROUTES.signUp];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
@@ -20,7 +20,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (isPublicRoute && token?.jwt) {
-    return NextResponse.redirect(`${req.nextUrl.origin}${routes.dashboard}`);
+    return NextResponse.redirect(`${req.nextUrl.origin}${ROUTES.dashboard}`);
   }
 
   return NextResponse.next();
