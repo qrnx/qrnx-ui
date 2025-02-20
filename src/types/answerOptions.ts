@@ -1,4 +1,4 @@
-import { TModel } from "./api";
+import { Model } from "./api";
 
 enum AnswerOptionType {
   Afirmative = "affirmative",
@@ -11,4 +11,4 @@ export type AnswerOptionBase = {
   userId: number;
 };
 
-export type AnswerOption = TModel<AnswerOptionBase>;
+export type AnswerOption = Model<AnswerOptionBase>;

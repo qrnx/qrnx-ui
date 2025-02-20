@@ -1,5 +1,5 @@
 import { AnswerOption } from "./answerOptions";
-import { TModel } from "./api";
+import { Model } from "./api";
 
 export type PollBase = {
   title: string;
@@ -8,4 +8,4 @@ export type PollBase = {
   answerOptions: AnswerOption[];
 };
 
-export type Poll = TModel<PollBase>;
+export type Poll = Model<PollBase>;

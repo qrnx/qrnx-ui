@@ -1,4 +1,4 @@
-export type TGetParams = {
+export type GetParams = {
   pagination?: {
     page?: number;
     pageSize?: number;
@@ -11,7 +11,7 @@ export type TGetParams = {
   locale?: string;
 };
 
-export type TPagination = {
+export type Pagination = {
   page: number;
   pageSize: number;
   pageCount: number;
@@ -20,14 +20,14 @@ export type TPagination = {
   total: number;
 };
 
-export type TResponse<T> = {
+export type Response<T> = {
   data: T;
   meta?: {
-    pagination: TPagination;
+    pagination: Pagination;
   };
 };
 
-export type TModel<T> = T & {
+export type Model<T> = T & {
   id: number;
   documentId: string;
   createdAt: string;
@@ -37,12 +37,12 @@ export type TModel<T> = T & {
   localizations: string[];
 };
 
-export type TArray<T> = {
+export type Array<T> = {
   id: number;
   value: T;
 }[];
 
-export type TMedia = {
+export type Media = {
   attributes: {
     alternativeText: string | null;
     caption: string | null;
