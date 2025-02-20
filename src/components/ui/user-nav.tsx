@@ -14,8 +14,14 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
+import { Skeleton } from "./skeleton";
+
 export function UserNav() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <Skeleton className="h-8 w-8 rounded-full" />;
+  }
 
   if (!session) {
     return (
