@@ -22,7 +22,7 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center justify-items-center h-full pt-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center justify-center justify-items-center w-full h-full pt-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
         <div className="flex flex-col gap-2 row-start-2 items-center sm:items-start">
           <div>{session && session.user?.email}</div>
