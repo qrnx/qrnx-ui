@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import Link from "next/link";
 export function UserNav() {
   const { data: session } = useSession();
@@ -20,7 +20,7 @@ export function UserNav() {
   if (!session) {
     return (
       <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-        <Link href={routes.signIn}>
+        <Link href={ROUTES.signIn}>
           <Avatar className="h-8 w-8">
             <AvatarImage alt="User" />
             <AvatarFallback>
@@ -61,7 +61,7 @@ export function UserNav() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={() => signOut({ callbackUrl: routes.home })}
+            onClick={() => signOut({ callbackUrl: ROUTES.home })}
           >
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

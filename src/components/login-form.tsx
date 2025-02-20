@@ -15,7 +15,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
-import { routes } from "@/config/routes";
+import { ROUTES } from "@/config/routes";
 import { toast } from "sonner";
 import { Toast } from "./ui/toast";
 import { useTranslations } from "next-intl";
@@ -45,7 +45,7 @@ export function LoginForm({
           />
         ));
       });
-      router.push(routes.signIn);
+      router.push(ROUTES.signIn);
     }
 
     return () => {
@@ -72,7 +72,7 @@ export function LoginForm({
       }
 
       if (res?.ok) {
-        router.push(routes.dashboard);
+        router.push(ROUTES.dashboard);
       } else {
         setError(t("error.redirect"));
       }
@@ -125,7 +125,7 @@ export function LoginForm({
                 {t("signIn.login")}
               </Button>
               <Button
-                onClick={() => signOut({ callbackUrl: routes.home })}
+                onClick={() => signOut({ callbackUrl: ROUTES.home })}
                 variant="outline"
                 className="w-full cursor-pointer"
               >
@@ -135,7 +135,7 @@ export function LoginForm({
             <div className="mt-4 text-center text-sm">
               {t("signIn.signUpQuestion")}{" "}
               <Link
-                href={routes.signUp}
+                href={ROUTES.signUp}
                 className="underline underline-offset-4"
               >
                 {t("signIn.signUpLink")}
