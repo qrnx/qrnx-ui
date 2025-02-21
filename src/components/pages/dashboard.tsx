@@ -40,24 +40,30 @@ export default function Dashboard() {
 
   const ButtonsContainer = () => {
     return (
-      <div className="flex gap-4">
-        <div className="flex text-lg space-x-2">
-          <div className="opacity-70 font-medium self-center">
-            3 / {polls?.length}
+      <>
+        <div className="flex gap-3">
+          <div className="flex gap-2">
+            <div className="text-muted-foreground font-medium self-center text-lg">
+              3 / {polls?.length}
+            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <CircleHelp className="size-4 self-center text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Blablalblallsl</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
-          <TooltipProvider delayDuration={200}>
-            <Tooltip>
-              <TooltipTrigger>
-                <CircleHelp className="size-6 self-center opacity-50" />
-              </TooltipTrigger>
-              <TooltipContent side="bottom">
-                <p>Blablalblallsl</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Button onClick={() => console.log("test")}>{t("createPoll")}</Button>
+          <div>
+            <Button onClick={() => console.log("test")}>
+              {t("createPoll")}
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     );
   };
 

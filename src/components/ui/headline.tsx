@@ -10,7 +10,7 @@ export const Headline: React.FC<HeadlineProps> = ({
   return (
     <div className="flex justify-between w-full">
       <div className="text-4xl font-semibold">{title}</div>
-      <div>{buttonsContainer}</div>
+      <div className="flex gap-4 h-fit">{buttonsContainer}</div>
     </div>
   );
 };
