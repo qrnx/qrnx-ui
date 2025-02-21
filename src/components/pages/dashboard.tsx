@@ -8,6 +8,12 @@ import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -35,11 +41,22 @@ export default function Dashboard() {
   const ButtonsContainer = () => {
     return (
       <div className="flex gap-4">
-        <div className="flex self-center text-lg space-x-2">
-          <div className="opacity-70 font-medium">3 / {polls?.length}</div>
-          <CircleHelp className="size-4 self-center opacity-50" />
+        <div className="flex text-lg space-x-2">
+          <div className="opacity-70 font-medium self-center">
+            3 / {polls?.length}
+          </div>
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger>
+                <CircleHelp className="size-6 self-center opacity-50" />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Blablalblallsl</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <Button onClick={() => console.log("test")}>{t("createPoll")}</Button>
         </div>
-        <Button onClick={() => console.log("test")}>{t("createPoll")}</Button>
       </div>
     );
   };
