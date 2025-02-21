@@ -26,6 +26,11 @@
     "affirmative": "Позитивный"
   },
 
+  "headline": {
+    "tittle": "Все опросы",
+    "createPoll": "Создать опрос"
+  },
+
   "error": {
     "registration": "Регистрация не удалась",
     "redirect": "Ошибка перенаправления",

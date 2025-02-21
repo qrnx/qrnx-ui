@@ -4,9 +4,14 @@ import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard, PollCardSkeleton } from "@/components/ui/poll-card";
+import { Headline } from "../ui/headline";
+import { Button } from "../ui/button";
+import { CircleHelp } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Dashboard() {
   const { data: session } = useSession();
+  const t = useTranslations("headline");
 
   const {
     data: polls,
@@ -27,16 +32,30 @@ export default function Dashboard() {
     ));
   };
 
+  const ButtonsContainer = () => {
+    return (
+      <div className="flex gap-4">
+        <div className="flex self-center text-lg space-x-2">
+          <div className="opacity-70 font-medium">3 / {polls?.length}</div>
+          <CircleHelp className="size-4 self-center opacity-50" />
+        </div>
+        <Button onClick={() => console.log("test")}>{t("createPoll")}</Button>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-start justify-items-center w-full h-fit max-h-full py-8 gap-16 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
-        <div className="flex w-full flex-col gap-2 row-start-2 items-center sm:items-start">
-          {isPending ? renderSkeletons() : null}
-          {error ? <div>"Error fetching data"</div> : null}
-
-          {polls?.map((poll) => (
-            <PollCard poll={poll} key={poll.id}></PollCard>
-          ))}
+      <main className="flex flex-col gap-6 justify-between w-full">
+        <Headline title={t("tittle")} buttonsContainer={<ButtonsContainer />} />
+        <div className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
+          <div className="flex w-full flex-col gap-2 row-start-2 items-center sm:items-start">
+            {isPending ? renderSkeletons() : null}
+            {error ? <div>"Error fetching data"</div> : null}
+            {polls?.map((poll) => (
+              <PollCard poll={poll} key={poll.id}></PollCard>
+            ))}
+          </div>
         </div>
       </main>
     </div>

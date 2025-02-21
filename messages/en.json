@@ -26,6 +26,11 @@
     "affirmative": "Affirmative"
   },
 
+  "headline": {
+    "tittle": "All polls",
+    "createPoll": "Create a poll"
+  },
+
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",
