@@ -13,6 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
+  TooltipArrow,
 } from "@radix-ui/react-tooltip";
 
 export default function Dashboard() {
@@ -46,13 +47,18 @@ export default function Dashboard() {
             <div className="text-muted-foreground font-medium self-center text-lg">
               3 / {polls?.length}
             </div>
-            <TooltipProvider>
+            <TooltipProvider delayDuration={300}>
               <Tooltip>
                 <TooltipTrigger>
                   <CircleHelp className="size-4 self-center text-muted-foreground" />
                 </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Blablalblallsl</p>
+                <TooltipContent
+                  className="bg-primary text-primary-foreground rounded-2xl p-3 overflow-wrap max-w-[200px] z-[9999]"
+                  sideOffset={5}
+                  side="bottom"
+                >
+                  <p>{t("prompt")}</p>
+                  <TooltipArrow className="fill-primary" />
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -83,4 +89,22 @@ export default function Dashboard() {
       </main>
     </div>
   );
+}
+
+{
+  /* <TooltipProvider delayDuration={300}>
+<Tooltip>
+  <TooltipTrigger>
+    <CircleHelp className="size-4 self-center text-muted-foreground" />
+  </TooltipTrigger>
+  <TooltipContent
+    className="bg-foreground text-background rounded-2xl p-3 shadow text-balance overflow-wrap max-w-[200px] z-[9999]"
+    sideOffset={5}
+    side="bottom"
+  >
+    <p>{t("prompt")}</p>
+    <TooltipArrow />
+  </TooltipContent>
+</Tooltip>
+</TooltipProvider> */
 }

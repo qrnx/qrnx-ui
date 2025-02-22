@@ -28,7 +28,8 @@
 
   "headline": {
     "tittle": "All polls",
-    "createPoll": "Create a poll"
+    "createPoll": "Create a poll",
+    "prompt": "This is a tip for our great interface. There are a lot of words in it to show that everything fits and reads perfectly."
   },
 
   "error": {
