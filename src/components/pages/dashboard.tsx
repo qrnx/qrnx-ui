@@ -13,8 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-  TooltipArrow,
-} from "@radix-ui/react-tooltip";
+} from "../ui/tooltip";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -50,15 +49,10 @@ export default function Dashboard() {
             <TooltipProvider delayDuration={300}>
               <Tooltip>
                 <TooltipTrigger>
-                  <CircleHelp className="size-4 self-center text-muted-foreground" />
+                  <CircleHelp />
                 </TooltipTrigger>
-                <TooltipContent
-                  className="bg-primary text-primary-foreground rounded-2xl p-3 overflow-wrap max-w-[200px] z-[9999]"
-                  sideOffset={5}
-                  side="bottom"
-                >
+                <TooltipContent sideOffset={5} side="bottom">
                   <p>{t("prompt")}</p>
-                  <TooltipArrow className="fill-primary" />
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
