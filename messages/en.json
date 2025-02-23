@@ -54,7 +54,8 @@
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",
-    "login": "Wrong credentials"
+    "login": "Wrong credentials",
+    "sessionExpired": "Your session has expired. Please log in again."
   },
 
   "dialogCommon": {
