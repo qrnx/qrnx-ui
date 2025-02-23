@@ -9,7 +9,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
-import { capitalize } from "@/lib/string";
 import { useTranslations } from "next-intl";
 
 export default function Poll() {
@@ -66,10 +65,7 @@ export default function Poll() {
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full max-h-full py-8 gap-6 font-[family-name:var(--font-geist-sans)]">
-      <Headline
-        title={capitalize(title)}
-        buttonsContainer={<ButtonsContainer />}
-      />
+      <Headline title={title} buttonsContainer={<ButtonsContainer />} />
 
       <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(autofit,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
         <div className={cellCommonClasses}></div>

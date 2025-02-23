@@ -8,6 +8,10 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ComponentProps } from "react";
 import { Error } from "../ui/error";
+import { useMutation } from "@tanstack/react-query";
+import { createPoll as createPollRequest } from "@/api/polls";
+import queryClient from "@/lib/queryClient";
+import { ButtonLoading } from "../ui/button-loading";
 
 interface CreatePollFormProps extends ComponentProps<"form"> {
   onClose?: () => void;
@@ -17,13 +21,25 @@ export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
   const t = useTranslations("dashboard.createPollDialog");
   const validationTranslations = useTranslations("validation");
 
+  const { mutate: createPoll, isPending: isCreatePollPending } = useMutation({
+    mutationFn: createPollRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["polls"],
+      });
+      if (onClose) {
+        onClose();
+      }
+    },
+  });
+
   const requiredErrorMessage = validationTranslations("required");
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(requiredErrorMessage),
     description: Yup.string(),
-    affirmative: Yup.string().required(requiredErrorMessage),
-    negative: Yup.string().required(requiredErrorMessage),
+    affirmativeText: Yup.string().required(requiredErrorMessage),
+    negativeText: Yup.string().required(requiredErrorMessage),
   });
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
@@ -31,31 +47,21 @@ export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
       initialValues: {
         title: "",
         description: "",
-        affirmative: t("affirmativePlaceholder"),
-        negative: t("negativePlaceholder"),
+        affirmativeText: t("affirmativePlaceholder"),
+        negativeText: t("negativePlaceholder"),
       },
       validationSchema,
-
       onSubmit: (values) => {
-        // eslint-disable-next-line no-console
-        console.log(values);
+        createPoll(values);
       },
     });
 
   const inputErrorClassNames = "border-red-500";
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleSubmit();
-    if (onClose) {
-      onClose();
-    }
-  };
-
   return (
     <form
       className={cn("grid items-start gap-4", className)}
-      onSubmit={handleFormSubmit}
+      onSubmit={handleSubmit}
     >
       <div className="grid gap-2">
         <Label htmlFor="title">{t("titleLabel")}</Label>
@@ -90,38 +96,43 @@ export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
         )}
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="affirmative">{t("affirmativeLabel")}</Label>
+        <Label htmlFor="affirmativeText">{t("affirmativeLabel")}</Label>
         <Input
-          id="affirmative"
-          name="affirmative"
+          id="affirmativeText"
+          name="affirmativeText"
           className={cn({
-            [inputErrorClassNames]: touched.affirmative && errors.affirmative,
+            [inputErrorClassNames]:
+              touched.affirmativeText && errors.affirmativeText,
           })}
-          value={values.affirmative}
+          value={values.affirmativeText}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {touched.affirmative && errors.affirmative && (
-          <Error>{errors.affirmative}</Error>
+        {touched.affirmativeText && errors.affirmativeText && (
+          <Error>{errors.affirmativeText}</Error>
         )}
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="negative">{t("negativeLabel")}</Label>
+        <Label htmlFor="negativeText">{t("negativeLabel")}</Label>
         <Input
-          id="negative"
-          name="negative"
+          id="negativeText"
+          name="negativeText"
           className={cn({
-            [inputErrorClassNames]: touched.negative && errors.negative,
+            [inputErrorClassNames]: touched.negativeText && errors.negativeText,
           })}
-          value={values.negative}
+          value={values.negativeText}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {touched.negative && errors.negative && (
-          <Error>{errors.negative}</Error>
+        {touched.negativeText && errors.negativeText && (
+          <Error>{errors.negativeText}</Error>
         )}
       </div>
-      <Button type="submit">{t("create")}</Button>
+      {isCreatePollPending ? (
+        <ButtonLoading />
+      ) : (
+        <Button type="submit">{t("create")}</Button>
+      )}
     </form>
   );
 };
