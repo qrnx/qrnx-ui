@@ -38,7 +38,8 @@
       "negativeLabel": "Negative answer text",
       "negativePlaceholder": "No",
       "create": "Create",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "createSuccess": "Poll created successfully"
     },
     "inWeek": "In 7 days",
     "negative": "Negative",
@@ -54,7 +55,8 @@
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",
-    "login": "Wrong credentials"
+    "login": "Wrong credentials",
+    "sessionExpired": "Your session has expired. Please log in again."
   },
 
   "dialogCommon": {

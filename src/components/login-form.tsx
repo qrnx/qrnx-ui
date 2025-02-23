@@ -14,10 +14,9 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import { toast } from "sonner";
-import { Toast } from "./ui/toast";
 import { useTranslations } from "next-intl";
 
 export function LoginForm({
@@ -36,14 +35,7 @@ export function LoginForm({
     let timerId: NodeJS.Timeout;
     if (queryError === "unauthorized") {
       timerId = setTimeout(() => {
-        toast.custom((id) => (
-          <Toast
-            id={id}
-            title="Error"
-            description="Your session has expired. Please log in again."
-            variant="destructive"
-          />
-        ));
+        toast.error(t("error.sessionExpired"));
       });
       router.push(ROUTES.signIn);
     }
@@ -51,7 +43,7 @@ export function LoginForm({
     return () => {
       clearTimeout(timerId);
     };
-  }, [router, searchParams]);
+  }, [router, searchParams, t]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -123,13 +115,6 @@ export function LoginForm({
               </div>
               <Button type="submit" className="w-full cursor-pointer">
                 {t("signIn.login")}
-              </Button>
-              <Button
-                onClick={() => signOut({ callbackUrl: ROUTES.home })}
-                variant="outline"
-                className="w-full cursor-pointer"
-              >
-                Logout
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
