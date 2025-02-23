@@ -17,6 +17,7 @@ import {
 import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
 import { Skeleton } from "../ui/skeleton";
 import { ResponsiveDialog } from "../ui/responsive-dialog";
+import { CreatePollForm } from "../forms/create-poll";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -73,11 +74,12 @@ export default function Dashboard() {
           <TooltipToRender />
         </div>
 
-        {/* <ResponsiveDialog
+        <ResponsiveDialog
           label={t("headline.createPoll")}
           title={dialogTranslations("title")}
           description={dialogTranslations("description")}
-        /> */}
+          formComponent={<CreatePollForm />}
+        />
       </>
     );
   };
