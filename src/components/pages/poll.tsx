@@ -37,20 +37,21 @@ export default function Poll() {
   const ButtonsContainer = () => {
     return (
       <>
-        <div className="flex gap-3">
-          <Button onClick={() => console.log("Download PDF button")}>
-            {t("pdfButton")}
-          </Button>
-          <Button variant="outline" onClick={() => console.log("Edit button")}>
-            {t("editButton")}
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => console.log("Delete button")}
-          >
-            {t("deleteButton")}
-          </Button>
-        </div>
+        {/* eslint-disable-next-line no-console */}
+        <Button onClick={() => console.log("Download PDF button")}>
+          {t("pdfButton")}
+        </Button>
+        {/* eslint-disable-next-line no-console */}
+        <Button variant="outline" onClick={() => console.log("Edit button")}>
+          {t("editButton")}
+        </Button>
+        <Button
+          variant="destructive"
+          //  eslint-disable-next-line no-console
+          onClick={() => console.log("Delete button")}
+        >
+          {t("deleteButton")}
+        </Button>
       </>
     );
   };
@@ -68,7 +69,8 @@ export default function Poll() {
       <Headline
         title={capitalize(title)}
         buttonsContainer={<ButtonsContainer />}
-      ></Headline>
+      />
+
       <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(autofit,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
         <div className={cellCommonClasses}></div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
@@ -80,14 +82,12 @@ export default function Poll() {
         <div className={cellCommonClasses}></div>
         <div className={cellCommonClasses}></div>
       </div>
+
+      <div>
+        {answerOptions.map((answerOption) => (
+          <div key={answerOption.id}>{renderPollAnswerLink(answerOption)}</div>
+        ))}
+      </div>
     </div>
   );
-}
-
-{
-  /* <div>
-{answerOptions.map((answerOption) => (
-  <div key={answerOption.id}>{renderPollAnswerLink(answerOption)}</div>
-))}
-</div> */
 }
