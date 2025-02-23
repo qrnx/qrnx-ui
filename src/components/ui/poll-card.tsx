@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/chart";
 import { ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
 import Link from "next/link";
-import { capitalize } from "@/lib/string";
 import { Poll } from "@/types/poll";
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -51,7 +50,7 @@ export function PollCard({ poll }: PollCard) {
       <Card className="flex w-full justify-between p-[20] h-[200]">
         <div className="flex flex-col justify-between w-3/10">
           <div className="flex flex-col gap-2">
-            <h3 className="text-3xl font-medium">{capitalize(title)}</h3>
+            <h3 className="text-3xl font-medium">{title}</h3>
             <div className="text-muted-foreground text-sm max-h-12 line-clamp-2">
               {description}
             </div>
