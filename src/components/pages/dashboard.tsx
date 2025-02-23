@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard, PollCardSkeleton } from "@/components/ui/poll-card";
 import { Headline } from "../ui/headline";
-import { Button } from "../ui/button";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
@@ -16,10 +15,13 @@ import {
 } from "../ui/tooltip";
 import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
 import { Skeleton } from "../ui/skeleton";
+import { ResponsiveDialog } from "../ui/responsive-dialog";
+import { CreatePollForm } from "../forms/create-poll";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const t = useTranslations("dashboard");
+  const dialogTranslations = useTranslations("dashboard.createPollDialog");
 
   const {
     data: polls,
@@ -71,12 +73,13 @@ export default function Dashboard() {
           <TooltipToRender />
         </div>
 
-        <Button
+        <ResponsiveDialog
+          label={t("headline.createPoll")}
+          title={dialogTranslations("title")}
+          description={dialogTranslations("description")}
+          formComponent={<CreatePollForm />}
           disabled={!isAbleToCreatePoll}
-          onClick={() => console.log("test")}
-        >
-          {t("headline.createPoll")}
-        </Button>
+        />
       </>
     );
   };
