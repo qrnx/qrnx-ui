@@ -67,5 +67,12 @@
     "required": "This field is required",
     "email": "Invalid email",
     "password": "Password must be at least 6 characters long"
+  },
+
+  "deleteDialog": {
+    "title": "Are you absolutely sure?",
+    "description": "This action cannot be undone. This will permanently remove your data from our servers.",
+    "delete": "Delete",
+    "cancel": "Cancel"
   }
 }

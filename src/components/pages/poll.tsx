@@ -11,6 +11,9 @@ import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 
+import { DeleteConfirmation } from "../ui/delete-confirmation";
+import { DeletePollForm } from "../forms/delete-poll";
+
 export default function Poll() {
   const { pollId } = useParams();
   const { data: session } = useSession();
@@ -44,13 +47,11 @@ export default function Poll() {
         <Button variant="outline" onClick={() => console.log("Edit button")}>
           {t("editButton")}
         </Button>
-        <Button
+        <DeleteConfirmation
+          label={t("deleteButton")}
           variant="destructive"
-          //  eslint-disable-next-line no-console
-          onClick={() => console.log("Delete button")}
-        >
-          {t("deleteButton")}
-        </Button>
+          deleteComponent={<DeletePollForm />}
+        />
       </>
     );
   };
