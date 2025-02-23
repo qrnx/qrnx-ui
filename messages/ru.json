@@ -53,5 +53,11 @@
 
   "dialogCommon": {
     "cancel": "Отмена"
+  },
+
+  "validation": {
+    "required": "Это поле обязательно",
+    "email": "Неверный email",
+    "password": "Пароль должен содержать не менее 6 символов"
   }
 }

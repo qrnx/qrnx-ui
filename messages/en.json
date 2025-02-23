@@ -53,5 +53,11 @@
 
   "dialogCommon": {
     "cancel": "Cancel"
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email",
+    "password": "Password must be at least 6 characters long"
   }
 }

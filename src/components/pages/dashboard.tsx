@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard, PollCardSkeleton } from "@/components/ui/poll-card";
 import { Headline } from "../ui/headline";
-import { Button } from "../ui/button";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
@@ -79,6 +78,7 @@ export default function Dashboard() {
           title={dialogTranslations("title")}
           description={dialogTranslations("description")}
           formComponent={<CreatePollForm />}
+          disabled={!isAbleToCreatePoll}
         />
       </>
     );
