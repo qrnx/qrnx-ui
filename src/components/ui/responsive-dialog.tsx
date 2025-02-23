@@ -90,7 +90,12 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
           <DrawerTitle>{title}</DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
-        <div className="px-4">{formComponent && formComponent}</div>
+        <div className="px-4">
+          {React.isValidElement(formComponent) &&
+            React.cloneElement(formComponent, {
+              onClose: handleClose,
+            } as FormComponentProps)}
+        </div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">{t("cancel")}</Button>
