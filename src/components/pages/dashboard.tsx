@@ -42,7 +42,8 @@ export default function Dashboard() {
     ));
   };
 
-  const isAbleToCreatePoll = polls && polls?.length < MAX_AVAILABLE_POLLS;
+  // const isAbleToCreatePoll = polls && polls?.length < MAX_AVAILABLE_POLLS;
+  const isAbleToCreatePoll = true;
 
   const TooltipToRender = () => {
     return (
