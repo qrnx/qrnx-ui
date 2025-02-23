@@ -41,4 +41,17 @@ const createPoll = async (req: Request) => {
   }
 };
 
-export { getAll as GET, createPoll as POST };
+const deletePoll = async (req: Request) => {
+  const session = await authGuard(req);
+  if (session instanceof NextResponse) return session;
+
+  try {
+    const { pollId } = await req.json();
+    await serverInstance.delete(`/polls/${pollId}`);
+    return NextResponse.json(null, { status: 200 });
+  } catch {
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+  }
+};
+
+export { getAll as GET, createPoll as POST, deletePoll as DELETE };

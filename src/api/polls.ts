@@ -5,11 +5,19 @@ export type GetPollsData = Response<Poll[]>;
 export type GetPollByIdData = Response<Poll>;
 export type CreatePollData = Response<Poll>;
 
+export type GetPollByIdParams = {
+  pollId: string;
+};
+
 export type CreatePollParams = {
   title: string;
   description?: string;
   affirmativeText: string;
   negativeText: string;
+};
+
+export type DeletePollParams = {
+  pollId: string;
 };
 
 export const getPolls = async (): Promise<GetPollsData> => {
@@ -23,7 +31,9 @@ export const getPolls = async (): Promise<GetPollsData> => {
   return data.data;
 };
 
-export const getPollById = async (pollId: string): Promise<GetPollByIdData> => {
+export const getPollById = async ({
+  pollId,
+}: GetPollByIdParams): Promise<GetPollByIdData> => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/polls/${pollId}`,
     {
@@ -50,4 +60,20 @@ export const createPoll = async (
 
   const data = await res.json();
   return data.data;
+};
+
+export const deletePoll = async ({
+  pollId,
+}: DeletePollParams): Promise<Response<null>> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/polls/${pollId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
 };
