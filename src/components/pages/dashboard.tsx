@@ -14,10 +14,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Dashboard() {
   const { data: session } = useSession();
-  const t = useTranslations("headline");
+  const t = useTranslations("dashboard");
 
   const {
     data: polls,
@@ -38,31 +40,43 @@ export default function Dashboard() {
     ));
   };
 
+  const isAbleToCreatePoll = polls && polls?.length < MAX_AVAILABLE_POLLS;
+
+  const TooltipToRender = () => {
+    return (
+      <TooltipProvider delayDuration={300}>
+        <Tooltip>
+          <TooltipTrigger>
+            <CircleHelp size={16} />
+          </TooltipTrigger>
+          <TooltipContent side="bottom" className="whitespace-pre-line">
+            <p>{t("headline.counterHelp")}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  };
+
   const ButtonsContainer = () => {
     return (
       <>
-        <div className="flex gap-3">
-          <div className="flex gap-2">
-            <div className="text-muted-foreground font-medium self-center text-lg">
-              3 / {polls?.length}
-            </div>
-            <TooltipProvider delayDuration={300}>
-              <Tooltip>
-                <TooltipTrigger>
-                  <CircleHelp />
-                </TooltipTrigger>
-                <TooltipContent sideOffset={5} side="bottom">
-                  <p>{t("prompt")}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+        <div className="flex items-center gap-1.5 md:gap-3">
+          <div className="font-medium text-lg">
+            {isPending || !polls ? (
+              <Skeleton className="w-[40px] h-[24px] rounded-sm" />
+            ) : (
+              `${polls?.length} / ${MAX_AVAILABLE_POLLS}`
+            )}
           </div>
-          <div>
-            <Button onClick={() => console.log("test")}>
-              {t("createPoll")}
-            </Button>
-          </div>
+          <TooltipToRender />
         </div>
+
+        <Button
+          disabled={!isAbleToCreatePoll}
+          onClick={() => console.log("test")}
+        >
+          {t("headline.createPoll")}
+        </Button>
       </>
     );
   };
@@ -70,11 +84,15 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col items-center justify-start justify-items-center w-full h-fit max-h-full py-8 gap-16 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 justify-between w-full">
-        <Headline title={t("tittle")} buttonsContainer={<ButtonsContainer />} />
+        <Headline
+          title={t("headline.title")}
+          buttonsContainer={<ButtonsContainer />}
+        />
         <div className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
-          <div className="flex w-full flex-col gap-2 row-start-2 items-center sm:items-start">
+          <div className="flex w-full flex-col gap-3 row-start-2 items-center sm:items-start">
             {isPending ? renderSkeletons() : null}
             {error ? <div>"Error fetching data"</div> : null}
+
             {polls?.map((poll) => (
               <PollCard poll={poll} key={poll.id}></PollCard>
             ))}
@@ -83,22 +101,4 @@ export default function Dashboard() {
       </main>
     </div>
   );
-}
-
-{
-  /* <TooltipProvider delayDuration={300}>
-<Tooltip>
-  <TooltipTrigger>
-    <CircleHelp className="size-4 self-center text-muted-foreground" />
-  </TooltipTrigger>
-  <TooltipContent
-    className="bg-foreground text-background rounded-2xl p-3 shadow text-balance overflow-wrap max-w-[200px] z-[9999]"
-    sideOffset={5}
-    side="bottom"
-  >
-    <p>{t("prompt")}</p>
-    <TooltipArrow />
-  </TooltipContent>
-</Tooltip>
-</TooltipProvider> */
 }

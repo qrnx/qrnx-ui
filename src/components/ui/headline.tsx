@@ -8,9 +8,13 @@ export const Headline: React.FC<HeadlineProps> = ({
   buttonsContainer,
 }) => {
   return (
-    <div className="flex justify-between w-full">
-      <div className="text-4xl font-semibold">{title}</div>
-      <div className="flex gap-4 h-fit">{buttonsContainer}</div>
+    <div className="flex items-center justify-between w-full">
+      <div className=" text-xl sm:text-2xl md:text-4xl font-semibold">
+        {title}
+      </div>
+      <div className="flex items-center gap-2 md:gap-4.5">
+        {buttonsContainer}
+      </div>
     </div>
   );
 };

@@ -21,15 +21,14 @@
   },
 
   "dashboard": {
+    "headline": {
+      "title": "All polls",
+      "createPoll": "Create a poll",
+      "counterHelp": "Number of polls available to create. \nYou can't create more."
+    },
     "inWeek": "In 7 days",
     "negative": "Negative",
     "affirmative": "Affirmative"
-  },
-
-  "headline": {
-    "tittle": "All polls",
-    "createPoll": "Create a poll",
-    "prompt": "This is a tip for our great interface. There are a lot of words in it to show that everything fits and reads perfectly."
   },
 
   "error": {
