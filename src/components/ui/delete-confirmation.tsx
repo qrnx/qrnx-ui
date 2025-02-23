@@ -88,7 +88,7 @@ export function DeleteConfirmation(props: DeleteConfirmationProps) {
           <DrawerTitle>{title}</DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
-        <div className="px-4 flex justify-between items-center gap-3">
+        <div className="px-4">
           {React.isValidElement(deleteComponent) &&
             React.cloneElement(deleteComponent, {
               onClose: handleClose,
