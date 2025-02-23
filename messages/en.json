@@ -45,6 +45,12 @@
     "affirmative": "Affirmative"
   },
 
+  "poll": {
+    "pdfButton": "Download PDF",
+    "editButton": "Edit",
+    "deleteButton": "Delete"
+  },
+
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",

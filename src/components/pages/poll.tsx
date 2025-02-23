@@ -10,10 +10,12 @@ import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { capitalize } from "@/lib/string";
+import { useTranslations } from "next-intl";
 
 export default function Poll() {
   const { pollId } = useParams();
   const { data: session } = useSession();
+  const t = useTranslations("poll");
   const pathname = usePathname();
 
   const {
@@ -37,16 +39,16 @@ export default function Poll() {
       <>
         <div className="flex gap-3">
           <Button onClick={() => console.log("Download PDF button")}>
-            Download PDF
+            {t("pdfButton")}
           </Button>
           <Button variant="outline" onClick={() => console.log("Edit button")}>
-            Edit
+            {t("editButton")}
           </Button>
           <Button
             variant="destructive"
             onClick={() => console.log("Delete button")}
           >
-            Delete
+            {t("deleteButton")}
           </Button>
         </div>
       </>

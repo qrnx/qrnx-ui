@@ -45,6 +45,12 @@
     "affirmative": "Позитивный"
   },
 
+  "poll": {
+    "pdfButton": "Скачать PDF",
+    "editButton": "Изменить",
+    "deleteButton": "Удалить"
+  },
+
   "error": {
     "registration": "Регистрация не удалась",
     "redirect": "Ошибка перенаправления",
