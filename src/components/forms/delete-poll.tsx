@@ -6,6 +6,7 @@ import queryClient from "@/lib/queryClient";
 import { ButtonLoading } from "../ui/button-loading";
 import { useParams, useRouter } from "next/navigation";
 import { ROUTES } from "@/config/routes";
+import { toast } from "sonner";
 
 interface DeletePollFormProps {
   onClose?: () => void;
@@ -26,6 +27,11 @@ export const DeletePollForm = ({ onClose }: DeletePollFormProps) => {
         onClose();
       }
       router.replace(ROUTES.dashboard);
+      toast.success(t("success"));
+    },
+
+    onError: () => {
+      toast.error(t("error"));
     },
   });
 
