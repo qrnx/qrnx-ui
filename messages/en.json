@@ -26,6 +26,20 @@
       "createPoll": "Create a poll",
       "counterHelp": "Number of polls available to create. \nYou can't create more."
     },
+    "createPollDialog": {
+      "title": "Create a poll",
+      "description": "Enter poll title, description and poll options below",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Title",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Description",
+      "affirmativeLabel": "Affirmative answer text",
+      "affirmativePlaceholder": "Yes",
+      "negativeLabel": "Negative answer text",
+      "negativePlaceholder": "No",
+      "create": "Create",
+      "cancel": "Cancel"
+    },
     "inWeek": "In 7 days",
     "negative": "Negative",
     "affirmative": "Affirmative"
@@ -35,5 +49,9 @@
     "registration": "Registration failed",
     "redirect": "Redirect failed",
     "login": "Wrong credentials"
+  },
+
+  "dialogCommon": {
+    "cancel": "Cancel"
   }
 }

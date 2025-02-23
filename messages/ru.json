@@ -26,6 +26,20 @@
       "createPoll": "Создать опрос",
       "counterHelp": "Количество опросов доступное для создания. \nВы не можете создать больше."
     },
+    "createPollDialog": {
+      "title": "Создать опрос",
+      "description": "Введите название опроса, описание и варианты ответов ниже",
+      "titleLabel": "Название",
+      "titlePlaceholder": "Название",
+      "descriptionLabel": "Описание",
+      "descriptionPlaceholder": "Описание",
+      "affirmativeLabel": "Текст утвердительного ответа",
+      "affirmativePlaceholder": "Да",
+      "negativeLabel": "Текст негативного ответа",
+      "negativePlaceholder": "Нет",
+      "create": "Создать",
+      "cancel": "Отмена"
+    },
     "inWeek": "За 7 дней",
     "negative": "Негативный",
     "affirmative": "Позитивный"
@@ -35,5 +49,9 @@
     "registration": "Регистрация не удалась",
     "redirect": "Ошибка перенаправления",
     "login": "Неверные данные учетной записи"
+  },
+
+  "dialogCommon": {
+    "cancel": "Отмена"
   }
 }

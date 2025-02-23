@@ -16,10 +16,12 @@ import {
 } from "../ui/tooltip";
 import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
 import { Skeleton } from "../ui/skeleton";
+import { ResponsiveDialog } from "../ui/responsive-dialog";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const t = useTranslations("dashboard");
+  const dialogTranslations = useTranslations("dashboard.createPollDialog");
 
   const {
     data: polls,
@@ -71,12 +73,11 @@ export default function Dashboard() {
           <TooltipToRender />
         </div>
 
-        <Button
-          disabled={!isAbleToCreatePoll}
-          onClick={() => console.log("test")}
-        >
-          {t("headline.createPoll")}
-        </Button>
+        {/* <ResponsiveDialog
+          label={t("headline.createPoll")}
+          title={dialogTranslations("title")}
+          description={dialogTranslations("description")}
+        /> */}
       </>
     );
   };
