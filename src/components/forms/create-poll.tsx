@@ -9,7 +9,11 @@ import { useFormik } from "formik";
 import { ComponentProps } from "react";
 import { Error } from "../ui/error";
 
-export const CreatePollForm = ({ className }: ComponentProps<"form">) => {
+interface CreatePollFormProps extends ComponentProps<"form"> {
+  onClose?: () => void;
+}
+
+export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
   const t = useTranslations("dashboard.createPollDialog");
   const validationTranslations = useTranslations("validation");
 
@@ -40,10 +44,18 @@ export const CreatePollForm = ({ className }: ComponentProps<"form">) => {
 
   const inputErrorClassNames = "border-red-500";
 
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleSubmit();
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <form
       className={cn("grid items-start gap-4", className)}
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <div className="grid gap-2">
         <Label htmlFor="title">{t("titleLabel")}</Label>

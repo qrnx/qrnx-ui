@@ -22,6 +22,10 @@ import {
 import { ComponentProps } from "react";
 import { useTranslations } from "next-intl";
 
+interface FormComponentProps extends ComponentProps<"form"> {
+  onClose: () => void;
+}
+
 interface ResponsiveDialogProps extends ComponentProps<typeof Button> {
   label: string;
   variant?: ComponentProps<typeof Button>["variant"];
@@ -44,6 +48,10 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
 
   const t = useTranslations("dialogCommon");
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -59,7 +67,12 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
               <DialogDescription>{description}</DialogDescription>
             )}
           </DialogHeader>
-          <div>{formComponent && formComponent}</div>
+          <div>
+            {React.isValidElement(formComponent) &&
+              React.cloneElement(formComponent, {
+                onClose: handleClose,
+              } as FormComponentProps)}
+          </div>
         </DialogContent>
       </Dialog>
     );
