@@ -29,7 +29,7 @@ export default function AnswerOption() {
     error,
   } = useQuery({
     queryKey: ["poll", pollId],
-    queryFn: () => getPollById(pollId as string),
+    queryFn: () => getPollById({ pollId: pollId as string }),
     enabled: !!session?.jwt,
     select: (data) => {
       const poll = data.data;

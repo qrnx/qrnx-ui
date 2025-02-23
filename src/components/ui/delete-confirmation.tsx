@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -22,31 +21,30 @@ import {
 import { ComponentProps } from "react";
 import { useTranslations } from "next-intl";
 
-interface FormComponentProps extends ComponentProps<"form"> {
+interface DeleteComponentProps extends ComponentProps<"form"> {
   onClose: () => void;
 }
 
-interface ResponsiveDialogProps extends ComponentProps<typeof Button> {
+interface DeleteConfirmationProps extends ComponentProps<typeof Button> {
   label: string;
   variant?: ComponentProps<typeof Button>["variant"];
-  title: string;
+  title?: string;
   description?: string;
-  formComponent: React.ReactNode;
+  deleteComponent: React.ReactNode;
 }
 
-export function ResponsiveDialog(props: ResponsiveDialogProps) {
+export function DeleteConfirmation(props: DeleteConfirmationProps) {
+  const t = useTranslations("deleteDialog");
   const {
     label,
-    title,
-    description,
     variant = "default",
-    formComponent,
+    title = t("title"),
+    description = t("description"),
+    deleteComponent,
     ...otherProps
   } = props;
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  const t = useTranslations("dialogCommon");
 
   const handleClose = () => {
     setOpen(false);
@@ -60,7 +58,7 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
             {label}
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[512px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             {description && (
@@ -68,10 +66,10 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
             )}
           </DialogHeader>
           <div>
-            {React.isValidElement(formComponent) &&
-              React.cloneElement(formComponent, {
+            {React.isValidElement(deleteComponent) &&
+              React.cloneElement(deleteComponent, {
                 onClose: handleClose,
-              } as FormComponentProps)}
+              } as DeleteComponentProps)}
           </div>
         </DialogContent>
       </Dialog>
@@ -91,16 +89,12 @@ export function ResponsiveDialog(props: ResponsiveDialogProps) {
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         <div className="px-4">
-          {React.isValidElement(formComponent) &&
-            React.cloneElement(formComponent, {
+          {React.isValidElement(deleteComponent) &&
+            React.cloneElement(deleteComponent, {
               onClose: handleClose,
-            } as FormComponentProps)}
+            } as DeleteComponentProps)}
         </div>
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">{t("cancel")}</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <DrawerFooter className="pt-2"></DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
