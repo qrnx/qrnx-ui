@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   const {
     data: polls,
-    isPending,
+    isFetching,
     error,
   } = useQuery({
     queryKey: ["polls"],
@@ -65,7 +65,7 @@ export default function Dashboard() {
       <>
         <div className="flex items-center gap-1.5 md:gap-2">
           <div className="font-medium text-lg">
-            {isPending || !polls ? (
+            {isFetching || !polls ? (
               <Skeleton className="w-[40px] h-[24px] rounded-sm" />
             ) : (
               `${polls?.length} / ${MAX_AVAILABLE_POLLS}`
@@ -94,12 +94,13 @@ export default function Dashboard() {
         />
         <div className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
           <div className="flex w-full flex-col gap-3 row-start-2 items-center sm:items-start">
-            {isPending ? renderSkeletons() : null}
             {error ? <div>"Error fetching data"</div> : null}
 
-            {polls?.map((poll) => (
-              <PollCard poll={poll} key={poll.id}></PollCard>
-            ))}
+            {isFetching
+              ? renderSkeletons()
+              : polls?.map((poll) => (
+                  <PollCard poll={poll} key={poll.id}></PollCard>
+                ))}
           </div>
         </div>
       </main>
