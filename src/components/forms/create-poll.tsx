@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createPoll as createPollRequest } from "@/api/polls";
 import queryClient from "@/lib/queryClient";
 import { ButtonLoading } from "../ui/button-loading";
+import { toast } from "sonner";
 
 interface CreatePollFormProps extends ComponentProps<"form"> {
   onClose?: () => void;
@@ -30,6 +31,8 @@ export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
       if (onClose) {
         onClose();
       }
+
+      toast.success(t("createSuccess"));
     },
   });
 

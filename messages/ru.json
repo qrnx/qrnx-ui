@@ -38,7 +38,8 @@
       "negativeLabel": "Текст негативного ответа",
       "negativePlaceholder": "Нет",
       "create": "Создать",
-      "cancel": "Отмена"
+      "cancel": "Отмена",
+      "createSuccess": "Опрос успешно создан"
     },
     "inWeek": "За 7 дней",
     "negative": "Негативный",

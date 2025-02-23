@@ -38,7 +38,8 @@
       "negativeLabel": "Negative answer text",
       "negativePlaceholder": "No",
       "create": "Create",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "createSuccess": "Poll created successfully"
     },
     "inWeek": "In 7 days",
     "negative": "Negative",
