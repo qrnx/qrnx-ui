@@ -88,11 +88,3 @@ export default function Poll() {
     </div>
   );
 }
-
-{
-  /* <div>
-{answerOptions.map((answerOption) => (
-  <div key={answerOption.id}>{renderPollAnswerLink(answerOption)}</div>
-))}
-</div> */
-}
