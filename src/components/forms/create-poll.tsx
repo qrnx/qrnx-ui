@@ -34,6 +34,10 @@ export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
 
       toast.success(t("createSuccess"));
     },
+
+    onError: () => {
+      toast.error(t("createError"));
+    },
   });
 
   const requiredErrorMessage = validationTranslations("required");

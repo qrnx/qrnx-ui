@@ -39,7 +39,8 @@
       "negativePlaceholder": "No",
       "create": "Create",
       "cancel": "Cancel",
-      "createSuccess": "Poll created successfully"
+      "createSuccess": "Poll created successfully",
+      "createError": "Error has occurred"
     },
     "inWeek": "In 7 days",
     "negative": "Negative",

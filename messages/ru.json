@@ -39,7 +39,8 @@
       "negativePlaceholder": "Нет",
       "create": "Создать",
       "cancel": "Отмена",
-      "createSuccess": "Опрос успешно создан"
+      "createSuccess": "Опрос успешно создан",
+      "createError": "Произошла ошибка"
     },
     "inWeek": "За 7 дней",
     "negative": "Негативный",
