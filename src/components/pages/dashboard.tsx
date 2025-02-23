@@ -62,7 +62,7 @@ export default function Dashboard() {
   const ButtonsContainer = () => {
     return (
       <>
-        <div className="flex items-center gap-1.5 md:gap-3">
+        <div className="flex items-center gap-1.5 md:gap-2">
           <div className="font-medium text-lg">
             {isPending || !polls ? (
               <Skeleton className="w-[40px] h-[24px] rounded-sm" />
