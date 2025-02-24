@@ -41,8 +41,6 @@ export default function Poll() {
 
   const { title, answerOptions } = poll;
 
-  console.log("poll", poll);
-
   const ButtonsContainer = () => {
     return (
       <>
