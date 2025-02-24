@@ -14,11 +14,11 @@ import queryClient from "@/lib/queryClient";
 import { ButtonLoading } from "../ui/button-loading";
 import { toast } from "sonner";
 
-interface CreatePollFormProps extends ComponentProps<"form"> {
+interface CreatePollProps extends ComponentProps<"form"> {
   onClose?: () => void;
 }
 
-export const CreatePollForm = ({ className, onClose }: CreatePollFormProps) => {
+export const CreatePoll = ({ className, onClose }: CreatePollProps) => {
   const t = useTranslations("dashboard.createPollDialog");
   const validationTranslations = useTranslations("validation");
 

@@ -8,11 +8,11 @@ import { useParams, useRouter } from "next/navigation";
 import { ROUTES } from "@/config/routes";
 import { toast } from "sonner";
 
-interface DeletePollFormProps {
+interface DeletePollProps {
   onClose?: () => void;
 }
 
-export const DeletePollForm = ({ onClose }: DeletePollFormProps) => {
+export const DeletePoll = ({ onClose }: DeletePollProps) => {
   const { pollId } = useParams();
   const t = useTranslations("deleteDialog");
   const router = useRouter();
