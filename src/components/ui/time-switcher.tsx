@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Card } from "./card";
-import { Console } from "console";
 import { TimeIntervals } from "@/types/timeIntervals";
 import { useTranslations } from "next-intl";
 
@@ -12,20 +11,30 @@ const TIME_INTERVALS = [
   TimeIntervals.ALL,
 ];
 
-export const TimeSwitcher = () => {
-  const [selectedTime, setSelectedTime] = useState("1W");
+interface TimeSwitcherProps {
+  initialInterval: TimeIntervals;
+  onChange: (value: TimeIntervals) => void;
+}
+
+export const TimeSwitcher = ({
+  initialInterval,
+  onChange,
+}: TimeSwitcherProps) => {
+  const [timeInterval, setTimeInterval] = useState(initialInterval);
   const t = useTranslations("poll.timeIntervals");
-  console.log(selectedTime);
+  console.log(timeInterval);
 
   return (
     <Card>
       <ToggleGroup
         type="single"
-        value={selectedTime}
+        value={timeInterval}
         onValueChange={(value) => {
-          if (TIME_INTERVALS.includes(value)) {
-            setSelectedTime(value);
+          if (!TIME_INTERVALS.includes(value as TimeIntervals)) {
+            return;
           }
+          setTimeInterval(value as TimeIntervals);
+          onChange(value as TimeIntervals);
         }}
         className="p-1 rounded-lg shadow-sm"
       >
@@ -35,7 +44,7 @@ export const TimeSwitcher = () => {
               value={item}
               key={item}
               className={`px-4 py-2 rounded-md ${
-                selectedTime === item ? "bg-accent text-primary" : ""
+                timeInterval === item ? "bg-accent text-primary" : ""
               }`}
             >
               {t(item)}
