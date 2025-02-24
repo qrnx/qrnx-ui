@@ -50,7 +50,14 @@
   "poll": {
     "pdfButton": "Скачать PDF",
     "editButton": "Изменить",
-    "deleteButton": "Удалить"
+    "deleteButton": "Удалить",
+    "mainChartTitle": "Основной график",
+    "timeIntervals": {
+      "week": "1Н",
+      "month": "1М",
+      "year": "1Г",
+      "all": "Все"
+    }
   },
 
   "informationCard": {
