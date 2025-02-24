@@ -9,7 +9,7 @@ const getAll = async (req: Request) => {
   try {
     const { data } = await serverInstance.get("/polls", {
       params: {
-        populate: ["answerOptions"],
+        populate: ["answerOptions", "responses.answerOption"],
       },
     });
     return NextResponse.json({ data }, { status: 200 });
@@ -35,6 +35,25 @@ const createPoll = async (req: Request) => {
       },
     });
 
+    const pollId = data.poll.documentId;
+
+    await Promise.all([
+      serverInstance.post("/answer-options", {
+        data: {
+          text: affirmativeText,
+          type: "affirmative",
+          poll: { connect: pollId },
+        },
+      }),
+      serverInstance.post("/answer-options", {
+        data: {
+          text: negativeText,
+          type: "negative",
+          poll: { connect: pollId },
+        },
+      }),
+    ]);
+
     return NextResponse.json({ data }, { status: 200 });
   } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
@@ -59,19 +78,48 @@ const editPoll = async (req: Request) => {
   if (session instanceof NextResponse) return session;
 
   try {
-    const { pollId, title, description, affirmativeText, negativeText } =
+    const { pollId, poll, title, description, affirmativeText, negativeText } =
       await req.json();
 
-    const { data } = await serverInstance.put(`/polls/${pollId}`, {
-      data: {
-        title,
-        description,
-        affirmativeText,
-        negativeText,
-      },
-    });
+    const filteredValues: Record<string, string> = {};
 
-    return NextResponse.json({ data }, { status: 200 });
+    if (title !== undefined) filteredValues.title = title;
+    if (description !== undefined) filteredValues.description = description;
+
+    if (title || description) {
+      await serverInstance.put(`/polls/${pollId}`, {
+        data: {
+          ...filteredValues,
+        },
+      });
+    }
+    const affirmativeOption = poll.answerOptions.find(
+      (option: { type: string }) => option.type === "affirmative"
+    );
+    const negativeOption = poll.answerOptions.find(
+      (option: { type: string }) => option.type === "negative"
+    );
+
+    if (affirmativeText !== undefined) {
+      await serverInstance.put(
+        `/answer-options/${affirmativeOption.documentId}`,
+        {
+          data: {
+            text: affirmativeText,
+          },
+        }
+      );
+    }
+
+    if (negativeText !== undefined) {
+      await serverInstance.put(`/answer-options/${negativeOption.documentId}`, {
+        data: {
+          text: negativeText,
+        },
+      });
+    }
+
+    return NextResponse.json({ data: {} }, { status: 200 });
   } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }

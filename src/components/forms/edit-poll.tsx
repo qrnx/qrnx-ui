@@ -8,37 +8,49 @@ import { useTranslations } from "next-intl";
 import { Textarea } from "../ui/textarea";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 import { Error } from "../ui/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPoll as createPollRequest } from "@/api/polls";
+import { editPoll as editPollRequest } from "@/api/polls";
 import { ButtonLoading } from "../ui/button-loading";
 import { toast } from "sonner";
+import { Poll } from "@/types/poll";
+import { AnswerOption } from "@/types/answerOptions";
+import { useParams } from "next/navigation";
 
-interface CreatePollProps extends ComponentProps<"form"> {
+interface EditPollProps extends ComponentProps<"form"> {
   onClose?: () => void;
+  poll: Poll;
 }
 
-export const CreatePoll = ({ className, onClose }: CreatePollProps) => {
-  const t = useTranslations("dashboard.createPollDialog");
+type FormValues = {
+  title: string;
+  description: string;
+  affirmativeText: string;
+  negativeText: string;
+};
+
+export const EditPoll = (props: EditPollProps) => {
+  const { className, poll, onClose, ...otherProps } = props;
+  const { pollId } = useParams();
+  const t = useTranslations("poll.editPollDialog");
   const validationTranslations = useTranslations("validation");
   const queryClient = useQueryClient();
 
-  const { mutate: createPoll, isPending: isCreatePollPending } = useMutation({
-    mutationFn: createPollRequest,
+  const { mutate: editPoll, isPending: isEditPollPending } = useMutation({
+    mutationFn: editPollRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["polls"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["polls", pollId],
       });
       if (onClose) {
         onClose();
       }
 
-      toast.success(t("createSuccess"));
-    },
-
-    onError: () => {
-      toast.error(t("createError"));
+      toast.success(t("updateSuccess"));
     },
   });
 
@@ -51,18 +63,46 @@ export const CreatePoll = ({ className, onClose }: CreatePollProps) => {
     negativeText: Yup.string().required(requiredErrorMessage),
   });
 
+  const [affirmativeOption, negativeOption] = useMemo(() => {
+    const affirmativeOption = poll.answerOptions.find(
+      (option) => option.type === "affirmative"
+    );
+
+    const negativeOption = poll.answerOptions.find(
+      (option) => option.type === "negative"
+    );
+
+    return [affirmativeOption as AnswerOption, negativeOption as AnswerOption];
+  }, [poll.answerOptions]);
+
+  const initialValues: FormValues = {
+    title: poll.title,
+    description: poll.description,
+    affirmativeText: affirmativeOption?.text,
+    negativeText: negativeOption?.text,
+  };
+
+  const handleEditForm = (values: FormValues) => {
+    const changedFields = (Object.keys(values) as (keyof FormValues)[]).reduce(
+      (acc, key) => {
+        if (
+          JSON.stringify(values[key]) !== JSON.stringify(initialValues[key])
+        ) {
+          acc[key] = values[key];
+        }
+        return acc;
+      },
+      {} as Record<keyof FormValues, string>
+    );
+
+    editPoll({ pollId: poll.documentId, poll, ...changedFields });
+  };
+
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
-      initialValues: {
-        title: "",
-        description: "",
-        affirmativeText: t("affirmativePlaceholder"),
-        negativeText: t("negativePlaceholder"),
-      },
+      initialValues,
       validationSchema,
-      onSubmit: (values) => {
-        createPoll(values);
-      },
+      onSubmit: handleEditForm,
     });
 
   const inputErrorClassNames = "border-red-500";
@@ -71,6 +111,7 @@ export const CreatePoll = ({ className, onClose }: CreatePollProps) => {
     <form
       className={cn("grid items-start gap-4", className)}
       onSubmit={handleSubmit}
+      {...otherProps}
     >
       <div className="grid gap-2">
         <Label htmlFor="title">{t("titleLabel")}</Label>
@@ -137,10 +178,10 @@ export const CreatePoll = ({ className, onClose }: CreatePollProps) => {
           <Error>{errors.negativeText}</Error>
         )}
       </div>
-      {isCreatePollPending ? (
+      {isEditPollPending ? (
         <ButtonLoading />
       ) : (
-        <Button type="submit">{t("create")}</Button>
+        <Button type="submit">{t("update")}</Button>
       )}
     </form>
   );

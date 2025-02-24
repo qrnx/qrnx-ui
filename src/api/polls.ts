@@ -23,10 +23,11 @@ export type DeletePollParams = {
 
 export type EditPollParams = {
   pollId: string;
-  title: string;
-  description: string;
-  affirmativeText: string;
-  negativeText: string;
+  poll: Poll;
+  title?: string;
+  description?: string;
+  affirmativeText?: string;
+  negativeText?: string;
 };
 
 export const getPolls = async (): Promise<GetPollsData> => {
@@ -43,6 +44,7 @@ export const getPolls = async (): Promise<GetPollsData> => {
 export const getPollById = async ({
   pollId,
 }: GetPollByIdParams): Promise<GetPollByIdData> => {
+  console.log("GET POLL BY ID", pollId);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/polls/${pollId}`,
     {
@@ -88,20 +90,12 @@ export const deletePoll = async ({
 export const editPoll = async (
   params: EditPollParams
 ): Promise<EditPollData> => {
-  const { pollId, title, description, affirmativeText, negativeText } = params;
-
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/polls`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      pollId,
-      title,
-      description,
-      affirmativeText,
-      negativeText,
-    }),
+    body: JSON.stringify(params),
   });
   const data = await res.json();
   return data;

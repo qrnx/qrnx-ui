@@ -1,8 +1,9 @@
+"use client";
+
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deletePoll as deletePollRequest } from "@/api/polls";
-import queryClient from "@/lib/queryClient";
 import { ButtonLoading } from "../ui/button-loading";
 import { useParams, useRouter } from "next/navigation";
 import { ROUTES } from "@/config/routes";
@@ -16,6 +17,7 @@ export const DeletePoll = ({ onClose }: DeletePollProps) => {
   const { pollId } = useParams();
   const t = useTranslations("deleteDialog");
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { mutate: deletePoll, isPending: isDeletePollPending } = useMutation({
     mutationFn: deletePollRequest,
