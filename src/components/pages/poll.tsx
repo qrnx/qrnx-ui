@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import { InformationCard } from "../ui/Information-card";
 
 import { DeleteConfirmation } from "../ui/delete-confirmation";
-import { DeletePollForm } from "../forms/delete-poll";
+import { DeletePoll } from "../forms/delete-poll";
 import { MainChartCard } from "../main-chart-card";
 
 export default function Poll() {
@@ -52,7 +52,7 @@ export default function Poll() {
         <DeleteConfirmation
           label={t("deleteButton")}
           variant="destructive"
-          deleteComponent={<DeletePollForm />}
+          deleteComponent={<DeletePoll />}
         />
       </>
     );
