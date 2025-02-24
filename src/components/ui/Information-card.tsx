@@ -22,15 +22,15 @@ export const InformationCard = () => {
       <CardContent className="flex flex-col gap-1.5">
         <div className="flex gap-2">
           <Users />
-          <div>{t("cardContent.total")}: 503</div>
+          <div>{t("total")}: 503</div>
         </div>
         <div className="flex gap-2">
           <Percent />
-          <div>{t("cardContent.responses")}: 0.54</div>
+          <div>{t("responses")}: 0.54</div>
         </div>
         <div className="flex gap-2">
           <Calendar />
-          <div>{t("cardContent.date")}: 12.04.2025</div>
+          <div>{t("date")}: 12.04.2025</div>
         </div>
       </CardContent>
     </Card>

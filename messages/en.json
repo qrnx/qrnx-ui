@@ -55,11 +55,9 @@
 
   "informationCard": {
     "general": "General Information",
-    "cardContent": {
-      "total": "Total",
-      "responses": "Positive responses",
-      "date": "Date of creation"
-    }
+    "total": "Total",
+    "responses": "Affirmative responses",
+    "date": "Date of creation"
   },
 
   "error": {
