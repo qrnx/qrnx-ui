@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
+import { InformationCard } from "../ui/Information-card";
 
 import { DeleteConfirmation } from "../ui/delete-confirmation";
 import { DeletePollForm } from "../forms/delete-poll";
@@ -62,14 +63,16 @@ export default function Poll() {
   };
 
   const cellCommonClasses =
-    "bg-primary/10 w-full col-span-1 aspect-square sm:aspect-2/1 lg:aspect-auto max-h-[300px] ";
+    "bg-primary/10 w-full col-span-1 aspect-square sm:aspect-2/1 lg:aspect-auto  ";
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full max-h-full py-8 gap-6 font-[family-name:var(--font-geist-sans)]">
       <Headline title={title} buttonsContainer={<ButtonsContainer />} />
 
-      <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(autofit,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
-        <div className={cellCommonClasses}></div>
+      <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
+        <div className={cellCommonClasses}>
+          <InformationCard />
+        </div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
 
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
