@@ -68,6 +68,7 @@
       "updateError": "Произошла ошибка"
     },
     "mainChartTitle": "Основной график",
+    "normalizedChartTitle": "Нормализованный график",
     "timeIntervals": {
       "week": "1Н",
       "month": "1М",

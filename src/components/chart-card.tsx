@@ -13,23 +13,23 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const chartData = [
-  { weekDay: "Monday", affirmative: 252, negative: 123 },
+  { weekDay: "Monday", affirmative: 952, negative: 523 },
   { weekDay: "Tuesday", affirmative: 325, negative: 200 },
-  { weekDay: "Wednesday", affirmative: 237, negative: 120 },
-  { weekDay: "Thursday", affirmative: 73, negative: 190 },
-  { weekDay: "Friday", affirmative: 209, negative: 130 },
+  { weekDay: "Wednesday", affirmative: 2237, negative: 1120 },
+  { weekDay: "Thursday", affirmative: 173, negative: 190 },
+  { weekDay: "Friday", affirmative: 1209, negative: 130 },
   { weekDay: "Saturday ", affirmative: 214, negative: 140 },
   { weekDay: "Sunday", affirmative: 214, negative: 140 },
 ];
 
 interface ChartCardProps {
   title: string;
-  trendComponent?: boolean;
+  withTrendSection?: boolean;
 }
 
 export const ChartCard = ({
   title,
-  trendComponent = false,
+  withTrendSection = false,
 }: ChartCardProps) => {
   const [timeInterval, setTimeInterval] = useState(TimeIntervals.WEEK);
   const t = useTranslations("dashboard");
@@ -54,7 +54,7 @@ export const ChartCard = ({
           onChange={setTimeInterval}
         />
       </div>
-      {trendComponent === true ? (
+      {withTrendSection === true ? (
         <div className="flex gap-6 text-2xl font-medium">
           <div className="flex gap-2">
             324
@@ -68,7 +68,7 @@ export const ChartCard = ({
       ) : null}
       <ChartContainer
         config={chartConfig}
-        className={`w-full ml-auto ${trendComponent ? "h-30" : "h-50"}`}
+        className={`w-full ml-auto ${withTrendSection ? "h-30" : "h-50"}`}
       >
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
