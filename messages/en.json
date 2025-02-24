@@ -50,7 +50,14 @@
   "poll": {
     "pdfButton": "Download PDF",
     "editButton": "Edit",
-    "deleteButton": "Delete"
+    "deleteButton": "Delete",
+    "mainChartTitle": "Main chart",
+    "timeIntervals": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y",
+      "all": "ALL"
+    }
   },
 
   "informationCard": {
