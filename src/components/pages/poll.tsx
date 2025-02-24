@@ -16,7 +16,7 @@ import { DeleteConfirmation } from "../ui/delete-confirmation";
 import { DeletePoll } from "../forms/delete-poll";
 import { ResponsiveDialog } from "../ui/responsive-dialog";
 import { EditPoll } from "../forms/edit-poll";
-import { MainChartCard } from "../main-chart-card";
+import { ChartCard } from "../main-chart-card";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -85,10 +85,12 @@ export default function Poll() {
           <InformationCard />
         </div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
-          <MainChartCard />
+          <ChartCard title="Main Chart" trendComponent />
         </div>
 
-        <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
+        <div className={cn(cellCommonClasses, "lg:col-span-2")}>
+          <ChartCard title="Normalized Chart" />
+        </div>
         <div className={cellCommonClasses}></div>
 
         <div className={cellCommonClasses}></div>

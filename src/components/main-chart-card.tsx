@@ -22,7 +22,15 @@ const chartData = [
   { weekDay: "Sunday", affirmative: 214, negative: 140 },
 ];
 
-export const MainChartCard = () => {
+interface ChartCardProps {
+  title: string;
+  trendComponent?: boolean;
+}
+
+export const ChartCard = ({
+  title,
+  trendComponent = false,
+}: ChartCardProps) => {
   const [timeInterval, setTimeInterval] = useState(TimeIntervals.WEEK);
   const t = useTranslations("dashboard");
 
@@ -40,23 +48,28 @@ export const MainChartCard = () => {
   return (
     <Card className="flex h-full flex-col justify-between p-4">
       <div className="flex justify-between items-center">
-        <div className="text-2xl font-semibold">Main Chart</div>
+        <div className="text-2xl font-semibold">{title}</div>
         <TimeSwitcher
           initialInterval={timeInterval}
           onChange={setTimeInterval}
         />
       </div>
-      <div className="flex gap-6 text-2xl font-medium">
-        <div className="flex gap-2">
-          324
-          <TrendingUp className="size-8 text-(--chart-2)" />
+      {trendComponent === true ? (
+        <div className="flex gap-6 text-2xl font-medium">
+          <div className="flex gap-2">
+            324
+            <TrendingUp className="size-8 text-(--chart-2)" />
+          </div>
+          <div className="flex gap-2">
+            54
+            <TrendingDown className="size-8 text-(--chart-1)" />
+          </div>
         </div>
-        <div className="flex gap-2">
-          54
-          <TrendingDown className="size-8 text-(--chart-1)" />
-        </div>
-      </div>
-      <ChartContainer config={chartConfig} className="w-full h-30 ml-auto">
+      ) : null}
+      <ChartContainer
+        config={chartConfig}
+        className={`w-full ml-auto ${trendComponent ? "h-30" : "h-50"}`}
+      >
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis
