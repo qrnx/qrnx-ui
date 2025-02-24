@@ -25,7 +25,7 @@ export const TimeSwitcher = ({
   console.log(timeInterval);
 
   return (
-    <Card>
+    <Card className="rounded-lg">
       <ToggleGroup
         type="single"
         value={timeInterval}
@@ -36,14 +36,14 @@ export const TimeSwitcher = ({
           setTimeInterval(value as TimeIntervals);
           onChange(value as TimeIntervals);
         }}
-        className="p-1 rounded-lg shadow-sm"
+        className="flex justify-between p-[4] gap-0.5 rounded-lg shadow-sm"
       >
         {TIME_INTERVALS.map((item) => {
           return (
             <ToggleGroupItem
               value={item}
               key={item}
-              className={`px-4 py-2 rounded-md ${
+              className={`text-xs font-semibold px-4 py-2 rounded-md ${
                 timeInterval === item ? "bg-accent text-primary" : ""
               }`}
             >
