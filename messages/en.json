@@ -53,6 +53,15 @@
     "deleteButton": "Delete"
   },
 
+  "informationCard": {
+    "general": "General Information",
+    "cardContent": {
+      "total": "Total",
+      "responses": "Positive responses",
+      "date": "Date of creation"
+    }
+  },
+
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",

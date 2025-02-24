@@ -53,6 +53,15 @@
     "deleteButton": "Удалить"
   },
 
+  "informationCard": {
+    "general": "Общая информация",
+    "cardContent": {
+      "total": "Кол-во проголосовавших",
+      "responses": "Позитивные голоса",
+      "date": "Дата создания"
+    }
+  },
+
   "error": {
     "registration": "Регистрация не удалась",
     "redirect": "Ошибка перенаправления",
