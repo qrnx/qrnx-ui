@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
+import { InformationCard } from "../ui/InformationCard";
 
 import { DeleteConfirmation } from "../ui/delete-confirmation";
 import { DeletePollForm } from "../forms/delete-poll";
@@ -69,7 +70,9 @@ export default function Poll() {
       <Headline title={title} buttonsContainer={<ButtonsContainer />} />
 
       <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(autofit,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
-        <div className={cellCommonClasses}></div>
+        <div className={cellCommonClasses}>
+          <InformationCard />
+        </div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
 
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
