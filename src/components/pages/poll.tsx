@@ -13,13 +13,16 @@ import { useTranslations } from "next-intl";
 import { InformationCard } from "../ui/Information-card";
 
 import { DeleteConfirmation } from "../ui/delete-confirmation";
-import { DeletePollForm } from "../forms/delete-poll";
+import { DeletePoll } from "../forms/delete-poll";
+import { ResponsiveDialog } from "../ui/responsive-dialog";
+import { EditPoll } from "../forms/edit-poll";
 import { MainChartCard } from "../main-chart-card";
 
 export default function Poll() {
   const { pollId } = useParams();
   const { data: session } = useSession();
   const t = useTranslations("poll");
+  const dialogTranslations = useTranslations("poll.editPollDialog");
   const pathname = usePathname();
 
   const {
@@ -27,7 +30,7 @@ export default function Poll() {
     isPending,
     error,
   } = useQuery({
-    queryKey: ["poll", pollId],
+    queryKey: ["polls", pollId],
     queryFn: () => getPollById({ pollId: pollId as string }),
     enabled: !!session?.jwt,
     select: (data) => data.data,
@@ -38,6 +41,8 @@ export default function Poll() {
 
   const { title, answerOptions } = poll;
 
+  console.log("poll", poll);
+
   const ButtonsContainer = () => {
     return (
       <>
@@ -45,14 +50,21 @@ export default function Poll() {
         <Button onClick={() => console.log("Download PDF button")}>
           {t("pdfButton")}
         </Button>
-        {/* eslint-disable-next-line no-console */}
-        <Button variant="outline" onClick={() => console.log("Edit button")}>
+        {}
+        {/* <Button variant="outline" onClick={() => console.log("Edit button")}>
           {t("editButton")}
-        </Button>
+        </Button> */}
+        <ResponsiveDialog
+          label={t("editButton")}
+          variant="outline"
+          title={dialogTranslations("title")}
+          description={dialogTranslations("description")}
+          formComponent={<EditPoll poll={poll} />}
+        />
         <DeleteConfirmation
           label={t("deleteButton")}
           variant="destructive"
-          deleteComponent={<DeletePollForm />}
+          deleteComponent={<DeletePoll />}
         />
       </>
     );

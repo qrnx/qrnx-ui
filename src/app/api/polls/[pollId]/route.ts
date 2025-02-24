@@ -14,7 +14,7 @@ const getOne = async (
   try {
     const { data } = await serverInstance.get(`/polls/${pollId}`, {
       params: {
-        populate: ["answerOptions"],
+        populate: ["answerOptions", "responses.answerOption"],
       },
     });
     return NextResponse.json({ data }, { status: 200 });

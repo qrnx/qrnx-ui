@@ -51,6 +51,22 @@
     "pdfButton": "Download PDF",
     "editButton": "Edit",
     "deleteButton": "Delete",
+    "editPollDialog": {
+      "title": "Edit poll",
+      "description": "Edit poll title, description and poll options below",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Title",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Description",
+      "affirmativeLabel": "Affirmative answer text",
+      "affirmativePlaceholder": "Yes",
+      "negativeLabel": "Negative answer text",
+      "negativePlaceholder": "No",
+      "update": "Update",
+      "cancel": "Cancel",
+      "updateSuccess": "Poll updated successfully",
+      "updateError": "Error has occurred"
+    },
     "mainChartTitle": "Main chart",
     "timeIntervals": {
       "week": "1W",

@@ -28,7 +28,7 @@ export default function AnswerOption() {
     isPending,
     error,
   } = useQuery({
-    queryKey: ["poll", pollId],
+    queryKey: ["polls", pollId],
     queryFn: () => getPollById({ pollId: pollId as string }),
     enabled: !!session?.jwt,
     select: (data) => {

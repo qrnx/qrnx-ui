@@ -51,6 +51,22 @@
     "pdfButton": "Скачать PDF",
     "editButton": "Изменить",
     "deleteButton": "Удалить",
+    "editPollDialog": {
+      "title": "Изменить опрос",
+      "description": "Измените название опроса, описание и варианты ответов ниже",
+      "titleLabel": "Название",
+      "titlePlaceholder": "Название",
+      "descriptionLabel": "Описание",
+      "descriptionPlaceholder": "Описание",
+      "affirmativeLabel": "Текст утвердительного ответа",
+      "affirmativePlaceholder": "Да",
+      "negativeLabel": "Текст негативного ответа",
+      "negativePlaceholder": "Нет",
+      "update": "Обновить",
+      "cancel": "Отмена",
+      "updateSuccess": "Опрос успешно обновлен",
+      "updateError": "Произошла ошибка"
+    },
     "mainChartTitle": "Основной график",
     "timeIntervals": {
       "week": "1Н",
