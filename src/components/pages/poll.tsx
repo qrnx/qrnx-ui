@@ -14,6 +14,7 @@ import { InformationCard } from "../ui/Information-card";
 
 import { DeleteConfirmation } from "../ui/delete-confirmation";
 import { DeletePollForm } from "../forms/delete-poll";
+import { MainChartCard } from "../main-chart-card";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -73,7 +74,9 @@ export default function Poll() {
         <div className={cellCommonClasses}>
           <InformationCard />
         </div>
-        <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
+        <div className={cn(cellCommonClasses, "lg:col-span-2")}>
+          <MainChartCard />
+        </div>
 
         <div className={cn(cellCommonClasses, "lg:col-span-2")}></div>
         <div className={cellCommonClasses}></div>
