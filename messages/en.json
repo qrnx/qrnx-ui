@@ -68,6 +68,7 @@
       "updateError": "Error has occurred"
     },
     "mainChartTitle": "Main chart",
+    "normalizedChartTitle": "Normalized Chart",
     "timeIntervals": {
       "week": "1W",
       "month": "1M",

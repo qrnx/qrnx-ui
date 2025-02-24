@@ -22,10 +22,9 @@ export const TimeSwitcher = ({
 }: TimeSwitcherProps) => {
   const [timeInterval, setTimeInterval] = useState(initialInterval);
   const t = useTranslations("poll.timeIntervals");
-  console.log(timeInterval);
 
   return (
-    <Card className="rounded-lg">
+    <Card className="rounded-lg shadow-none">
       <ToggleGroup
         type="single"
         value={timeInterval}
