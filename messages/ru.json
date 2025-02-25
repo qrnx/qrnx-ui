@@ -42,6 +42,10 @@
       "createSuccess": "Опрос успешно создан",
       "createError": "Произошла ошибка"
     },
+    "donutChart": {
+      "total": "Всего ответов",
+      "polled": "ответов"
+    },
     "inWeek": "За 7 дней",
     "negative": "Негативный",
     "affirmative": "Позитивный"

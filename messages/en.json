@@ -42,9 +42,13 @@
       "createSuccess": "Poll created successfully",
       "createError": "Error has occurred"
     },
+    "donutChart": {
+      "total": "Total",
+      "polled": "polled"
+    },
     "inWeek": "In 7 days",
-    "negative": "Negative",
-    "affirmative": "Affirmative"
+    "negative": "Negative ",
+    "affirmative": "Affirmative "
   },
 
   "poll": {
