@@ -37,10 +37,8 @@ export const DonutChart = () => {
 
   return (
     <Card className="flex flex-col h-full p-4">
-      <div className="flex">
-        <div className="items-center pb-0 text-xl sm:text-2xl font-semibold">
-          {t("donutChart.total")}
-        </div>
+      <div className="flex items-center pb-0 text-xl sm:text-2xl font-semibold">
+        {t("donutChart.total")}
       </div>
 
       <div className="flex w-full h-full">
