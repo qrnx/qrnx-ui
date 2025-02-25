@@ -2,10 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getPollById } from "@/api/polls";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { AnswerOption } from "@/types/answerOptions";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
@@ -26,7 +24,6 @@ export default function Poll() {
   const { data: session } = useSession();
   const t = useTranslations("poll");
   const dialogTranslations = useTranslations("poll.editPollDialog");
-  const pathname = usePathname();
   const generateOptionUrl = useGenerateOptionUrl();
 
   const {
@@ -47,7 +44,7 @@ export default function Poll() {
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
 
-  const { title, answerOptions } = poll;
+  const { title } = poll;
 
   const ButtonsContainer = () => {
     return (
@@ -74,11 +71,6 @@ export default function Poll() {
         />
       </>
     );
-  };
-
-  const renderPollAnswerLink = (answerOption: AnswerOption) => {
-    const { documentId, text } = answerOption;
-    return <Link href={`${pathname}/${documentId}`}>{text}</Link>;
   };
 
   const cellCommonClasses =
