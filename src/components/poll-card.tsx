@@ -47,19 +47,26 @@ export function PollCard({ poll }: PollCard) {
       href={`${ROUTES.dashboard}/${poll.documentId}`}
       className="flex w-full"
     >
-      <Card className="flex w-full justify-between p-[20] h-[200]">
-        <div className="flex flex-col justify-between w-3/10">
+      <Card className="flex flex-col sm:flex-row w-full gap-4 justify-between p-[20] sm:h-[200]">
+        <div className="flex flex-col justify-between gap-2 sm:w-3/10">
           <div className="flex flex-col gap-2">
-            <h3 className="text-3xl font-medium">{title}</h3>
-            <div className="text-muted-foreground text-sm max-h-12 line-clamp-2">
-              {description}
+            <div className="flex justify-between items-center gap-2">
+              <h3 className="text-xl sm:text-3xl font-medium">{title}</h3>
+              <div className="flex sm:hidden justify-end">
+                <ChevronRight className="text-gray-400" />
+              </div>
             </div>
+            {description && (
+              <div className="text-muted-foreground text-sm max-h-12 line-clamp-2">
+                {description}
+              </div>
+            )}
           </div>
           <div className="flex flex-col gap-1">
             <div className="opacity-50 text-xs font-medium">
               {t("inWeek")} 7.05 - 14.05
             </div>
-            <div className="flex gap-6 text-2xl font-medium">
+            <div className="flex gap-6 text-lg md:text-2xl font-medium">
               <div className="flex gap-2">
                 2263
                 <TrendingUp className="size-8 text-(--chart-2)" />
@@ -71,8 +78,8 @@ export function PollCard({ poll }: PollCard) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between w-6/10">
-          <div className="flex justify-end ">
+        <div className="flex flex-col justify-between w-full md:w-6/10">
+          <div className="hidden sm:flex justify-end">
             <ChevronRight className="text-gray-400" />
           </div>
           <ChartContainer config={chartConfig} className="w-full h-30 ml-auto">
