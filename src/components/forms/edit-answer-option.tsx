@@ -24,7 +24,8 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
   const queryClient = useQueryClient();
 
   const { mutate: createPoll, isPending: isCreatePollPending } = useMutation({
-    mutationFn: createPollRequest,
+    mutationFn: (values: { affirmativeText: string; negativeText: string }) =>
+      createPollRequest(values),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["polls"],
@@ -32,8 +33,6 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
       if (onClose) {
         onClose();
       }
-
-      toast.success("createSuccess");
     },
 
     onError: () => {
