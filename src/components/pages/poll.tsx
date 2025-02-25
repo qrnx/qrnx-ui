@@ -19,6 +19,8 @@ import { QrCard } from "../qr-card";
 import { useGetAnswerOptions } from "@/hooks/use-get-answer-options";
 import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
 import { DonutChart } from "../donut-card";
+import AnswerOption from "./answer-option";
+import { AnswerChanger } from "../answer-changer-card";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -108,7 +110,9 @@ export default function Poll() {
             url={generateOptionUrl(negativeOption?.documentId)}
           />
         </div>
-        <div className={cellCommonClasses}></div>
+        <div className={cellCommonClasses}>
+          <AnswerChanger />
+        </div>
       </div>
     </div>
   );
