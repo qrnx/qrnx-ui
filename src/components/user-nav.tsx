@@ -14,7 +14,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
-import { Skeleton } from "./skeleton";
+import { Skeleton } from "./ui/skeleton";
 
 export function UserNav() {
   const { data: session, status } = useSession();

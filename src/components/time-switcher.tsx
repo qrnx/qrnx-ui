@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Card } from "./card";
+import { Card } from "./ui/card";
 import { TimeIntervals } from "@/types/timeIntervals";
 import { useTranslations } from "next-intl";
 

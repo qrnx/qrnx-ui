@@ -1,5 +1,5 @@
 import { Card } from "./ui/card";
-import { TimeSwitcher } from "./ui/time-switcher";
+import { TimeSwitcher } from "./time-switcher";
 import { useState } from "react";
 import { TimeIntervals } from "@/types/timeIntervals";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
