@@ -1,4 +1,4 @@
-import { Card } from "./card";
+import { Card } from "./ui/card";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   ChartConfig,

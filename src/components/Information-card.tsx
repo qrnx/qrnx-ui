@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Card, CardDescription, CardTitle } from "./card";
+import { Card, CardDescription, CardTitle } from "./ui/card";
 import { Users, Percent, Calendar } from "lucide-react";
 
 export const InformationCard = () => {

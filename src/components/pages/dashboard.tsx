@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
-import { PollCard, PollCardSkeleton } from "@/components/ui/poll-card";
+import { PollCard, PollCardSkeleton } from "@/components/poll-card";
 import { Headline } from "../ui/headline";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -15,7 +15,7 @@ import {
 } from "../ui/tooltip";
 import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
 import { Skeleton } from "../ui/skeleton";
-import { ResponsiveDialog } from "../ui/responsive-dialog";
+import { ResponsiveDialog } from "../responsive-dialog";
 import { CreatePoll } from "../forms/create-poll";
 
 export default function Dashboard() {

@@ -1,13 +1,13 @@
 import { Model } from "./api";
 
-enum AnswerOptionType {
+enum AnswerOptions {
   Afirmative = "affirmative",
   Negative = "negative",
 }
 
 export type AnswerOptionBase = {
   text: string;
-  type: AnswerOptionType;
+  type: AnswerOptions;
   userId: number;
 };
 

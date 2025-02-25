@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
-import { InformationCard } from "../ui/Information-card";
+import { InformationCard } from "../Information-card";
 
-import { DeleteConfirmation } from "../ui/delete-confirmation";
+import { DeleteConfirmation } from "../delete-confirmation";
 import { DeletePoll } from "../forms/delete-poll";
-import { ResponsiveDialog } from "../ui/responsive-dialog";
+import { ResponsiveDialog } from "../responsive-dialog";
 import { EditPoll } from "../forms/edit-poll";
 import { ChartCard } from "../chart-card";
 
