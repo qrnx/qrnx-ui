@@ -25,6 +25,9 @@ export const DeletePoll = ({ onClose }: DeletePollProps) => {
       queryClient.invalidateQueries({
         queryKey: ["polls"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["polls", pollId],
+      });
       if (onClose) {
         onClose();
       }
