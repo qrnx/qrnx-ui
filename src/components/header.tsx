@@ -28,12 +28,17 @@ const Header = () => {
       )}
     >
       <div className={styles["container-wrapper"]}>
-        <div className={cn(styles["container"], "flex h-14 items-center")}>
+        <div
+          className={cn(
+            styles["container"],
+            "flex h-10 md:h-14 items-center justify-between"
+          )}
+        >
           <Link href={session ? ROUTES.dashboard : ROUTES.home}>
             <Logo />
           </Link>
 
-          <div className="flex flex-1 items-center justify-between gap-3 md:justify-end">
+          <div className="flex items-center justify-between gap-3 md:justify-end">
             <ThemeToggle />
             <LanguageSelect />
             <UserNav />

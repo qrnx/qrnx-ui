@@ -48,7 +48,7 @@ export const ChartCard = ({
   return (
     <Card className="flex h-full flex-col justify-between p-4">
       <div className="flex justify-between items-center">
-        <div className="text-2xl font-semibold">{title}</div>
+        <div className="text-xl sm:text-2xl font-semibold">{title}</div>
         <TimeSwitcher
           initialInterval={timeInterval}
           onChange={setTimeInterval}
