@@ -14,7 +14,10 @@ const getAll = async (req: Request) => {
     });
     return NextResponse.json({ data }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 };
 
@@ -56,7 +59,10 @@ const createPoll = async (req: Request) => {
 
     return NextResponse.json({ data }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 };
 
@@ -69,7 +75,10 @@ const deletePoll = async (req: Request) => {
     await serverInstance.delete(`/polls/${pollId}`);
     return NextResponse.json(null, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 };
 
@@ -121,7 +130,10 @@ const editPoll = async (req: Request) => {
 
     return NextResponse.json({ data: {} }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 };
 

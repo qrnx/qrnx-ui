@@ -24,6 +24,9 @@ export async function POST(req: Request) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Register error:", error);
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 }

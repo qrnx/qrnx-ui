@@ -12,14 +12,19 @@ const getOne = async (
   const { pollId } = await params;
 
   try {
-    const { data } = await serverInstance.get(`/polls/${pollId}`, {
+    const res = await serverInstance.get(`/polls/${pollId}`, {
       params: {
         populate: ["answerOptions", "responses.answerOption"],
       },
     });
+
+    const data = res.data;
     return NextResponse.json({ data }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: "Internal error" },
+      { status: 500 }
+    );
   }
 };
 
