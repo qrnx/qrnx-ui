@@ -44,7 +44,6 @@ export const getPolls = async (): Promise<GetPollsData> => {
 export const getPollById = async ({
   pollId,
 }: GetPollByIdParams): Promise<GetPollByIdData> => {
-  console.log("GET POLL BY ID", pollId);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/polls/${pollId}`,
     {
