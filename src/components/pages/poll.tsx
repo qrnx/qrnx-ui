@@ -19,7 +19,6 @@ import { EditPoll } from "../forms/edit-poll";
 import { ChartCard } from "../chart-card";
 import { QrCard } from "../qr-card";
 import { useGetAnswerOptions } from "@/hooks/use-get-answer-options";
-import { useMemo } from "react";
 import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
 
 export default function Poll() {
@@ -104,18 +103,17 @@ export default function Poll() {
 
         <div className={cn(cellCommonClasses, "")}>
           <QrCard
-            title="Affirmative Option"
+            title={t("affirmativeOption")}
             url={generateOptionUrl(affirmativeOption?.documentId)}
           />
         </div>
+        <div className={cellCommonClasses}>
+          <QrCard
+            title={t("negativeOption")}
+            url={generateOptionUrl(negativeOption?.documentId)}
+          />
+        </div>
         <div className={cellCommonClasses}></div>
-        <div className={cellCommonClasses}></div>
-      </div>
-
-      <div>
-        {answerOptions.map((answerOption) => (
-          <div key={answerOption.id}>{renderPollAnswerLink(answerOption)}</div>
-        ))}
       </div>
     </div>
   );

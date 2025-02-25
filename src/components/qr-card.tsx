@@ -1,6 +1,9 @@
 import { Card, CardTitle } from "./ui/card";
 import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface QrCardProps {
   title: string;
@@ -29,13 +32,18 @@ export const QrCard = ({ title, url }: QrCardProps) => {
   }, []);
 
   return (
-    <Card className="flex flex-col justify-between gap-2 h-full p-4">
-      <CardTitle className="text-xl text-center font-semibold">
-        {title}
-      </CardTitle>
-      <div ref={qrContainerRef} className="flex h-full justify-center">
-        <QRCodeSVG value={url} size={squareSide} title={title} />
-      </div>
-    </Card>
+    <Link href={url}>
+      <Card className="h-full p-4">
+        <div className="relative flex flex-col justify-between gap-2 h-full">
+          <CardTitle className="text-xl text-center font-semibold">
+            {title}
+          </CardTitle>
+          <div ref={qrContainerRef} className="flex h-full justify-center">
+            <QRCodeSVG value={url} size={squareSide} title={title} />
+          </div>
+          <ChevronRight className=" absolute top-0 right-0 text-gray-400" />
+        </div>
+      </Card>
+    </Link>
   );
 };
