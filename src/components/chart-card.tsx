@@ -68,7 +68,9 @@ export const ChartCard = ({
       ) : null}
       <ChartContainer
         config={chartConfig}
-        className={`w-full ml-auto ${withTrendSection ? "h-30" : "h-50"}`}
+        className={`w-full ml-auto ${
+          withTrendSection ? " h-40 sm:h-40 lg:h-30" : "h-50"
+        }`}
       >
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />

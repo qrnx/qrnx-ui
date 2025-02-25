@@ -74,13 +74,13 @@ export default function Poll() {
   };
 
   const cellCommonClasses =
-    "bg-primary/10 w-full col-span-1 aspect-square sm:aspect-2/1 lg:aspect-auto  ";
+    "bg-primary/10 w-full col-span-1 aspect-auto lg:aspect-auto max-h-[300px] lg:max-h-none ";
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full max-h-full py-8 gap-6 font-[family-name:var(--font-geist-sans)]">
       <Headline title={title} buttonsContainer={<ButtonsContainer />} />
 
-      <div className="grid max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="grid lg:max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
         <div className={cellCommonClasses}>
           <InformationCard />
         </div>
