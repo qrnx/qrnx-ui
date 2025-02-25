@@ -1,7 +1,5 @@
-import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { Save, ChevronLeft } from "lucide-react";
-import { Input } from "./ui/input";
+import { EditAnswerOptionForm } from "./forms/edit-answer-option";
 
 export const AnswerChanger = () => {
   return (
@@ -10,30 +8,7 @@ export const AnswerChanger = () => {
         Customize your Pages
       </div>
       <div className="flex flex-col gap-3.5">
-        <div className="flex flex-col gap-1.5">
-          <div className="flex">
-            <ChevronLeft />
-            Affirmative option
-          </div>
-          <div className="flex gap-2">
-            <Input type="Affirmative" placeholder="Email" />
-            <Button size="icon">
-              <Save className="size-5" />
-            </Button>
-          </div>
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <div className="flex">
-            <ChevronLeft />
-            Negative option
-          </div>
-          <div className="flex gap-2">
-            <Input type="Negative" placeholder="Email" />
-            <Button size="icon">
-              <Save className="size-5" />
-            </Button>
-          </div>
-        </div>
+        <EditAnswerOptionForm />
       </div>
     </Card>
   );
