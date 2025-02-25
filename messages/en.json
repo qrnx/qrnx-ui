@@ -74,7 +74,9 @@
       "month": "1M",
       "year": "1Y",
       "all": "ALL"
-    }
+    },
+    "negativeOption": "Negative Option",
+    "affirmativeOption": "Affirmative Option"
   },
 
   "informationCard": {

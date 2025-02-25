@@ -74,7 +74,9 @@
       "month": "1М",
       "year": "1Г",
       "all": "Все"
-    }
+    },
+    "negativeOption": "Отрицательный ответ",
+    "affirmativeOption": "Утвердительный ответ"
   },
 
   "informationCard": {
