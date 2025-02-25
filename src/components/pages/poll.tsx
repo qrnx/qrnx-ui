@@ -18,6 +18,7 @@ import { ChartCard } from "../chart-card";
 import { QrCard } from "../qr-card";
 import { useGetAnswerOptions } from "@/hooks/use-get-answer-options";
 import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
+import { DonutChart } from "../donut-card";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -91,7 +92,9 @@ export default function Poll() {
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
           <ChartCard title={t("normalizedChartTitle")} />
         </div>
-        <div className={cellCommonClasses}></div>
+        <div className={cellCommonClasses}>
+          <DonutChart />
+        </div>
 
         <div className={cn(cellCommonClasses, "")}>
           <QrCard
