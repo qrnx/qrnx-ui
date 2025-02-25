@@ -17,6 +17,10 @@ import { DeletePoll } from "../forms/delete-poll";
 import { ResponsiveDialog } from "../responsive-dialog";
 import { EditPoll } from "../forms/edit-poll";
 import { ChartCard } from "../chart-card";
+import { QrCard } from "../qr-card";
+import { useGetAnswerOptions } from "@/hooks/use-get-answer-options";
+import { useMemo } from "react";
+import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -24,6 +28,7 @@ export default function Poll() {
   const t = useTranslations("poll");
   const dialogTranslations = useTranslations("poll.editPollDialog");
   const pathname = usePathname();
+  const generateOptionUrl = useGenerateOptionUrl();
 
   const {
     data: poll,
@@ -35,6 +40,10 @@ export default function Poll() {
     enabled: !!session?.jwt,
     select: (data) => data.data,
   });
+
+  const { affirmativeOption, negativeOption } = useGetAnswerOptions(
+    poll?.answerOptions
+  );
 
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
@@ -74,13 +83,13 @@ export default function Poll() {
   };
 
   const cellCommonClasses =
-    "bg-primary/10 w-full col-span-1 aspect-auto lg:aspect-auto max-h-[300px] lg:max-h-none ";
+    "bg-primary/10 w-full col-span-1 aspect-auto max-h-[300px] lg:max-h-none ";
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full max-h-full py-8 gap-6 font-[family-name:var(--font-geist-sans)]">
       <Headline title={title} buttonsContainer={<ButtonsContainer />} />
 
-      <div className="grid lg:max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="grid lg:max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(7,minmax(250,1fr))] lg:grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
         <div className={cellCommonClasses}>
           <InformationCard />
         </div>
@@ -93,7 +102,12 @@ export default function Poll() {
         </div>
         <div className={cellCommonClasses}></div>
 
-        <div className={cellCommonClasses}></div>
+        <div className={cn(cellCommonClasses, "")}>
+          <QrCard
+            title="Affirmative Option"
+            url={generateOptionUrl(affirmativeOption?.documentId)}
+          />
+        </div>
         <div className={cellCommonClasses}></div>
         <div className={cellCommonClasses}></div>
       </div>
