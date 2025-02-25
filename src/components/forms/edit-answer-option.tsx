@@ -3,9 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { useTranslations } from "next-intl";
-import { Textarea } from "../ui/textarea";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ComponentProps } from "react";
@@ -54,7 +52,7 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
     useFormik({
       initialValues: {
         affirmativeText: "yes",
-        negativeText: "",
+        negativeText: "no",
       },
       validationSchema,
       onSubmit: (values) => {
@@ -66,7 +64,7 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
     <form className="flex flex-col gap-1.5" onSubmit={handleSubmit}>
       <div className="flex">
         <ChevronLeft />
-        Negative option
+        Affirmative option
       </div>
       <div className="flex gap-2">
         <Input
@@ -79,9 +77,13 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
         {touched.affirmativeText && errors.affirmativeText && (
           <Error>{errors.affirmativeText}</Error>
         )}
-        <Button type="submit" size="icon">
-          <Save className="size-5" />
-        </Button>
+        {isCreatePollPending ? (
+          <ButtonLoading />
+        ) : (
+          <Button type="submit" size="icon">
+            <Save className="size-5" />
+          </Button>
+        )}
       </div>
       <div className="flex">
         <ChevronLeft />
@@ -98,9 +100,13 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
         {touched.negativeText && errors.negativeText && (
           <Error>{errors.negativeText}</Error>
         )}
-        <Button type="submit" size="icon">
-          <Save className="size-5" />
-        </Button>
+        {isCreatePollPending ? (
+          <ButtonLoading />
+        ) : (
+          <Button type="submit" size="icon">
+            <Save className="size-5" />
+          </Button>
+        )}
       </div>
     </form>
   );
