@@ -35,14 +35,14 @@ export const TimeSwitcher = ({
           setTimeInterval(value as TimeIntervals);
           onChange(value as TimeIntervals);
         }}
-        className="flex justify-between p-[4] gap-0.5 rounded-lg shadow-sm"
+        className="flex justify-between p-0.5 sm:p-1 gap-0.5 rounded-lg shadow-sm"
       >
         {TIME_INTERVALS.map((item) => {
           return (
             <ToggleGroupItem
               value={item}
               key={item}
-              className={`text-xs font-semibold px-4 py-2 rounded-md ${
+              className={`text-xs font-semibold px-2 sm:px-4 py-2 rounded-md ${
                 timeInterval === item ? "bg-accent text-primary" : ""
               }`}
             >
