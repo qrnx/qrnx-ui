@@ -33,9 +33,7 @@ export const DonutChart = () => {
     },
   } satisfies ChartConfig;
 
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.total, 0);
-  }, []);
+  const totalVisitors = chartData.reduce((acc, curr) => acc + curr.total, 0);
 
   return (
     <Card className="flex flex-col h-full p-4">
