@@ -7,7 +7,9 @@ export const InformationCard = () => {
   return (
     <Card className="flex flex-col justify-between gap-8 h-full p-4">
       <div className="flex flex-col gap-3">
-        <CardTitle className="text-2xl font-semibold">{t("general")}</CardTitle>
+        <CardTitle className="text-xl sm:text-2xl font-semibold">
+          {t("general")}
+        </CardTitle>
         <CardDescription className="text-sm font-medium text-primary">
           The "Tastes of the World" restaurant offers delicious cuisine and a
           warm atmosphere

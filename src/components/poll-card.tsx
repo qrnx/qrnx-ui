@@ -51,7 +51,7 @@ export function PollCard({ poll }: PollCard) {
         <div className="flex flex-col justify-between gap-2 sm:w-3/10">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center gap-2">
-              <h3 className="text-xl sm:text-3xl font-medium">{title}</h3>
+              <h3 className="text-xl sm:text-3xl font-semibold">{title}</h3>
               <div className="flex sm:hidden justify-end">
                 <ChevronRight className="text-gray-400" />
               </div>

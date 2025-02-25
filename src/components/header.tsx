@@ -38,7 +38,7 @@ const Header = () => {
             <Logo />
           </Link>
 
-          <div className="flex flex items-center justify-between gap-3 md:justify-end">
+          <div className="flex items-center justify-between gap-3 md:justify-end">
             <ThemeToggle />
             <LanguageSelect />
             <UserNav />
