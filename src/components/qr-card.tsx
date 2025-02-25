@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 
 interface QrCardProps {
   title: string;
