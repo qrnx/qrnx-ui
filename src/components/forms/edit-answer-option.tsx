@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import { ComponentProps } from "react";
 import { Error } from "../ui/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPoll as createPollRequest } from "@/api/polls";
+import { editPoll } from "@/api/polls";
 import { ButtonLoading } from "../ui/button-loading";
 import { toast } from "sonner";
 import { ChevronLeft, Save } from "lucide-react";
@@ -19,26 +19,33 @@ interface CreatePollProps extends ComponentProps<"form"> {
 }
 
 export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
-  const t = useTranslations("poll.editPollDialog");
+  const t = useTranslations("editAnswerOptionCard");
   const validationTranslations = useTranslations("validation");
   const queryClient = useQueryClient();
 
-  const { mutate: createPoll, isPending: isCreatePollPending } = useMutation({
-    mutationFn: (values: { affirmativeText: string; negativeText: string }) =>
-      createPollRequest(values),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["polls"],
-      });
-      if (onClose) {
-        onClose();
-      }
-    },
+  const { mutate: updateAffirmativeText, isPending: isAffirmativePending } =
+    useMutation({
+      mutationFn: (affirmativeText: string) => editPoll({ affirmativeText }),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["polls"] });
+        toast.success(t("updateSuccess"));
+      },
+      onError: () => {
+        toast.error(t("updateError"));
+      },
+    });
 
-    onError: () => {
-      toast.error("createError");
-    },
-  });
+  const { mutate: updateNegativeText, isPending: isNegativePending } =
+    useMutation({
+      mutationFn: (negativeText: string) => editPoll({ negativeText }),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["polls"] });
+        toast.success(t("updateSuccess"));
+      },
+      onError: () => {
+        toast.error(t("updateError"));
+      },
+    });
 
   const requiredErrorMessage = validationTranslations("required");
 
@@ -63,7 +70,7 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
     <form className="flex flex-col gap-1.5" onSubmit={handleSubmit}>
       <div className="flex">
         <ChevronLeft />
-        Affirmative option
+        {t("affOption")}
       </div>
       <div className="flex gap-2">
         <Input
@@ -86,7 +93,7 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
       </div>
       <div className="flex">
         <ChevronLeft />
-        Negative option
+        {t("negOption")}
       </div>
       <div className="flex gap-2">
         <Input
@@ -110,3 +117,8 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
     </form>
   );
 };
+function updatePollOptions(arg0: {
+  affirmativeText: string;
+}): Promise<unknown> {
+  throw new Error("Function not implemented.");
+}

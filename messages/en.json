@@ -51,6 +51,12 @@
     "affirmative": "Affirmative "
   },
 
+  "editAnswerOptionCard": {
+    "tittle": "Customize your Pages",
+    "affOption": "Affirmative option",
+    "negOption": "Negative option"
+  },
+
   "poll": {
     "pdfButton": "Download PDF",
     "editButton": "Edit",

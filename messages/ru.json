@@ -51,6 +51,12 @@
     "affirmative": "Позитивный"
   },
 
+  "editAnswerOptionCard": {
+    "tittle": "Измени свои ответы",
+    "affOption": "Утвердительный ответ",
+    "negOption": "Отрицательный ответ"
+  },
+
   "poll": {
     "pdfButton": "Скачать PDF",
     "editButton": "Изменить",
