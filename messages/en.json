@@ -98,6 +98,12 @@
     "date": "Date of creation"
   },
 
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "support": "Support"
+  },
+
   "error": {
     "registration": "Registration failed",
     "redirect": "Redirect failed",
