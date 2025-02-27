@@ -22,30 +22,21 @@ export const Footer = () => {
     <footer
       className={cn(
         styles["border-grid"],
-        "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        "sticky top-0 z-50 w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       )}
     >
       <div className={styles["container-wrapper"]}>
-        <div className="flex justify-between p-7">
+        <div
+          className={cn(
+            styles["container"],
+            "flex h-10 md:h-17 items-center justify-between"
+          )}
+        >
           <div className="text-sm opacity-50">Copyright © 2025 QRpools.com</div>
-          <div className="flex gap-16">
-            <div className="flex gap-8 text-sm opacity-50">
-              <Link href={""}>{t("privacy")}</Link>
-              <Link href={""}>{t("terms")}</Link>
-              <Link href={""}>{t("support")}</Link>
-            </div>
-
-            <div className="flex gap-3">
-              <Link href={""}>
-                <Discord />
-              </Link>
-              <Link href={""}>
-                <YouTube />
-              </Link>
-              <Link href={""}>
-                <Instagram />
-              </Link>
-            </div>
+          <div className="flex gap-8 text-sm opacity-50">
+            <Link href={""}>{t("privacy")}</Link>
+            <Link href={""}>{t("terms")}</Link>
+            <Link href={""}>{t("support")}</Link>
           </div>
         </div>
       </div>
