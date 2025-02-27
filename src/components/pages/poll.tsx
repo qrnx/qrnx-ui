@@ -81,7 +81,7 @@ export default function Poll() {
 
       <div className="grid lg:max-h-[900px] min-h-[700px] h-full w-full grid-rows-[repeat(7,minmax(250,1fr))] lg:grid-rows-[repeat(3,minmax(150,1fr))] grid-cols-1 lg:grid-cols-3 gap-3">
         <div className={cellCommonClasses}>
-          <InformationCard pollData={poll} />
+          <InformationCard poll={poll} />
         </div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
           <ChartCard title={t("mainChartTitle")} withTrendSection />
