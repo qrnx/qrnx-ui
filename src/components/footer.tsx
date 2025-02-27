@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 import Discord from "@/assets/Discord.svg";
 import YouTube from "@/assets/YouTube.svg";
 import Instagram from "@/assets/Instagram.svg";
+import { useTranslations } from "next-intl";
 
 const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 export const Footer = () => {
+  const t = useTranslations("footer");
   const pathname = usePathname();
   if (routesWIthoutHeader.includes(pathname)) {
     return null;
@@ -28,9 +30,9 @@ export const Footer = () => {
           <div className="text-sm opacity-50">Copyright © 2025 QRpools.com</div>
           <div className="flex gap-16">
             <div className="flex gap-8 text-sm opacity-50">
-              <Link href={""}>Privacy</Link>
-              <Link href={""}>Terms</Link>
-              <Link href={""}>Support</Link>
+              <Link href={""}>{t("privacy")}</Link>
+              <Link href={""}>{t("terms")}</Link>
+              <Link href={""}>{t("support")}</Link>
             </div>
 
             <div className="flex gap-3">
