@@ -86,7 +86,7 @@
       "title": "Измени свои ответы",
       "negativeOption": "Отрицательный ответ",
       "affirmativeOption": "Утвердительный ответ",
-      "updateSuccess": "Текс успешно обновлен",
+      "updateSuccess": "Текст успешно обновлен",
       "updateError": "Произошла ошибка"
     }
   },
