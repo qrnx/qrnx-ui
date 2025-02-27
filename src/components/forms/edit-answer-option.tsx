@@ -61,64 +61,74 @@ export const EditAnswerOptionForm = ({ onClose }: CreatePollProps) => {
         negativeText: "no",
       },
       validationSchema,
-      onSubmit: (values) => {
-        createPoll(values);
-      },
+      onSubmit: () => {},
     });
 
   return (
-    <form className="flex flex-col gap-1.5" onSubmit={handleSubmit}>
-      <div className="flex">
-        <ChevronLeft />
-        {t("affOption")}
-      </div>
-      <div className="flex gap-2">
-        <Input
-          id="affirmativeText"
-          name="affirmativeText"
-          value={values.affirmativeText}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        {touched.affirmativeText && errors.affirmativeText && (
-          <Error>{errors.affirmativeText}</Error>
-        )}
-        {isCreatePollPending ? (
-          <ButtonLoading />
-        ) : (
-          <Button type="submit" size="icon">
-            <Save className="size-5" />
-          </Button>
-        )}
-      </div>
-      <div className="flex">
-        <ChevronLeft />
-        {t("negOption")}
-      </div>
-      <div className="flex gap-2">
-        <Input
-          id="negativeText"
-          name="negativeText"
-          value={values.negativeText}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        {touched.negativeText && errors.negativeText && (
-          <Error>{errors.negativeText}</Error>
-        )}
-        {isCreatePollPending ? (
-          <ButtonLoading />
-        ) : (
-          <Button type="submit" size="icon">
-            <Save className="size-5" />
-          </Button>
-        )}
-      </div>
-    </form>
+    <div className="flex flex-col gap-4">
+      <form
+        className="flex flex-col gap-1.5"
+        onSubmit={(e) => {
+          e.preventDefault();
+          updateAffirmativeText(values.affirmativeText);
+        }}
+      >
+        <div className="flex">
+          <ChevronLeft />
+          {t("affOption")}
+        </div>
+        <div className="flex gap-2">
+          <Input
+            id="affirmativeText"
+            name="affirmativeText"
+            value={values.affirmativeText}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.affirmativeText && errors.affirmativeText && (
+            <Error>{errors.affirmativeText}</Error>
+          )}
+          {isAffirmativePending ? (
+            <ButtonLoading />
+          ) : (
+            <Button type="submit" size="icon">
+              <Save className="size-5" />
+            </Button>
+          )}
+        </div>
+      </form>
+
+      <form
+        className="flex flex-col gap-1.5"
+        onSubmit={(e) => {
+          e.preventDefault();
+          updateNegativeText(values.negativeText);
+        }}
+      >
+        <div className="flex">
+          <ChevronLeft />
+          {t("negOption")}
+        </div>
+        <div className="flex gap-2">
+          <Input
+            id="negativeText"
+            name="negativeText"
+            value={values.negativeText}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.negativeText && errors.negativeText && (
+            <Error>{errors.negativeText}</Error>
+          )}
+          {isNegativePending ? (
+            <ButtonLoading />
+          ) : (
+            <Button type="submit" size="icon">
+              <Save className="size-5" />
+            </Button>
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
-function updatePollOptions(arg0: {
-  affirmativeText: string;
-}): Promise<unknown> {
-  throw new Error("Function not implemented.");
-}
