@@ -2,8 +2,27 @@ import { useTranslations } from "next-intl";
 import { Card, CardDescription, CardTitle } from "./ui/card";
 import { Users, Percent, Calendar } from "lucide-react";
 
-export const InformationCard = () => {
+interface Poll {
+  createdAt: string;
+  description: string;
+}
+
+interface InformationCardProps {
+  pollData: Poll;
+}
+
+export const InformationCard: React.FC<InformationCardProps> = ({
+  pollData,
+}) => {
   const t = useTranslations("informationCard");
+  const isoDate = pollData.createdAt;
+  const date = new Date(isoDate);
+  const formattedDate = new Intl.DateTimeFormat("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(date);
+
   return (
     <Card className="flex flex-col justify-between gap-8 h-full p-4">
       <div className="flex flex-col gap-3">
@@ -11,8 +30,7 @@ export const InformationCard = () => {
           {t("general")}
         </CardTitle>
         <CardDescription className="text-sm font-medium text-primary">
-          The "Tastes of the World" restaurant offers delicious cuisine and a
-          warm atmosphere
+          {pollData.description}
         </CardDescription>
       </div>
       <div className="flex flex-col gap-1.5">
@@ -26,7 +44,9 @@ export const InformationCard = () => {
         </div>
         <div className="flex gap-2">
           <Calendar />
-          <div>{t("date")}: 12.04.2025</div>
+          <div>
+            {t("date")}: {formattedDate}
+          </div>
         </div>
       </div>
     </Card>
