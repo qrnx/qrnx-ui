@@ -2,9 +2,9 @@ import { authGuard } from "@/lib/authGuard";
 import serverInstance from "@/lib/serverInstance";
 import { NextResponse } from "next/server";
 
-const getOne = async (
+export const GET = async (
   req: Request,
-  { params }: { params: { pollId: string } }
+  { params }: { params: Promise<{ pollId: string }> }
 ) => {
   const session = await authGuard(req);
   if (session instanceof NextResponse) return session;
@@ -27,5 +27,3 @@ const getOne = async (
     );
   }
 };
-
-export { getOne as GET };
