@@ -36,7 +36,9 @@ export const Footer = () => {
           <div className="flex gap-8 text-sm opacity-50">
             <Link href={""}>{t("privacy")}</Link>
             <Link href={""}>{t("terms")}</Link>
-            <Link href={""}>{t("support")}</Link>
+            <Link href={"mailto:mihalay26@gmail.com?subject=Support%20letter"}>
+              {t("support")}
+            </Link>
           </div>
         </div>
       </div>
