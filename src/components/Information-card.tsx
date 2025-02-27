@@ -7,7 +7,7 @@ interface InformationCardProps {
   poll: Poll;
 }
 
-export const InformationCard: React.FC<InformationCardProps> = ({ poll }) => {
+export const InformationCard = ({ poll }: InformationCardProps) => {
   const t = useTranslations("informationCard");
   const { description, createdAt } = poll;
   const date = new Date(createdAt);
