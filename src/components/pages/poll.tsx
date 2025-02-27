@@ -19,6 +19,7 @@ import { QrCard } from "../qr-card";
 import { useGetAnswerOptions } from "@/hooks/use-get-answer-options";
 import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
 import { DonutChart } from "../donut-card";
+import { AnswerChanger } from "../answer-changer-card";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -55,9 +56,6 @@ export default function Poll() {
           {t("pdfButton")}
         </Button>
         {}
-        {/* <Button variant="outline" onClick={() => console.log("Edit button")}>
-          {t("editButton")}
-        </Button> */}
         <ResponsiveDialog
           label={t("editButton")}
           variant="outline"
@@ -75,7 +73,7 @@ export default function Poll() {
   };
 
   const cellCommonClasses =
-    "bg-primary/10 w-full col-span-1 aspect-auto max-h-[300px] lg:max-h-none ";
+    " w-full col-span-1 aspect-auto max-h-[300px] lg:max-h-none ";
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full max-h-full py-8 gap-6 font-[family-name:var(--font-geist-sans)]">
@@ -108,7 +106,13 @@ export default function Poll() {
             url={generateOptionUrl(negativeOption?.documentId)}
           />
         </div>
-        <div className={cellCommonClasses}></div>
+        <div className={cellCommonClasses}>
+          <AnswerChanger
+            poll={poll}
+            affirmativeOption={affirmativeOption}
+            negativeOption={negativeOption}
+          />
+        </div>
       </div>
     </div>
   );

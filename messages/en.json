@@ -80,7 +80,15 @@
       "all": "ALL"
     },
     "negativeOption": "Negative Option",
-    "affirmativeOption": "Affirmative Option"
+    "affirmativeOption": "Affirmative Option",
+
+    "editAnswerOptionCard": {
+      "title": "Customize your Pages",
+      "negativeOption": "Negative Option",
+      "affirmativeOption": "Affirmative Option",
+      "updateSuccess": "Text updated successfully",
+      "updateError": "Error has occurred"
+    }
   },
 
   "informationCard": {

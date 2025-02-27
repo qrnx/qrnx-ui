@@ -80,7 +80,15 @@
       "all": "Все"
     },
     "negativeOption": "Отрицательный ответ",
-    "affirmativeOption": "Утвердительный ответ"
+    "affirmativeOption": "Утвердительный ответ",
+
+    "editAnswerOptionCard": {
+      "title": "Измени свои ответы",
+      "negativeOption": "Отрицательный ответ",
+      "affirmativeOption": "Утвердительный ответ",
+      "updateSuccess": "Текст успешно обновлен",
+      "updateError": "Произошла ошибка"
+    }
   },
 
   "informationCard": {
