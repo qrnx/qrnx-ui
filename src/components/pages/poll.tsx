@@ -9,6 +9,7 @@ import { Headline } from "../ui/headline";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { InformationCard } from "../Information-card";
+import { notFound } from "next/navigation";
 
 import { DeleteConfirmation } from "../delete-confirmation";
 import { DeletePoll } from "../forms/delete-poll";
@@ -44,7 +45,7 @@ export default function Poll() {
   );
 
   if (isPending) return <div>Loading...</div>;
-  if (error) return <div>Error fetching data</div>;
+  if (error) return notFound();
 
   const { title } = poll;
 

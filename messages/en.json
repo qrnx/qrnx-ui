@@ -111,6 +111,11 @@
     "sessionExpired": "Your session has expired. Please log in again."
   },
 
+  "404page": {
+    "massage": "Page not found",
+    "homeLink": "Return home?"
+  },
+
   "dialogCommon": {
     "cancel": "Cancel"
   },
