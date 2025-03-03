@@ -8,10 +8,10 @@ const NotFound: React.FC = () => {
   const t = useTranslations("404page");
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-8">
-      <div className="flex items-center text-9xl">404</div>
+    <div className="flex flex-col items-center justify-center h-screen gap-8 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex items-center text-9xl font-bold">404</div>
       <div className="flex flex-col gap-2">
-        <div> {t("massage")}</div>
+        <div> {t("massage")} </div>
         <div>
           <Link
             className="flex items-center gap-2 underline"
