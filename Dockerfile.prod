@@ -1,6 +1,10 @@
 # Используем официальный образ Node.js
 FROM node:18-alpine
 
+ARG NEXT_PUBLIC_BASE_URL
+ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+
+
 # Рабочая директория
 WORKDIR /app
 
