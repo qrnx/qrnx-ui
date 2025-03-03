@@ -9,7 +9,8 @@
     "lint": "next lint",
     "build:package:dev": "docker build --build-arg NODE_ENV=development -t next_app:dev-latest -f Dockerfile .",
     "build:package:prod": "docker build --build-arg NODE_ENV=production -t next_app:prod-latest -f Dockerfile.prod .",
-    "start:package": "docker-compose up",
+    "start:package:dev": "IMAGE_NAME=next_app:dev-latest docker-compose up",
+    "start:package:prod": "IMAGE_NAME=next_app:prod-latest docker-compose up",
     "stop:package": "docker-compose down"
   },
   "dependencies": {
