@@ -15,9 +15,12 @@ import { signOut, useSession } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
+import { PersonalStatus } from "./personalStatus";
 
 export function UserNav() {
   const { data: session, status } = useSession();
+
+  const personalProgram = "Premium";
 
   if (status === "loading") {
     return <Skeleton className="h-8 w-8 rounded-full" />;
@@ -66,6 +69,17 @@ export function UserNav() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {personalProgram === "Premium" ? (
+            <PersonalStatus
+              title={"Cancel Premium status"}
+              status={personalProgram}
+            />
+          ) : (
+            <PersonalStatus
+              title={"Get Premium status"}
+              status={personalProgram}
+            />
+          )}
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
           >
