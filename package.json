@@ -6,7 +6,11 @@
     "dev": "next dev -H 0.0.0.0 --turbopack",
     "build": "next build",
     "start": "next start -H 0.0.0.0",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:package:dev": "docker build --build-arg NODE_ENV=development -t next_app:dev-latest -f Dockerfile .",
+    "build:package:prod": "docker build --build-arg NODE_ENV=production -t next_app:prod-latest -f Dockerfile.prod .",
+    "start:package": "docker-compose up",
+    "stop:package": "docker-compose down"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.3",
