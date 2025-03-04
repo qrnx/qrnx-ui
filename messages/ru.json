@@ -119,9 +119,12 @@
   },
 
   "userNav": {
-    "logOut": "Выйти из аккаунта",
+    "logOut": "Выйти из аккаунта"
+  },
+
+  "premiumStatus": {
     "getPremium": {
-      "getPremiumTittle": "Получить Премиум статус",
+      "getPremiumTitle": "Получить Премиум статус",
       "getPremiumForm": {
         "email": "Ваш Email:",
         "description": "Оставьте свой адрес электронной почты. Мы напишем вам и подтвердим ваш премиум-статус.",
@@ -130,6 +133,16 @@
           "requiredField": "Обязательное поле",
           "incorrectEmail": "Некорректный email"
         }
+      }
+    },
+
+    "cancelPremium": {
+      "cancelPremiumTittle": "Отменить подписку",
+      "cancelPremiumForm": {
+        "title": "Вы абсолютно уверены?",
+        "description": "Это действие невозможно отменить. Это действие приведет к отмене вашего Премиум статуса.",
+        "cancelButton": "Отмена",
+        "continueButton": "Продолжить"
       }
     }
   },

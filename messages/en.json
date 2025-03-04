@@ -119,9 +119,12 @@
   },
 
   "userNav": {
-    "logOut": "Log out",
+    "logOut": "Log out"
+  },
+
+  "premiumStatus": {
     "getPremium": {
-      "getPremiumTittle": "Get Premium Status",
+      "getPremiumTitle": "Get Premium Status",
       "getPremiumForm": {
         "email": "Your Email:",
         "description": "Leave your Email. We will write to you and confirm your premium status.",
@@ -130,6 +133,16 @@
           "requiredField": "Обязательное поле",
           "incorrectEmail": "Некорректный email"
         }
+      }
+    },
+
+    "cancelPremium": {
+      "cancelPremiumTittle": "Cancel subscription",
+      "cancelPremiumForm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This action will result in the cancellation of your Premium status.",
+        "cancelButton": "Cancel",
+        "continueButton": "Continue"
       }
     }
   },
