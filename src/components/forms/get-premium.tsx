@@ -1,67 +1,68 @@
 "use client";
 
+import * as Yup from "yup";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useTranslations } from "next-intl";
-import { Textarea } from "../ui/textarea";
-import * as Yup from "yup";
 import { useFormik } from "formik";
-import { ComponentProps, useMemo } from "react";
+import { ComponentProps } from "react";
 import { Error } from "../ui/error";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editPoll as editPollRequest } from "@/api/polls";
-import { ButtonLoading } from "../ui/button-loading";
-import { toast } from "sonner";
-import { Poll } from "@/types/poll";
-import { AnswerOption } from "@/types/answerOptions";
-import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-interface EditPollProps extends ComponentProps<"form"> {
+interface GetEmailProps extends ComponentProps<"form"> {
   onClose?: () => void;
-  poll: Poll;
+  email?: string;
 }
 
-type FormValues = {
-  title: string;
-  description: string;
-  affirmativeText: string;
-  negativeText: string;
-};
+export const GetPremium = (props: GetEmailProps) => {
+  const t = useTranslations("userNav.getPremium.getPremiumForm");
+  const { className, onClose, email, ...otherProps } = props;
 
-export const GetPremium = (props: EditPollProps) => {
-  const { className, poll, onClose, ...otherProps } = props;
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Некорректный email")
+      .required("Обязательное поле"),
+  });
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-  };
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: email || "test@email.com",
+      },
+      validationSchema: validationSchema,
+      onSubmit: (values) => {
+        if (values.email === "test@email.com") return;
+        if (onClose) onClose();
+      },
+    });
 
-  const initialValues: FormValues = {
-    title: "",
-    description: "",
-    affirmativeText: "",
-    negativeText: "",
-  };
+  const inputErrorClassNames = "border-red-500";
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form
+      className={cn("grid items-start gap-4", className)}
+      onSubmit={handleSubmit}
+      {...otherProps}
+    >
       <div>
-        <label htmlFor="name">Имя:</label>
-        <input type="text" id="name" name="name" required />
+        <Label htmlFor="email">{t("email")}</Label>
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          required
+          className={cn({
+            [inputErrorClassNames]: touched.email && errors.email,
+          })}
+          placeholder={"test@email.com"}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.email}
+        />
+        {touched.email && errors.email && <Error>{errors.email}</Error>}
       </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div>
-        <label htmlFor="message">Сообщение:</label>
-        <textarea id="message" name="message" required />
-      </div>
-      <button type="submit">Отправить</button>
+      <Button type="submit">{t("submitButton")}</Button>
     </form>
   );
 };

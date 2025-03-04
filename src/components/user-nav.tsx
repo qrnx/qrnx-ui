@@ -15,10 +15,12 @@ import { signOut, useSession } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
-import { PersonalStatus } from "./personalStatus";
+import { SubscriptionStatus } from "./subscription-status";
+import { useTranslations } from "next-intl";
 
 export function UserNav() {
   const { data: session, status } = useSession();
+  const t = useTranslations("userNav");
 
   const personalProgram = "Premium";
 
@@ -69,21 +71,16 @@ export function UserNav() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {personalProgram === "Premium" ? (
-            <PersonalStatus
-              title={"Cancel Premium status"}
-              status={personalProgram}
-            />
+          {personalProgram === "Basic" ? (
+            <SubscriptionStatus title={"Hui"} />
           ) : (
-            <PersonalStatus
-              title={"Get Premium status"}
-              status={personalProgram}
-            />
+            <SubscriptionStatus title={t("getPremium.getPremiumTittle")} />
           )}
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
+            className="font-medium"
           >
-            Log out
+            {t("logOut")}
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
