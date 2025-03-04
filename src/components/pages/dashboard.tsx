@@ -95,10 +95,6 @@ export default function Dashboard() {
         <div className="flex flex-col gap-4 row-start-2 w-full items-center sm:items-start">
           <div className="flex w-full flex-col gap-3 row-start-2 items-center sm:items-start">
             {error ? <div>"Error fetching data"</div> : null}
-            <p>
-              NEXT_PUBLIC_BASE_URL:{" "}
-              {process.env.NEXT_PUBLIC_BASE_URL || "undefined"}
-            </p>
 
             {isFetching
               ? renderSkeletons()

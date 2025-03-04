@@ -31,10 +31,6 @@ export type EditPollParams = {
 };
 
 export const getPolls = async (): Promise<GetPollsData> => {
-  console.log(
-    "process.env.NEXT_PUBLIC_BASE_URL",
-    process.env.NEXT_PUBLIC_BASE_URL
-  );
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/polls`, {
     method: "GET",
     headers: {

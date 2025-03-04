@@ -12,7 +12,6 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-RUN echo "NEXT_PUBLIC_BASE_URL at build time: ${NEXT_PUBLIC_BASE_URL}"
 # Копируем весь проект и собираем Next.js
 COPY . .
 RUN yarn build
