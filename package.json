@@ -8,7 +8,7 @@
     "start": "next start -H 0.0.0.0",
     "lint": "next lint",
     "start:package:dev": "IMAGE_NAME=next_app:dev-latest docker-compose -f docker-compose.yml up --build",
-    "start:package:prod": "IMAGE_NAME=next_app:prod-latest docker-compose -f docker-compose.prod.yml up --build",
+    "start:package:prod": "IMAGE_NAME=next_app:prod-latest docker-compose -f docker-compose.prod.yml up --build -d",
     "stop:package": "docker-compose down"
   },
   "dependencies": {

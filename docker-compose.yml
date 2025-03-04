@@ -3,8 +3,6 @@ services:
   next-app:
     build:
       context: .
-      args:
-        NEXT_PUBLIC_BASE_URL: "http://qrnx.ru"
     image: ${IMAGE_NAME}
     container_name: next_app
     env_file:
@@ -12,5 +10,3 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_BASE_URL=http://qrnx.ru
