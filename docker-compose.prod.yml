@@ -4,7 +4,8 @@ services:
     build:
       context: .
       args:
-        NEXT_PUBLIC_BASE_URL: "http://qrnx.ru"
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+      dockerfile: Dockerfile.prod
     image: ${IMAGE_NAME}
     container_name: next_app
     env_file:
@@ -13,4 +14,4 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_BASE_URL=http://qrnx.ru
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
