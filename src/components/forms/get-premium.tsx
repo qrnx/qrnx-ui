@@ -16,7 +16,7 @@ interface GetEmailProps extends ComponentProps<"form"> {
 }
 
 export const GetPremium = (props: GetEmailProps) => {
-  const t = useTranslations("userNav.getPremium.getPremiumForm");
+  const t = useTranslations("premiumStatus.getPremium.getPremiumForm");
   const { className, onClose, email, ...otherProps } = props;
 
   const validationSchema = Yup.object({
