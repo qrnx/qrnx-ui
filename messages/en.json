@@ -125,7 +125,11 @@
       "getPremiumForm": {
         "email": "Your Email:",
         "description": "Leave your Email. We will write to you and confirm your premium status.",
-        "submitButton": "Send a request"
+        "submitButton": "Send a request",
+        "error": {
+          "requiredField": "Обязательное поле",
+          "incorrectEmail": "Некорректный email"
+        }
       }
     }
   },

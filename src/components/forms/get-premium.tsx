@@ -21,8 +21,8 @@ export const GetPremium = (props: GetEmailProps) => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("Некорректный email")
-      .required("Обязательное поле"),
+      .email(t("error.incorrectEmail"))
+      .required(t("error.requiredField")),
   });
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
@@ -45,7 +45,7 @@ export const GetPremium = (props: GetEmailProps) => {
       onSubmit={handleSubmit}
       {...otherProps}
     >
-      <div>
+      <div className="grid gap-2">
         <Label htmlFor="email">{t("email")}</Label>
         <Input
           type="email"

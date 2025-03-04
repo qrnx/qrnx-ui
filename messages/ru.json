@@ -125,7 +125,11 @@
       "getPremiumForm": {
         "email": "Ваш Email:",
         "description": "Оставьте свой адрес электронной почты. Мы напишем вам и подтвердим ваш премиум-статус.",
-        "submitButton": "Отправить запрос"
+        "submitButton": "Отправить запрос",
+        "error": {
+          "requiredField": "Обязательное поле",
+          "incorrectEmail": "Некорректный email"
+        }
       }
     }
   },
