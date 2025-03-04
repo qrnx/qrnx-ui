@@ -118,6 +118,18 @@
     "sessionExpired": "Your session has expired. Please log in again."
   },
 
+  "userNav": {
+    "logOut": "Log out",
+    "getPremium": {
+      "getPremiumTittle": "Get Premium Status",
+      "getPremiumForm": {
+        "email": "Your Email:",
+        "description": "Leave your Email. We will write to you and confirm your premium status.",
+        "submitButton": "Send a request"
+      }
+    }
+  },
+
   "404page": {
     "massage": "Page not found",
     "homeLink": "Return home?"
