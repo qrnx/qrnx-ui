@@ -55,7 +55,7 @@ export const GetPremium = (props: GetEmailProps) => {
           className={cn({
             [inputErrorClassNames]: touched.email && errors.email,
           })}
-          placeholder={"test@email.com"}
+          placeholder={"mail"}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.email}

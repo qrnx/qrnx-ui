@@ -22,7 +22,7 @@ export function UserNav() {
   const { data: session, status } = useSession();
   const t = useTranslations("userNav");
 
-  const personalProgram = "Premium";
+  const personalProgram = false;
 
   if (status === "loading") {
     return <Skeleton className="h-8 w-8 rounded-full" />;
@@ -71,14 +71,12 @@ export function UserNav() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {personalProgram === "Basic" ? (
-            <SubscriptionStatus title={"Hui"} />
-          ) : (
-            <SubscriptionStatus title={t("getPremium.getPremiumTittle")} />
-          )}
+          <SubscriptionStatus
+            title={t("getPremium.getPremiumTittle")}
+            hasSubscription={personalProgram}
+          />
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
-            className="font-medium"
           >
             {t("logOut")}
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
