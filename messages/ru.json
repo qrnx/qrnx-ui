@@ -91,6 +91,11 @@
     }
   },
 
+  "answerOption": {
+    "title": "Спасибо за ответ",
+    "yourAnswer": "Вы ответили:"
+  },
+
   "informationCard": {
     "general": "Общая информация",
     "total": "Всего проголосовало",
