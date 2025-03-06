@@ -13,6 +13,8 @@ import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ROUTES } from "@/config/routes";
 import { getLastWeekRange } from "@/lib/dates";
+import { getResponses } from "@/api/responses";
+import { TimeIntervals } from "@/types/timeIntervals";
 
 const chartData = [
   { weekDay: "Monday", affirmative: 252, negative: 123 },
@@ -29,7 +31,13 @@ interface PollCard {
 }
 
 export function PollCard({ poll }: PollCard) {
-  const { title, description, affirmativeResponses, negativeResponses } = poll;
+  const {
+    title,
+    description,
+    affirmativeResponses,
+    negativeResponses,
+    documentId,
+  } = poll;
   const t = useTranslations("dashboard");
 
   const chartConfig = {
@@ -44,6 +52,8 @@ export function PollCard({ poll }: PollCard) {
   } satisfies ChartConfig;
 
   const dateRange = getLastWeekRange();
+
+  getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK });
 
   return (
     <Link
