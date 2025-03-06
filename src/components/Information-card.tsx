@@ -9,13 +9,17 @@ interface InformationCardProps {
 
 export const InformationCard = ({ poll }: InformationCardProps) => {
   const t = useTranslations("informationCard");
-  const { description, createdAt } = poll;
+  const { description, createdAt, totalResponses, affirmativeResponses } = poll;
   const date = new Date(createdAt);
   const formattedDate = new Intl.DateTimeFormat("ru-RU", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
   }).format(date);
+
+  const AffirmativeResponsesRate = (
+    affirmativeResponses / totalResponses
+  ).toFixed(2);
 
   return (
     <Card className="flex flex-col justify-between gap-8 h-full p-4">
@@ -32,11 +36,15 @@ export const InformationCard = ({ poll }: InformationCardProps) => {
       <div className="flex flex-col gap-1.5">
         <div className="flex gap-2">
           <Users />
-          <div>{t("total")}: 503</div>
+          <div>
+            {t("total")}: {totalResponses}
+          </div>
         </div>
         <div className="flex gap-2">
           <Percent />
-          <div>{t("responses")}: 0.54</div>
+          <div>
+            {t("responses")}: {AffirmativeResponsesRate}
+          </div>
         </div>
         <div className="flex gap-2">
           <Calendar />
