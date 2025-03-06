@@ -21,7 +21,7 @@ export const TimeSwitcher = ({
   onChange,
 }: TimeSwitcherProps) => {
   const [timeInterval, setTimeInterval] = useState(initialInterval);
-  const t = useTranslations("poll.timeIntervals");
+  const t = useTranslations("dates.timeIntervals");
 
   return (
     <Card className="rounded-lg shadow-none">

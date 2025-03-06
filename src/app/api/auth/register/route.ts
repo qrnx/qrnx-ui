@@ -1,4 +1,5 @@
 import serverInstance from "@/lib/serverInstance";
+import { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -22,11 +23,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, user: data.user });
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Register error:", error);
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 }

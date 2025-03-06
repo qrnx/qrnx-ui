@@ -42,13 +42,13 @@
       "createSuccess": "Опрос успешно создан",
       "createError": "Произошла ошибка"
     },
-    "donutChart": {
-      "total": "Всего ответов",
-      "polled": "ответов"
-    },
+
+    "chartFetchingErrorTitle": "Ошибка",
+    "chartFetchingErrorDescription": "Попробуйте обновить страницу или попробовать позже",
+
     "inWeek": "За 7 дней",
-    "negative": "Негативный",
-    "affirmative": "Позитивный"
+    "negative": "Отрицательно",
+    "affirmative": "Утвердительно"
   },
 
   "poll": {
@@ -73,12 +73,14 @@
     },
     "mainChartTitle": "Основной график",
     "normalizedChartTitle": "Нормализованный график",
-    "timeIntervals": {
-      "week": "1Н",
-      "month": "1М",
-      "year": "1Г",
-      "all": "Все"
+
+    "donutChart": {
+      "total": "Всего ответов",
+      "polled": "ответов",
+      "negative": "Отрицательно",
+      "affirmative": "Утвердительно"
     },
+
     "negativeOption": "Отрицательный ответ",
     "affirmativeOption": "Утвердительный ответ",
 
@@ -118,6 +120,40 @@
 
   "dialogCommon": {
     "cancel": "Отмена"
+  },
+
+  "dates": {
+    "weekdays": {
+      "sunday": "Воскресенье",
+      "monday": "Понедельник",
+      "tuesday": "Вторник",
+      "wednesday": "Среда",
+      "thursday": "Четверг",
+      "friday": "Пятница",
+      "saturday": "Суббота"
+    },
+
+    "months": {
+      "january": "Январь",
+      "february": "Февраль",
+      "march": "Март",
+      "april": "Апрель",
+      "may": "Май",
+      "june": "Июнь",
+      "july": "Июль",
+      "august": "Август",
+      "september": "Сентябрь",
+      "october": "Октябрь",
+      "november": "Ноябрь",
+      "december": "Декабрь"
+    },
+
+    "timeIntervals": {
+      "week": "1Н",
+      "month": "1М",
+      "year": "1Г",
+      "all": "Все"
+    }
   },
 
   "validation": {

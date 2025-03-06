@@ -42,13 +42,13 @@
       "createSuccess": "Poll created successfully",
       "createError": "Error has occurred"
     },
-    "donutChart": {
-      "total": "Total",
-      "polled": "polled"
-    },
+
+    "chartFetchingErrorTitle": "Error",
+    "chartFetchingErrorDescription": "Try to refresh the page or try again later",
+
     "inWeek": "In 7 days",
-    "negative": "Negative ",
-    "affirmative": "Affirmative "
+    "negative": "Negative",
+    "affirmative": "Affirmative"
   },
 
   "poll": {
@@ -73,12 +73,14 @@
     },
     "mainChartTitle": "Main chart",
     "normalizedChartTitle": "Normalized Chart",
-    "timeIntervals": {
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+
+    "donutChart": {
+      "total": "Total",
+      "polled": "polled",
+      "negative": "Negative",
+      "affirmative": "Affirmative"
     },
+
     "negativeOption": "Negative Option",
     "affirmativeOption": "Affirmative Option",
 
@@ -118,6 +120,40 @@
 
   "dialogCommon": {
     "cancel": "Cancel"
+  },
+
+  "dates": {
+    "weekdays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+
+    "timeIntervals": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y",
+      "all": "ALL"
+    }
   },
 
   "validation": {

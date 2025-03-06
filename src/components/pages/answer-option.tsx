@@ -14,7 +14,7 @@ export default function AnswerOption() {
   useEffect(() => {
     const requestBody = { answerOptionId, pollId };
 
-    fetch("/api/response", {
+    fetch("/api/responses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

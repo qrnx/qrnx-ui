@@ -11,12 +11,27 @@ import {
 } from "@/components/ui/chart";
 import { useTranslations } from "next-intl";
 
-export const DonutChart = () => {
-  const t = useTranslations("dashboard");
+interface DonutChartProps {
+  totalResponses: number;
+  affirmativeResponses: number;
+  negativeResponses: number;
+}
+
+export const DonutChart = (props: DonutChartProps) => {
+  const { totalResponses, affirmativeResponses, negativeResponses } = props;
+  const t = useTranslations("poll.donutChart");
 
   const chartData = [
-    { responseType: t("affirmative"), total: 275, fill: "var(--chart-2)" },
-    { responseType: t("negative"), total: 222, fill: "var(--chart-1)" },
+    {
+      responseType: t("affirmative"),
+      total: affirmativeResponses,
+      fill: "var(--chart-2)",
+    },
+    {
+      responseType: t("negative"),
+      total: negativeResponses,
+      fill: "var(--chart-1)",
+    },
   ];
 
   const chartConfig = {
@@ -24,21 +39,19 @@ export const DonutChart = () => {
       label: "total",
     },
     affirmative: {
-      label: t("affirmative"),
+      label: t("affirmative") + " ",
       color: "var(--chart-2)",
     },
     negative: {
-      label: t("negative"),
+      label: t("negative") + " ",
       color: "var(--chart-1)",
     },
   } satisfies ChartConfig;
 
-  const totalVisitors = chartData.reduce((acc, curr) => acc + curr.total, 0);
-
   return (
     <Card className="flex flex-col h-full p-4">
       <div className="flex items-center pb-0 text-xl sm:text-2xl font-semibold">
-        {t("donutChart.total")}
+        {t("total")}
       </div>
 
       <div className="flex w-full h-full">
@@ -70,14 +83,14 @@ export const DonutChart = () => {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalResponses.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground font-medium"
                         >
-                          {t("donutChart.polled")}
+                          {t("polled")}
                         </tspan>
                       </text>
                     );
