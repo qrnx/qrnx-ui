@@ -12,6 +12,7 @@ import { Poll } from "@/types/poll";
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ROUTES } from "@/config/routes";
+import { getLastWeekRange } from "@/lib/dates";
 
 const chartData = [
   { weekDay: "Monday", affirmative: 252, negative: 123 },
@@ -28,7 +29,7 @@ interface PollCard {
 }
 
 export function PollCard({ poll }: PollCard) {
-  const { title, description } = poll;
+  const { title, description, affirmativeResponses, negativeResponses } = poll;
   const t = useTranslations("dashboard");
 
   const chartConfig = {
@@ -41,6 +42,8 @@ export function PollCard({ poll }: PollCard) {
       color: "var(--chart-1)",
     },
   } satisfies ChartConfig;
+
+  const dateRange = getLastWeekRange();
 
   return (
     <Link
@@ -64,15 +67,15 @@ export function PollCard({ poll }: PollCard) {
           </div>
           <div className="flex flex-col gap-1">
             <div className="opacity-50 text-xs font-medium">
-              {t("inWeek")} 7.05 - 14.05
+              {t("inWeek")} {dateRange}
             </div>
             <div className="flex gap-6 text-lg md:text-2xl font-medium">
               <div className="flex gap-2">
-                2263
+                {affirmativeResponses}
                 <TrendingUp className="size-8 text-(--chart-2)" />
               </div>
               <div className="flex gap-2">
-                176
+                {negativeResponses}
                 <TrendingDown className="size-8 text-(--chart-1)" />
               </div>
             </div>

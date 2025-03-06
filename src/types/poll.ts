@@ -6,6 +6,9 @@ export type PollBase = {
   description: string;
   userId: number;
   answerOptions: AnswerOption[];
+  totalResponses: number;
+  affirmativeResponses: number;
+  negativeResponses: number;
 };
 
 export type Poll = Model<PollBase>;
