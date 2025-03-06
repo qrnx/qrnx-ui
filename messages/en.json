@@ -141,8 +141,8 @@
       "cancelPremiumForm": {
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This action will result in the cancellation of your Premium status.",
-        "cancelButton": "Cancel",
-        "continueButton": "Continue"
+        "cancel": "Cancel",
+        "continue": "Continue"
       }
     }
   },
