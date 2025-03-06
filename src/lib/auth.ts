@@ -6,6 +6,18 @@ import { ROUTES } from "@/config/routes";
 declare module "next-auth" {
   interface User {
     jwt: string;
+    clientRole: string;
+    maxPolls: number;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    name: string;
+    email: string;
+    clientRole: string;
+    maxPolls: number;
   }
 }
 
@@ -35,6 +47,8 @@ export const authOptions: AuthOptions = {
               id: String(user.id),
               name: user.username,
               email: user.email,
+              clientRole: user.clientRole,
+              maxPolls: user.maxPolls,
               jwt: response.data.jwt,
             };
           }
@@ -52,7 +66,11 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.jwt = user.jwt; // ✅ Сохраняем Strapi JWT в token
+        token.jwt = user.jwt;
+        token.name = user.name ?? "";
+        token.email = user.email ?? "";
+        token.clientRole = user.clientRole;
+        token.maxPolls = user.maxPolls;
       }
 
       return token;
@@ -63,6 +81,8 @@ export const authOptions: AuthOptions = {
         user: {
           ...session.user,
           id: token.id,
+          clientRole: token.clientRole,
+          maxPolls: token.maxPolls,
         },
         jwt: token.jwt,
       };

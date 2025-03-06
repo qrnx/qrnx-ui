@@ -13,7 +13,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { MAX_AVAILABLE_POLLS } from "@/config/availablePolls";
 import { Skeleton } from "../ui/skeleton";
 import { ResponsiveDialog } from "../responsive-dialog";
 import { CreatePoll } from "../forms/create-poll";
@@ -22,6 +21,7 @@ export default function Dashboard() {
   const { data: session } = useSession();
   const t = useTranslations("dashboard");
   const dialogTranslations = useTranslations("dashboard.createPollDialog");
+  const { maxPolls } = session?.user;
 
   const {
     data: polls,
@@ -42,8 +42,7 @@ export default function Dashboard() {
     ));
   };
 
-  // const isAbleToCreatePoll = polls && polls?.length < MAX_AVAILABLE_POLLS;
-  const isAbleToCreatePoll = true;
+  const isAbleToCreatePoll = polls && polls?.length < maxPolls;
 
   const TooltipToRender = () => {
     return (
@@ -68,7 +67,7 @@ export default function Dashboard() {
             {isFetching || !polls ? (
               <Skeleton className="w-[40px] h-[24px] rounded-sm" />
             ) : (
-              `${polls?.length} / ${MAX_AVAILABLE_POLLS}`
+              `${polls?.length} / ${maxPolls}`
             )}
           </div>
           <TooltipToRender />
