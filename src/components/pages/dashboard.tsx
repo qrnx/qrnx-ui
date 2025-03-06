@@ -21,7 +21,8 @@ export default function Dashboard() {
   const { data: session } = useSession();
   const t = useTranslations("dashboard");
   const dialogTranslations = useTranslations("dashboard.createPollDialog");
-  const { maxPolls } = session?.user;
+
+  const { maxPolls } = session?.user || {};
 
   const {
     data: polls,
