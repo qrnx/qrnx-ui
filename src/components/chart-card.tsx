@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { Poll } from "@/types/poll";
 import { useQuery } from "@tanstack/react-query";
 import { getResponses } from "@/api/responses";
-import { convertDatesToWeekdays } from "@/lib/dates";
+import { convertDatesToMonths, convertDatesToWeekdays } from "@/lib/dates";
 import { Skeleton } from "./ui/skeleton";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +32,7 @@ export const ChartCard = ({
   const { documentId, affirmativeResponses, negativeResponses } = poll;
   const [timeInterval, setTimeInterval] = useState(TimeIntervals.WEEK);
   const t = useTranslations("dashboard");
+  const dateTranslations = useTranslations("dates");
 
   const {
     data: responses,
@@ -57,10 +58,19 @@ export const ChartCard = ({
 
   const fortmatedResponses = useMemo(() => {
     if (timeInterval === TimeIntervals.WEEK) {
-      return convertDatesToWeekdays(responses || []);
+      return convertDatesToWeekdays(responses || [], dateTranslations);
     }
+
+    if (timeInterval === TimeIntervals.YEAR) {
+      return convertDatesToMonths(responses || [], dateTranslations);
+    }
+
+    if (timeInterval === TimeIntervals.ALL) {
+      return convertDatesToMonths(responses || [], dateTranslations);
+    }
+
     return responses;
-  }, [responses, timeInterval]);
+  }, [responses, timeInterval, dateTranslations]);
 
   const renderChart = () => {
     const commonClasses = "w-full h-30";
@@ -83,12 +93,28 @@ export const ChartCard = ({
       );
     }
 
+    let dataKey = "weekday";
+    switch (timeInterval) {
+      case TimeIntervals.WEEK:
+        dataKey = "weekday";
+        break;
+      case TimeIntervals.MONTH:
+        dataKey = "response_date";
+        break;
+      case TimeIntervals.YEAR:
+        dataKey = "month";
+        break;
+      case TimeIntervals.ALL:
+        dataKey = "month";
+        break;
+    }
+
     return (
       <ChartContainer config={chartConfig} className={commonClasses}>
         <BarChart accessibilityLayer data={fortmatedResponses || []}>
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="weekday"
+            dataKey={dataKey}
             tickLine={false}
             tickMargin={10}
             axisLine={false}

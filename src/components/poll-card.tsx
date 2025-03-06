@@ -32,6 +32,7 @@ export function PollCard({ poll }: PollCard) {
     documentId,
   } = poll;
   const t = useTranslations("dashboard");
+  const dateTranslations = useTranslations("dates");
 
   const {
     data: responses,
@@ -61,8 +62,8 @@ export function PollCard({ poll }: PollCard) {
   const dateRange = getLastWeekRange();
 
   const formated = useMemo(() => {
-    return convertDatesToWeekdays(responses || []);
-  }, [responses]);
+    return convertDatesToWeekdays(responses || [], dateTranslations);
+  }, [responses, dateTranslations]);
 
   const renderChart = () => {
     const commonClasses = "w-full h-30";

@@ -15,7 +15,10 @@ export const getLastWeekRange = (): string => {
   return `${formatDate(weekAgo)} - ${formatDate(today)}`;
 };
 
-export const convertDatesToWeekdays = (data: GetResponsesData | []) => {
+export const convertDatesToWeekdays = (
+  data: GetResponsesData | [],
+  dateTranslations: (key: string) => string
+) => {
   return data.map((item) => {
     const { response_date, ...rest } = item;
     const dateParts = response_date.split(".");
@@ -26,16 +29,48 @@ export const convertDatesToWeekdays = (data: GetResponsesData | []) => {
     );
 
     const weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
     ];
     const weekday = weekdays[date.getDay()];
 
-    return { weekday, ...rest };
+    const translatedWeekday = dateTranslations(`weekdays.${weekday}`);
+
+    return { weekday: translatedWeekday, ...rest };
+  });
+};
+
+export const convertDatesToMonths = (
+  data: GetResponsesData | [],
+  dateTranslations: (key: string) => string
+) => {
+  const months = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+
+  return data.map((item) => {
+    const dateParts = item.response_date.split(".");
+    const monthIndex = Number(dateParts[1]) - 1;
+    const month = months[monthIndex];
+
+    const translatedMonth = dateTranslations(`months.${month}`);
+
+    return { ...item, month: translatedMonth }; // Добавляем поле month
   });
 };
