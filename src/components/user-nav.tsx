@@ -18,12 +18,15 @@ import { Skeleton } from "./ui/skeleton";
 import { SubscriptionStatus } from "./subscription-status";
 import { useTranslations } from "next-intl";
 import { DeletePremium } from "./forms/delete-premium";
+import { ClitentRoles } from "@/types/clientRoles";
 
 export function UserNav() {
   const { data: session, status } = useSession();
   const t = useTranslations("userNav");
 
-  const personalProgram = true;
+  const { clientRole } = session?.user || {};
+
+  const hasSubscription = clientRole === ClitentRoles.PREMIUM;
 
   if (status === "loading") {
     return <Skeleton className="h-8 w-8 rounded-full" />;
@@ -74,7 +77,7 @@ export function UserNav() {
           <DropdownMenuSeparator />
           <SubscriptionStatus
             deleteComponent={<DeletePremium />}
-            hasSubscription={personalProgram}
+            hasSubscription={hasSubscription}
           />
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
