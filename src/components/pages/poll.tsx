@@ -47,7 +47,8 @@ export default function Poll() {
   if (isPending) return <div>Loading...</div>;
   if (error) return notFound();
 
-  const { title } = poll;
+  const { title, totalResponses, affirmativeResponses, negativeResponses } =
+    poll;
 
   const ButtonsContainer = () => {
     return (
@@ -92,7 +93,11 @@ export default function Poll() {
           <ChartCard poll={poll} title={t("normalizedChartTitle")} />
         </div>
         <div className={cellCommonClasses}>
-          <DonutChart />
+          <DonutChart
+            totalResponses={totalResponses}
+            affirmativeResponses={affirmativeResponses}
+            negativeResponses={negativeResponses}
+          />
         </div>
 
         <div className={cn(cellCommonClasses, "")}>
