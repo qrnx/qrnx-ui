@@ -1,5 +1,6 @@
 import { authGuard } from "@/lib/authGuard";
 import serverInstance from "@/lib/serverInstance";
+import { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
 export const GET = async (
@@ -20,10 +21,8 @@ export const GET = async (
 
     const data = res.data;
     return NextResponse.json({ data }, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };

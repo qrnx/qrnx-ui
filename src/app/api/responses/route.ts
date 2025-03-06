@@ -17,10 +17,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ success: true });
   } catch (error) {
     const axiosError = error as AxiosError;
-    return NextResponse.json(
-      { data: axiosError.response?.data, error: "Internal error" },
-      { status: 500 }
-    );
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };
 
@@ -32,7 +29,7 @@ export const GET = async (req: NextRequest) => {
 
     const res = await serverInstance.get("/responses", {
       params: {
-        pollId: pollId,
+        pollId2: pollId,
         timeInterval,
       },
     });
@@ -40,9 +37,6 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json(res.data);
   } catch (error) {
     const axiosError = error as AxiosError;
-    return NextResponse.json(
-      { data: axiosError.response?.data || null, error: "Internal error" },
-      { status: 500 }
-    );
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };

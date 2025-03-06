@@ -1,5 +1,6 @@
 import { authGuard } from "@/lib/authGuard";
 import serverInstance from "@/lib/serverInstance";
+import { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
 const getAll = async (req: Request) => {
@@ -13,11 +14,9 @@ const getAll = async (req: Request) => {
       },
     });
     return NextResponse.json({ data }, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };
 
@@ -58,11 +57,9 @@ const createPoll = async (req: Request) => {
     ]);
 
     return NextResponse.json({ data }, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };
 
@@ -74,11 +71,9 @@ const deletePoll = async (req: Request) => {
     const { pollId } = await req.json();
     await serverInstance.delete(`/polls/${pollId}`);
     return NextResponse.json(null, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };
 
@@ -129,11 +124,9 @@ const editPoll = async (req: Request) => {
     }
 
     return NextResponse.json({ data: {} }, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { data: null, error: "Internal error" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    return NextResponse.json(axiosError, { status: axiosError.status });
   }
 };
 
