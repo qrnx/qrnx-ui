@@ -118,6 +118,35 @@
     "sessionExpired": "Ваша сессия истекла. Пожалуйста, войдите снова."
   },
 
+  "userNav": {
+    "logOut": "Выйти из аккаунта"
+  },
+
+  "premiumStatus": {
+    "getPremium": {
+      "getPremiumTitle": "Получить Премиум статус",
+      "getPremiumForm": {
+        "email": "Ваш Email:",
+        "description": "Оставьте свой адрес электронной почты. Мы напишем вам и подтвердим ваш премиум-статус.",
+        "submitButton": "Отправить запрос",
+        "error": {
+          "requiredField": "Обязательное поле",
+          "incorrectEmail": "Некорректный email"
+        }
+      }
+    },
+
+    "cancelPremium": {
+      "cancelPremiumTittle": "Отменить подписку",
+      "cancelPremiumForm": {
+        "title": "Вы абсолютно уверены?",
+        "description": "Это действие невозможно отменить. Это действие приведет к отмене вашего Премиум статуса.",
+        "cancel": "Отменить",
+        "continue": "Продолжить"
+      }
+    }
+  },
+
   "404page": {
     "massage": "Страница не найдена",
     "homeLink": "Вернуться домой?"

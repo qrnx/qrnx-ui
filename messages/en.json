@@ -118,6 +118,35 @@
     "sessionExpired": "Your session has expired. Please log in again."
   },
 
+  "userNav": {
+    "logOut": "Log out"
+  },
+
+  "premiumStatus": {
+    "getPremium": {
+      "getPremiumTitle": "Get Premium Status",
+      "getPremiumForm": {
+        "email": "Your Email:",
+        "description": "Leave your Email. We will write to you and confirm your premium status.",
+        "submitButton": "Send a request",
+        "error": {
+          "requiredField": "Обязательное поле",
+          "incorrectEmail": "Некорректный email"
+        }
+      }
+    },
+
+    "cancelPremium": {
+      "cancelPremiumTittle": "Cancel subscription",
+      "cancelPremiumForm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This action will result in the cancellation of your Premium status.",
+        "cancel": "Cancel",
+        "continue": "Continue"
+      }
+    }
+  },
+
   "404page": {
     "massage": "Page not found",
     "homeLink": "Return home?"

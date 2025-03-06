@@ -15,9 +15,18 @@ import { signOut, useSession } from "next-auth/react";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
+import { SubscriptionStatus } from "./subscription-status";
+import { useTranslations } from "next-intl";
+import { DeletePremium } from "./forms/delete-premium";
+import { ClitentRoles } from "@/types/clientRoles";
 
 export function UserNav() {
   const { data: session, status } = useSession();
+  const t = useTranslations("userNav");
+
+  const { clientRole } = session?.user || {};
+
+  const hasSubscription = clientRole === ClitentRoles.PREMIUM;
 
   if (status === "loading") {
     return <Skeleton className="h-8 w-8 rounded-full" />;
@@ -66,10 +75,14 @@ export function UserNav() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <SubscriptionStatus
+            deleteComponent={<DeletePremium />}
+            hasSubscription={hasSubscription}
+          />
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
           >
-            Log out
+            {t("logOut")}
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
