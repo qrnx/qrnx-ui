@@ -26,11 +26,13 @@ export const GET = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams;
     const pollId = searchParams.get("pollId");
     const timeInterval = searchParams.get("timeInterval");
+    const isNormalized = searchParams.get("isNormalized");
 
     const res = await serverInstance.get("/responses", {
       params: {
         pollId: pollId,
         timeInterval,
+        isNormalized,
       },
     });
 

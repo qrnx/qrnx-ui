@@ -22,6 +22,7 @@ import { useGenerateOptionUrl } from "@/hooks/use-generate-option-link";
 import { DonutChart } from "../donut-card";
 import { AnswerChanger } from "../answer-changer-card";
 import { Skeleton } from "../ui/skeleton";
+import { ChartCardNormalized } from "../chart-card-normalized";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -126,7 +127,7 @@ export default function Poll() {
         </div>
 
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
-          <ChartCard poll={poll} title={t("normalizedChartTitle")} />
+          <ChartCardNormalized poll={poll} title={t("normalizedChartTitle")} />
         </div>
         <div className={cellCommonClasses}>
           <DonutChart

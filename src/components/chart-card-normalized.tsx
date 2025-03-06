@@ -24,7 +24,7 @@ interface ChartCardProps {
   withTrendSection?: boolean;
 }
 
-export const ChartCard = ({
+export const ChartCardNormalized = ({
   poll,
   title,
   withTrendSection = false,
@@ -38,9 +38,13 @@ export const ChartCard = ({
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["responses", documentId, timeInterval, "unnormalized"],
+    queryKey: ["responses", documentId, timeInterval, "normalized"],
     queryFn: () =>
-      getResponses({ pollId: documentId, timeInterval: timeInterval }),
+      getResponses({
+        pollId: documentId,
+        timeInterval: timeInterval,
+        isNormalized: true,
+      }),
     enabled: !!documentId,
   });
 

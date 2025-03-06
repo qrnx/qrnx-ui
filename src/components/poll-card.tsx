@@ -38,9 +38,12 @@ export function PollCard({ poll }: PollCard) {
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["responses", documentId, TimeIntervals.WEEK],
+    queryKey: ["responses", documentId, TimeIntervals.WEEK, "unnormalized"],
     queryFn: () =>
-      getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK }),
+      getResponses({
+        pollId: documentId,
+        timeInterval: TimeIntervals.WEEK,
+      }),
     enabled: !!documentId,
   });
 

@@ -7,11 +7,13 @@ export type GetResponsesData = Response[];
 export type GetResponsesParams = {
   pollId: string;
   timeInterval: TimeIntervals;
+  isNormalized?: boolean;
 };
 
 export const getResponses = async ({
   pollId,
   timeInterval,
+  isNormalized = false,
 }: GetResponsesParams): Promise<GetResponsesData> => {
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/responses`,
@@ -19,6 +21,7 @@ export const getResponses = async ({
       params: {
         pollId,
         timeInterval,
+        isNormalized,
       },
       headers: {
         "Content-Type": "application/json",
