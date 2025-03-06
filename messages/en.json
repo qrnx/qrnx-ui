@@ -47,8 +47,8 @@
     "chartFetchingErrorDescription": "Try to refresh the page or try again later",
 
     "inWeek": "In 7 days",
-    "negative": "Negative ",
-    "affirmative": "Affirmative "
+    "negative": "Negative",
+    "affirmative": "Affirmative"
   },
 
   "poll": {
@@ -82,7 +82,9 @@
 
     "donutChart": {
       "total": "Total",
-      "polled": "polled"
+      "polled": "polled",
+      "negative": "Negative",
+      "affirmative": "Affirmative"
     },
 
     "negativeOption": "Negative Option",

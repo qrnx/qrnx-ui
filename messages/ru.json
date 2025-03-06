@@ -48,7 +48,7 @@
 
     "inWeek": "За 7 дней",
     "negative": "Негативный",
-    "affirmative": "Позитивный"
+    "affirmative": "Утвердительно"
   },
 
   "poll": {
@@ -82,7 +82,9 @@
 
     "donutChart": {
       "total": "Всего ответов",
-      "polled": "ответов"
+      "polled": "ответов",
+      "negative": "Отрицательно",
+      "affirmative": "Утвердительно"
     },
 
     "negativeOption": "Отрицательный ответ",
