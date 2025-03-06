@@ -17,6 +17,7 @@ import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
 import { SubscriptionStatus } from "./subscription-status";
 import { useTranslations } from "next-intl";
+import { DeletePremium } from "./forms/delete-premium";
 
 export function UserNav() {
   const { data: session, status } = useSession();
@@ -71,7 +72,10 @@ export function UserNav() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <SubscriptionStatus hasSubscription={personalProgram} />
+          <SubscriptionStatus
+            deleteComponent={<DeletePremium />}
+            hasSubscription={personalProgram}
+          />
           <DropdownMenuItem
             onClick={() => signOut({ callbackUrl: ROUTES.home })}
           >
