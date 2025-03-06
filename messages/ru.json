@@ -73,12 +73,6 @@
     },
     "mainChartTitle": "Основной график",
     "normalizedChartTitle": "Нормализованный график",
-    "timeIntervals": {
-      "week": "1Н",
-      "month": "1М",
-      "year": "1Г",
-      "all": "Все"
-    },
 
     "donutChart": {
       "total": "Всего ответов",
@@ -152,6 +146,13 @@
       "october": "Октябрь",
       "november": "Ноябрь",
       "december": "Декабрь"
+    },
+
+    "timeIntervals": {
+      "week": "1Н",
+      "month": "1М",
+      "year": "1Г",
+      "all": "Все"
     }
   },
 

@@ -73,12 +73,6 @@
     },
     "mainChartTitle": "Main chart",
     "normalizedChartTitle": "Normalized Chart",
-    "timeIntervals": {
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
-    },
 
     "donutChart": {
       "total": "Total",
@@ -152,6 +146,13 @@
       "october": "October",
       "november": "November",
       "december": "December"
+    },
+
+    "timeIntervals": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y",
+      "all": "ALL"
     }
   },
 
