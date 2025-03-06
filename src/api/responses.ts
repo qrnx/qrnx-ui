@@ -1,5 +1,6 @@
 import { TimeIntervals } from "@/types/timeIntervals";
 import axios from "axios";
+import { Response } from "@/types/response";
 
 export type GetResponsesData = Response[];
 
@@ -11,7 +12,7 @@ export type GetResponsesParams = {
 export const getResponses = async ({
   pollId,
   timeInterval,
-}: GetResponsesParams): Promise<GetResponsesParams> => {
+}: GetResponsesParams): Promise<GetResponsesData> => {
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/responses`,
     {

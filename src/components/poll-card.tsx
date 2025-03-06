@@ -12,19 +12,12 @@ import { Poll } from "@/types/poll";
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ROUTES } from "@/config/routes";
-import { getLastWeekRange } from "@/lib/dates";
+import { convertDatesToWeekdays, getLastWeekRange } from "@/lib/dates";
 import { getResponses } from "@/api/responses";
 import { TimeIntervals } from "@/types/timeIntervals";
-
-const chartData = [
-  { weekDay: "Monday", affirmative: 252, negative: 123 },
-  { weekDay: "Tuesday", affirmative: 325, negative: 200 },
-  { weekDay: "Wednesday", affirmative: 237, negative: 120 },
-  { weekDay: "Thursday", affirmative: 73, negative: 190 },
-  { weekDay: "Friday", affirmative: 209, negative: 130 },
-  { weekDay: "Saturday ", affirmative: 214, negative: 140 },
-  { weekDay: "Sunday", affirmative: 214, negative: 140 },
-];
+import { useQuery } from "@tanstack/react-query";
+import { cn } from "@/lib/utils";
+import { useMemo } from "react";
 
 interface PollCard {
   poll: Poll;
@@ -51,9 +44,70 @@ export function PollCard({ poll }: PollCard) {
     },
   } satisfies ChartConfig;
 
+  const {
+    data: responses,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: ["responses", documentId],
+    queryFn: () =>
+      getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK }),
+    enabled: !!documentId,
+  });
+
   const dateRange = getLastWeekRange();
 
-  getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK });
+  const formated = useMemo(() => {
+    return convertDatesToWeekdays(responses || []);
+  }, [responses]);
+
+  const renderChart = () => {
+    const commonClasses = "w-full h-30";
+
+    if (isFetching) {
+      return <Skeleton className={commonClasses} />;
+    }
+
+    if (error) {
+      return (
+        <div
+          className={cn(
+            commonClasses,
+            "flex flex-col items-center justify-center gap-4"
+          )}
+        >
+          <h2 className="text-2xl">{t("chartFetchingErrorTitle")}</h2>
+          <p>{t("chartFetchingErrorDescription")}</p>
+        </div>
+      );
+    }
+
+    return (
+      <ChartContainer config={chartConfig} className={commonClasses}>
+        <BarChart accessibilityLayer data={formated || []}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="weekday"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+            tickFormatter={(value) => value.slice(0, 3)}
+            hide
+          />
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent indicator="dashed" />}
+          />
+          <Bar
+            dataKey="affirmative"
+            fill="var(--color-affirmative)"
+            radius={4}
+          />
+          <Bar dataKey="negative" fill="var(--color-negative)" radius={4} />
+        </BarChart>
+      </ChartContainer>
+    );
+  };
 
   return (
     <Link
@@ -95,29 +149,7 @@ export function PollCard({ poll }: PollCard) {
           <div className="hidden sm:flex justify-end">
             <ChevronRight className="text-gray-400" />
           </div>
-          <ChartContainer config={chartConfig} className="w-full h-30 ml-auto">
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="weekDay"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-                hide
-              />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent indicator="dashed" />}
-              />
-              <Bar
-                dataKey="affirmative"
-                fill="var(--color-affirmative)"
-                radius={4}
-              />
-              <Bar dataKey="negative" fill="var(--color-negative)" radius={4} />
-            </BarChart>
-          </ChartContainer>
+          {renderChart()}
         </div>
       </Card>
     </Link>

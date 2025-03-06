@@ -31,7 +31,6 @@ export default function Dashboard() {
   } = useQuery({
     queryKey: ["polls"],
     queryFn: getPolls,
-    enabled: !!session?.jwt,
     select: (data) => data.data,
   });
 
