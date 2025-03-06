@@ -1,6 +1,6 @@
 import { Card } from "./ui/card";
 import { TimeSwitcher } from "./time-switcher";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { TimeIntervals } from "@/types/timeIntervals";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
@@ -11,28 +11,38 @@ import {
 } from "@/components/ui/chart";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-const chartData = [
-  { weekDay: "Monday", affirmative: 952, negative: 523 },
-  { weekDay: "Tuesday", affirmative: 325, negative: 200 },
-  { weekDay: "Wednesday", affirmative: 2237, negative: 1120 },
-  { weekDay: "Thursday", affirmative: 173, negative: 190 },
-  { weekDay: "Friday", affirmative: 1209, negative: 130 },
-  { weekDay: "Saturday ", affirmative: 214, negative: 140 },
-  { weekDay: "Sunday", affirmative: 214, negative: 140 },
-];
+import { Poll } from "@/types/poll";
+import { useQuery } from "@tanstack/react-query";
+import { getResponses } from "@/api/responses";
+import { convertDatesToWeekdays } from "@/lib/dates";
+import { Skeleton } from "./ui/skeleton";
+import { cn } from "@/lib/utils";
 
 interface ChartCardProps {
+  poll: Poll;
   title: string;
   withTrendSection?: boolean;
 }
 
 export const ChartCard = ({
+  poll,
   title,
   withTrendSection = false,
 }: ChartCardProps) => {
+  const { documentId, affirmativeResponses, negativeResponses } = poll;
   const [timeInterval, setTimeInterval] = useState(TimeIntervals.WEEK);
   const t = useTranslations("dashboard");
+
+  const {
+    data: responses,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: ["responses", documentId, timeInterval],
+    queryFn: () =>
+      getResponses({ pollId: documentId, timeInterval: timeInterval }),
+    enabled: !!documentId,
+  });
 
   const chartConfig = {
     affirmative: {
@@ -45,37 +55,40 @@ export const ChartCard = ({
     },
   } satisfies ChartConfig;
 
-  return (
-    <Card className="flex h-full flex-col justify-between p-4">
-      <div className="flex justify-between items-center">
-        <div className="text-xl sm:text-2xl font-semibold">{title}</div>
-        <TimeSwitcher
-          initialInterval={timeInterval}
-          onChange={setTimeInterval}
-        />
-      </div>
-      {withTrendSection === true ? (
-        <div className="flex gap-6 text-2xl font-medium">
-          <div className="flex gap-2">
-            324
-            <TrendingUp className="size-8 text-(--chart-2)" />
-          </div>
-          <div className="flex gap-2">
-            54
-            <TrendingDown className="size-8 text-(--chart-1)" />
-          </div>
+  const fortmatedResponses = useMemo(() => {
+    if (timeInterval === TimeIntervals.WEEK) {
+      return convertDatesToWeekdays(responses || []);
+    }
+    return responses;
+  }, [responses, timeInterval]);
+
+  const renderChart = () => {
+    const commonClasses = "w-full h-30";
+
+    if (isFetching) {
+      return <Skeleton className={commonClasses} />;
+    }
+
+    if (error) {
+      return (
+        <div
+          className={cn(
+            commonClasses,
+            "flex flex-col items-center justify-center gap-4"
+          )}
+        >
+          <h2 className="text-2xl">{t("chartFetchingErrorTitle")}</h2>
+          <p>{t("chartFetchingErrorDescription")}</p>
         </div>
-      ) : null}
-      <ChartContainer
-        config={chartConfig}
-        className={`w-full ml-auto ${
-          withTrendSection ? " h-40 sm:h-40 lg:h-30" : "h-50"
-        }`}
-      >
-        <BarChart accessibilityLayer data={chartData}>
+      );
+    }
+
+    return (
+      <ChartContainer config={chartConfig} className={commonClasses}>
+        <BarChart accessibilityLayer data={fortmatedResponses || []}>
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="weekDay"
+            dataKey="weekday"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
@@ -94,6 +107,31 @@ export const ChartCard = ({
           <Bar dataKey="negative" fill="var(--color-negative)" radius={4} />
         </BarChart>
       </ChartContainer>
+    );
+  };
+
+  return (
+    <Card className="flex h-full flex-col justify-between p-4">
+      <div className="flex justify-between items-center">
+        <div className="text-xl sm:text-2xl font-semibold">{title}</div>
+        <TimeSwitcher
+          initialInterval={timeInterval}
+          onChange={setTimeInterval}
+        />
+      </div>
+      {withTrendSection === true ? (
+        <div className="flex gap-6 text-2xl font-medium">
+          <div className="flex gap-2">
+            {affirmativeResponses}
+            <TrendingUp className="size-8 text-(--chart-2)" />
+          </div>
+          <div className="flex gap-2">
+            {negativeResponses}
+            <TrendingDown className="size-8 text-(--chart-1)" />
+          </div>
+        </div>
+      ) : null}
+      {renderChart()}
     </Card>
   );
 };

@@ -33,6 +33,17 @@ export function PollCard({ poll }: PollCard) {
   } = poll;
   const t = useTranslations("dashboard");
 
+  const {
+    data: responses,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: ["responses", documentId, TimeIntervals.WEEK],
+    queryFn: () =>
+      getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK }),
+    enabled: !!documentId,
+  });
+
   const chartConfig = {
     affirmative: {
       label: t("affirmative"),
@@ -43,17 +54,6 @@ export function PollCard({ poll }: PollCard) {
       color: "var(--chart-1)",
     },
   } satisfies ChartConfig;
-
-  const {
-    data: responses,
-    isFetching,
-    error,
-  } = useQuery({
-    queryKey: ["responses", documentId],
-    queryFn: () =>
-      getResponses({ pollId: documentId, timeInterval: TimeIntervals.WEEK }),
-    enabled: !!documentId,
-  });
 
   const dateRange = getLastWeekRange();
 

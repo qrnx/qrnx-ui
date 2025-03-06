@@ -85,11 +85,11 @@ export default function Poll() {
           <InformationCard poll={poll} />
         </div>
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
-          <ChartCard title={t("mainChartTitle")} withTrendSection />
+          <ChartCard poll={poll} title={t("mainChartTitle")} withTrendSection />
         </div>
 
         <div className={cn(cellCommonClasses, "lg:col-span-2")}>
-          <ChartCard title={t("normalizedChartTitle")} />
+          <ChartCard poll={poll} title={t("normalizedChartTitle")} />
         </div>
         <div className={cellCommonClasses}>
           <DonutChart />
