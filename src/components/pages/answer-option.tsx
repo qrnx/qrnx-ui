@@ -50,9 +50,11 @@ export default function AnswerOption() {
   return (
     <div className="flex flex-col items-center justify-items-center w-full h-full py-8 gap-16 font-[family-name:var(--font-geist-sans)]">
       <div className="flex flex-col grow items-center justify-center gap-4 w-full">
-        <div className="flex flex-col items-center justify-center gap-6 text-6xl">
-          <div className="font-extrabold">{t("title")}</div>
-          <div className="flex flex-col items-center font-medium gap-7">
+        <div className="flex flex-col items-center justify-center gap-6">
+          <div className="font-extrabold text-3xl md:text-6xl">
+            {t("title")}
+          </div>
+          <div className="flex flex-col items-center font-medium gap-7 text-2xl md:text-5xl">
             <div>{t("yourAnswer")}</div>
             <div>{text}</div>
           </div>
