@@ -12,7 +12,7 @@ import {
 import { useTranslations } from "next-intl";
 
 export const DonutChart = () => {
-  const t = useTranslations("dashboard");
+  const t = useTranslations("poll");
 
   const chartData = [
     { responseType: t("affirmative"), total: 275, fill: "var(--chart-2)" },

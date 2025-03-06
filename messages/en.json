@@ -42,10 +42,10 @@
       "createSuccess": "Poll created successfully",
       "createError": "Error has occurred"
     },
-    "donutChart": {
-      "total": "Total",
-      "polled": "polled"
-    },
+
+    "chartFetchingErrorTitle": "Error",
+    "chartFetchingErrorDescription": "Try to refresh the page or try again later",
+
     "inWeek": "In 7 days",
     "negative": "Negative ",
     "affirmative": "Affirmative "
@@ -79,6 +79,12 @@
       "year": "1Y",
       "all": "ALL"
     },
+
+    "donutChart": {
+      "total": "Total",
+      "polled": "polled"
+    },
+
     "negativeOption": "Negative Option",
     "affirmativeOption": "Affirmative Option",
 
