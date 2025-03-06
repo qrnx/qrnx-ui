@@ -93,6 +93,11 @@
     }
   },
 
+  "answerOption": {
+    "title": "Thanks for the answer",
+    "yourAnswer": "Your Answer:"
+  },
+
   "informationCard": {
     "general": "General Information",
     "total": "Total",

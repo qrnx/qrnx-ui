@@ -6,10 +6,12 @@ import { notFound, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { AnswerOption as AnswerOptionType } from "@/types/answerOptions";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function AnswerOption() {
   const { answerOptionId, pollId } = useParams();
   const { data: session } = useSession();
+  const t = useTranslations("answerOption");
 
   useEffect(() => {
     const requestBody = { answerOptionId, pollId };
@@ -43,13 +45,21 @@ export default function AnswerOption() {
   if (isPending) return <div>Loading...</div>;
   if (error || !answerOption) return notFound();
 
-  const { text, type } = answerOption;
+  const { text } = answerOption;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <h1>{answerOptionId}</h1>
-      <div>Answer: {text}</div>
-      <div>Answer type: {type}</div>
+    <div className="flex flex-col items-center justify-items-center w-full h-full py-8 gap-16 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col grow items-center justify-center gap-4 w-full">
+        <div className="flex flex-col items-center justify-center gap-6">
+          <div className="font-extrabold text-3xl md:text-6xl">
+            {t("title")}
+          </div>
+          <div className="flex flex-col items-center font-medium gap-7 text-2xl md:text-5xl">
+            <div>{t("yourAnswer")}</div>
+            <div>{text}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
