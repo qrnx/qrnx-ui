@@ -17,9 +17,10 @@ export const InformationCard = ({ poll }: InformationCardProps) => {
     year: "numeric",
   }).format(date);
 
-  const AffirmativeResponsesRate = (
-    affirmativeResponses / totalResponses
-  ).toFixed(2);
+  const AffirmativeResponsesRate =
+    totalResponses === 0
+      ? 0
+      : (affirmativeResponses / totalResponses).toFixed(2);
 
   return (
     <Card className="flex flex-col justify-between gap-8 h-full p-4">
