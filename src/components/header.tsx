@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
 import { ROUTES } from "@/config/routes";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { UserNav } from "./user-nav";
 import { LanguageSelect } from "./language-select";
 import { ThemeToggle } from "./theme-toggle";
@@ -16,7 +16,8 @@ const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
 const Header = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
-  if (routesWIthoutHeader.includes(pathname)) {
+  const params = useParams();
+  if (routesWIthoutHeader.includes(pathname) || params.answerOptionId) {
     return null;
   }
 
