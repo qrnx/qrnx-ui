@@ -5,9 +5,6 @@ import styles from "@/components/layout.module.css";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Discord from "@/assets/Discord.svg";
-import YouTube from "@/assets/YouTube.svg";
-import Instagram from "@/assets/Instagram.svg";
 import { useTranslations } from "next-intl";
 
 const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
