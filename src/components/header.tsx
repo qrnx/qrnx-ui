@@ -11,13 +11,13 @@ import Logo from "@/assets/logo.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
+const routesWithoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 const Header = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
   const params = useParams();
-  if (routesWIthoutHeader.includes(pathname) || params.answerOptionId) {
+  if (routesWithoutHeader.includes(pathname) || params.answerOptionId) {
     return null;
   }
 

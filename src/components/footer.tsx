@@ -7,13 +7,13 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
+const routesWithoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 export const Footer = () => {
   const t = useTranslations("footer");
   const pathname = usePathname();
   const params = useParams();
-  if (routesWIthoutHeader.includes(pathname) || params.answerOptionId) {
+  if (routesWithoutHeader.includes(pathname) || params.answerOptionId) {
     return null;
   }
   return (
