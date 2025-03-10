@@ -4,18 +4,16 @@ import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
 import { ROUTES } from "@/config/routes";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Discord from "@/assets/Discord.svg";
-import YouTube from "@/assets/YouTube.svg";
-import Instagram from "@/assets/Instagram.svg";
+import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
+const routesWithoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 export const Footer = () => {
   const t = useTranslations("footer");
   const pathname = usePathname();
-  if (routesWIthoutHeader.includes(pathname)) {
+  const params = useParams();
+  if (routesWithoutHeader.includes(pathname) || params.answerOptionId) {
     return null;
   }
   return (

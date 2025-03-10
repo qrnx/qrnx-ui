@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import styles from "@/components/layout.module.css";
 import { ROUTES } from "@/config/routes";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { UserNav } from "./user-nav";
 import { LanguageSelect } from "./language-select";
 import { ThemeToggle } from "./theme-toggle";
@@ -11,12 +11,13 @@ import Logo from "@/assets/logo.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-const routesWIthoutHeader = [ROUTES.signIn, ROUTES.signUp];
+const routesWithoutHeader = [ROUTES.signIn, ROUTES.signUp];
 
 const Header = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
-  if (routesWIthoutHeader.includes(pathname)) {
+  const params = useParams();
+  if (routesWithoutHeader.includes(pathname) || params.answerOptionId) {
     return null;
   }
 
