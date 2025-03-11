@@ -26,7 +26,7 @@ interface DeleteComponentProps extends ComponentProps<"form"> {
 }
 
 interface DeleteConfirmationProps extends ComponentProps<typeof Button> {
-  label: string;
+  label: string | React.ReactNode;
   variant?: ComponentProps<typeof Button>["variant"];
   title?: string;
   description?: string;

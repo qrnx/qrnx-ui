@@ -27,7 +27,7 @@ interface FormComponentProps extends ComponentProps<"form"> {
 }
 
 interface ResponsiveDialogProps extends ComponentProps<typeof Button> {
-  label: string;
+  label: string | React.ReactNode;
   variant?: ComponentProps<typeof Button>["variant"];
   title: string;
   description?: string;

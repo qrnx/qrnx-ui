@@ -23,6 +23,8 @@ import { DonutChart } from "../donut-card";
 import { AnswerChanger } from "../answer-changer-card";
 import { Skeleton } from "../ui/skeleton";
 import { ChartCardNormalized } from "../chart-card-normalized";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { FileDown, Pencil, Trash2 } from "lucide-react";
 
 export default function Poll() {
   const { pollId } = useParams();
@@ -30,6 +32,7 @@ export default function Poll() {
   const t = useTranslations("poll");
   const dialogTranslations = useTranslations("poll.editPollDialog");
   const generateOptionUrl = useGenerateOptionUrl();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const {
     data: poll,
@@ -88,24 +91,27 @@ export default function Poll() {
 
   const { title, totalResponses, affirmativeResponses, negativeResponses } =
     poll;
-
   const ButtonsContainer = () => {
+    const downloadButtonLabel = isDesktop ? t("pdfButton") : <FileDown />;
+    const editButtonLabel = isDesktop ? t("editButton") : <Pencil />;
+    const deleteButtonLabel = isDesktop ? t("deleteButton") : <Trash2 />;
+
     return (
       <>
         {/* eslint-disable-next-line no-console */}
         <Button onClick={() => console.log("Download PDF button")}>
-          {t("pdfButton")}
+          {downloadButtonLabel}
         </Button>
         {}
         <ResponsiveDialog
-          label={t("editButton")}
+          label={editButtonLabel}
           variant="outline"
           title={dialogTranslations("title")}
           description={dialogTranslations("description")}
           formComponent={<EditPoll poll={poll} />}
         />
         <DeleteConfirmation
-          label={t("deleteButton")}
+          label={deleteButtonLabel}
           variant="destructive"
           deleteComponent={<DeletePoll />}
         />
