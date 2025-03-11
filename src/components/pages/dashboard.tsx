@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard, PollCardSkeleton } from "@/components/poll-card";
@@ -16,13 +15,13 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { ResponsiveDialog } from "../responsive-dialog";
 import { CreatePoll } from "../forms/create-poll";
+import useGetUser from "@/hooks/use-get-user";
 
 export default function Dashboard() {
-  const { data: session } = useSession();
   const t = useTranslations("dashboard");
   const dialogTranslations = useTranslations("dashboard.createPollDialog");
 
-  const { maxPolls } = session?.user || {};
+  const { maxPolls, isLoading: isUserLoading } = useGetUser();
 
   const {
     data: polls,
@@ -64,7 +63,7 @@ export default function Dashboard() {
       <>
         <div className="flex items-center gap-1.5 md:gap-2">
           <div className="font-medium text-lg">
-            {isFetching || !polls ? (
+            {isFetching || isUserLoading || !polls ? (
               <Skeleton className="w-[40px] h-[24px] rounded-sm" />
             ) : (
               `${polls?.length} / ${maxPolls}`
