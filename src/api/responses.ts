@@ -9,6 +9,10 @@ export type GetResponsesParams = {
   timeInterval: TimeIntervals;
   isNormalized?: boolean;
 };
+export type CreateResponseParams = {
+  pollId: string;
+  answerOptionId: string;
+};
 
 export const getResponses = async ({
   pollId,
@@ -30,4 +34,22 @@ export const getResponses = async ({
   );
 
   return res.data;
+};
+
+export const createResponse = async ({
+  pollId,
+  answerOptionId,
+}: CreateResponseParams): Promise<void> => {
+  await axios.post(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/responses`,
+    {
+      pollId,
+      answerOptionId,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
