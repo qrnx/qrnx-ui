@@ -54,11 +54,13 @@ export const QrCard = ({ title, url, type }: QrCardProps) => {
             {title}
           </CardTitle>
           <div ref={qrContainerRef} className="flex h-full justify-center">
+            <QRCodeCanvas value={url} size={squareSide} title={title} />
             <QRCodeCanvas
               ref={canvasRef}
               value={url}
-              size={squareSide}
+              size={400}
               title={title}
+              style={{ display: "none" }}
             />
           </div>
           <Button
