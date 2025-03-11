@@ -2,17 +2,25 @@ import { ROUTES } from "@/config/routes";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const protectedRoutes = [ROUTES.dashboard];
 const publicRoutes = [ROUTES.home, ROUTES.signIn, ROUTES.signUp];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.includes(path);
+  const segments = path.split("/");
+
+  if (segments.length >= 3 && segments[1] === "dashboard") {
+    const answerOptionId = segments[3] || null;
+
+    if (answerOptionId) {
+      return NextResponse.next();
+    }
+  }
+
   const isPublicRoute = publicRoutes.includes(path);
 
   const token = await getToken({ req });
 
-  if (isProtectedRoute && !token?.jwt) {
+  if (!isPublicRoute && !token?.jwt) {
     const signInUrl = new URL("/sign-in", req.nextUrl.origin);
     signInUrl.searchParams.set("error", "unauthorized");
 

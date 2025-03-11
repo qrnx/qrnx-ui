@@ -1,48 +1,54 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getPollById } from "@/api/polls";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { notFound, useParams } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { AnswerOption as AnswerOptionType } from "@/types/answerOptions";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { getAnswerOptionById } from "@/api/answerOptions";
+import { createResponse as createResponseApi } from "@/api/responses";
+import { Loader2 } from "lucide-react";
 
 export default function AnswerOption() {
   const { answerOptionId, pollId } = useParams();
-  const { data: session } = useSession();
   const t = useTranslations("answerOption");
+  const queryClient = useQueryClient();
+
+  const { mutate: createResponse, isPending: isCreateResponsePending } =
+    useMutation({
+      mutationFn: createResponseApi,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["polls"] });
+        queryClient.invalidateQueries({
+          queryKey: ["polls", pollId],
+        });
+      },
+    });
 
   useEffect(() => {
-    const requestBody = { answerOptionId, pollId };
-
-    fetch("/api/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
-  }, [answerOptionId, pollId]);
+    if (answerOptionId && pollId) {
+      createResponse({
+        pollId: pollId as string,
+        answerOptionId: answerOptionId as string,
+      });
+    }
+  }, [answerOptionId, createResponse, pollId]);
 
   const {
     data: answerOption,
     isPending,
     error,
   } = useQuery({
-    queryKey: ["polls", pollId],
-    queryFn: () => getPollById({ pollId: pollId as string }),
-    enabled: !!session?.jwt,
-    select: (data) => {
-      const poll = data.data;
-      const answerOption = poll.answerOptions.find(
-        (answerOption) => answerOption.documentId === answerOptionId
-      );
-      return answerOption as AnswerOptionType;
-    },
+    queryKey: ["answerOptions", answerOptionId],
+    queryFn: () =>
+      getAnswerOptionById({ answerOptionId: answerOptionId as string }),
   });
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending || isCreateResponsePending)
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <Loader2 size={100} className="animate-spin" />
+      </div>
+    );
   if (error || !answerOption) return notFound();
 
   const { text } = answerOption;
