@@ -19,16 +19,16 @@ import { SubscriptionStatus } from "./subscription-status";
 import { useTranslations } from "next-intl";
 import { DeletePremium } from "./forms/delete-premium";
 import { ClitentRoles } from "@/types/clientRoles";
+import useGetUser from "@/hooks/use-get-user";
 
 export function UserNav() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const t = useTranslations("userNav");
-
-  const { clientRole } = session?.user || {};
+  const { clientRole, isLoading: isUserLoading } = useGetUser();
 
   const hasSubscription = clientRole === ClitentRoles.PREMIUM;
 
-  if (status === "loading") {
+  if (isUserLoading) {
     return <Skeleton className="h-8 w-8 rounded-full" />;
   }
 
