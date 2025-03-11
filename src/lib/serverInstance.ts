@@ -6,6 +6,10 @@ const serverInstance = axios.create({
   baseURL: `${process.env.STRAPI_API_URL}/api/`,
 });
 
+export const serverWithoutInterceptor = axios.create({
+  baseURL: `${process.env.STRAPI_API_URL}/api/`,
+});
+
 serverInstance.interceptors.request.use(
   async (config) => {
     const session = await getServerSession(authOptions);

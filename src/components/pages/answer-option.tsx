@@ -1,16 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getPollById } from "@/api/polls";
 import { notFound, useParams } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { AnswerOption as AnswerOptionType } from "@/types/answerOptions";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { getAnswerOptionById } from "@/api/answerOptions";
 
 export default function AnswerOption() {
   const { answerOptionId, pollId } = useParams();
-  const { data: session } = useSession();
   const t = useTranslations("answerOption");
 
   useEffect(() => {
@@ -30,16 +27,9 @@ export default function AnswerOption() {
     isPending,
     error,
   } = useQuery({
-    queryKey: ["polls", pollId],
-    queryFn: () => getPollById({ pollId: pollId as string }),
-    enabled: !!session?.jwt,
-    select: (data) => {
-      const poll = data.data;
-      const answerOption = poll.answerOptions.find(
-        (answerOption) => answerOption.documentId === answerOptionId
-      );
-      return answerOption as AnswerOptionType;
-    },
+    queryKey: ["answerOptions", answerOptionId],
+    queryFn: () =>
+      getAnswerOptionById({ answerOptionId: answerOptionId as string }),
   });
 
   if (isPending) return <div>Loading...</div>;

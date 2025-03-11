@@ -1,4 +1,4 @@
-import serverInstance from "@/lib/serverInstance";
+import serverInstance, { serverWithoutInterceptor } from "@/lib/serverInstance";
 import { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +7,7 @@ export const POST = async (req: NextRequest) => {
     const body = await req.json();
     const { answerOptionId, pollId } = body;
 
-    await serverInstance.post("/responses", {
+    await serverWithoutInterceptor.post("/responses", {
       data: {
         poll: pollId,
         answerOption: answerOptionId,
