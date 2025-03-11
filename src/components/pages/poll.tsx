@@ -25,14 +25,25 @@ import { Skeleton } from "../ui/skeleton";
 import { ChartCardNormalized } from "../chart-card-normalized";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { FileDown, Pencil, Trash2 } from "lucide-react";
+import React from "react";
+import { saveAs } from "file-saver";
+import { pdf } from "@react-pdf/renderer";
+import { PdfDocument } from "../pdf-document";
+import { QRCodeCanvas } from "qrcode.react";
+import { ButtonLoading } from "../ui/button-loading";
+import { useGerateQrBase64 } from "@/hooks/useGerateQrBase64";
 
 export default function Poll() {
   const { pollId } = useParams();
   const { data: session } = useSession();
   const t = useTranslations("poll");
+  const answerOptionTranslations = useTranslations("answerOption");
   const dialogTranslations = useTranslations("poll.editPollDialog");
   const generateOptionUrl = useGenerateOptionUrl();
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const affirmativeRef = React.useRef<HTMLCanvasElement>(null);
+  const negativeRef = React.useRef<HTMLCanvasElement>(null);
 
   const {
     data: poll,
@@ -48,6 +59,13 @@ export default function Poll() {
   const { affirmativeOption, negativeOption } = useGetAnswerOptions(
     poll?.answerOptions
   );
+
+  const { affirmativeImage, negativeImage } = useGerateQrBase64({
+    affirmativeRef,
+    negativeRef,
+    affirmativeOption,
+    negativeOption,
+  });
 
   const cellCommonClasses =
     " w-full col-span-1 aspect-auto max-h-[300px] lg:max-h-none ";
@@ -89,6 +107,20 @@ export default function Poll() {
   if (isPending) return renderSkeleton();
   if (error) return notFound();
 
+  const handleDownload = async () => {
+    const fileName = "test.pdf";
+    const blob = await pdf(
+      <PdfDocument
+        title={answerOptionTranslations("pdfTitle")}
+        affirmativeUrl={affirmativeImage}
+        negativeUrl={negativeImage}
+        affirmativeText={affirmativeOption?.text || ""}
+        negativeText={negativeOption?.text || ""}
+      />
+    ).toBlob();
+    saveAs(blob, fileName);
+  };
+
   const { title, totalResponses, affirmativeResponses, negativeResponses } =
     poll;
   const ButtonsContainer = () => {
@@ -98,11 +130,11 @@ export default function Poll() {
 
     return (
       <>
-        {/* eslint-disable-next-line no-console */}
-        <Button onClick={() => console.log("Download PDF button")}>
-          {downloadButtonLabel}
-        </Button>
-        {}
+        {!affirmativeImage || !negativeImage ? (
+          <ButtonLoading />
+        ) : (
+          <Button onClick={handleDownload}>{downloadButtonLabel}</Button>
+        )}
         <ResponsiveDialog
           label={editButtonLabel}
           variant="outline"
@@ -163,6 +195,20 @@ export default function Poll() {
             negativeOption={negativeOption}
           />
         </div>
+        <QRCodeCanvas
+          ref={affirmativeRef}
+          value={generateOptionUrl(affirmativeOption?.documentId)}
+          size={600}
+          title={title}
+          style={{ display: "none" }}
+        />
+        <QRCodeCanvas
+          ref={negativeRef}
+          value={generateOptionUrl(negativeOption?.documentId)}
+          size={600}
+          title={title}
+          style={{ display: "none" }}
+        />
       </div>
     </div>
   );
