@@ -95,7 +95,8 @@
 
   "answerOption": {
     "title": "Thanks for the answer",
-    "yourAnswer": "Your Answer:"
+    "yourAnswer": "Your Answer:",
+    "pdfTitle": "Did you like it?"
   },
 
   "informationCard": {
