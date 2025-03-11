@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPolls } from "@/api/polls";
 import { PollCard, PollCardSkeleton } from "@/components/poll-card";
 import { Headline } from "../ui/headline";
-import { CircleHelp } from "lucide-react";
+import { CircleHelp, SquarePen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
   Tooltip,
@@ -16,10 +16,12 @@ import { Skeleton } from "../ui/skeleton";
 import { ResponsiveDialog } from "../responsive-dialog";
 import { CreatePoll } from "../forms/create-poll";
 import useGetUser from "@/hooks/use-get-user";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export default function Dashboard() {
   const t = useTranslations("dashboard");
   const dialogTranslations = useTranslations("dashboard.createPollDialog");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const { maxPolls, isLoading: isUserLoading } = useGetUser();
 
@@ -59,6 +61,12 @@ export default function Dashboard() {
   };
 
   const ButtonsContainer = () => {
+    const createButtonLabel = isDesktop ? (
+      t("headline.createPoll")
+    ) : (
+      <SquarePen />
+    );
+
     return (
       <>
         <div className="flex items-center gap-1.5 md:gap-2">
@@ -73,11 +81,12 @@ export default function Dashboard() {
         </div>
 
         <ResponsiveDialog
-          label={t("headline.createPoll")}
+          label={createButtonLabel}
           title={dialogTranslations("title")}
           description={dialogTranslations("description")}
           formComponent={<CreatePoll />}
           disabled={!isAbleToCreatePoll}
+          size={isDesktop ? "default" : "icon"}
         />
       </>
     );

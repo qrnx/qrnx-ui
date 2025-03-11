@@ -133,18 +133,25 @@ export default function Poll() {
         {!affirmativeImage || !negativeImage ? (
           <ButtonLoading />
         ) : (
-          <Button onClick={handleDownload}>{downloadButtonLabel}</Button>
+          <Button
+            onClick={handleDownload}
+            size={isDesktop ? "default" : "icon"}
+          >
+            {downloadButtonLabel}
+          </Button>
         )}
         <ResponsiveDialog
           label={editButtonLabel}
           variant="outline"
           title={dialogTranslations("title")}
           description={dialogTranslations("description")}
+          size={isDesktop ? "default" : "icon"}
           formComponent={<EditPoll poll={poll} />}
         />
         <DeleteConfirmation
           label={deleteButtonLabel}
           variant="destructive"
+          size={isDesktop ? "default" : "icon"}
           deleteComponent={<DeletePoll />}
         />
       </>
