@@ -141,12 +141,14 @@ export default function Poll() {
           <QrCard
             title={t("affirmativeOption")}
             url={generateOptionUrl(affirmativeOption?.documentId)}
+            type="affirmative"
           />
         </div>
         <div className={cellCommonClasses}>
           <QrCard
             title={t("negativeOption")}
             url={generateOptionUrl(negativeOption?.documentId)}
+            type="negative"
           />
         </div>
         <div className={cellCommonClasses}>
